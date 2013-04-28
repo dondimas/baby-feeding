@@ -10,24 +10,28 @@
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
+                android:layout_weight="0.2"
                 />
     <TextView   android:id="@+id/finish_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
+                android:layout_weight="0.2"
             />
     <TextView   android:id="@+id/left_breast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
+                android:layout_weight="0.2"
             />
     <TextView   android:id="@+id/right_breast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
+                android:layout_weight="0.2"
             />
 
     <TextView   android:id="@+id/full_date"
@@ -35,5 +39,6 @@
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
+                android:layout_weight="0.2"
             />
 </LinearLayout>

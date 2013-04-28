@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,19 +20,25 @@ import java.util.TimerTask;
 public class FeedRunningActivity extends Activity {
 
     TextView runningFeedTime;
+    TextView startFeedTime;
     Button finishFeed;
     Button cancelFeeding;
+    Date startTime;
+    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed_running);
-
+        startTime = FeedList.currentFeedEvent.getStartTime();
         startTiming();
         initViews();
     }
 
     private void initViews() {
         runningFeedTime = (TextView) findViewById(R.id.current_feed_time);
+        startFeedTime = (TextView) findViewById(R.id.start_feed_time);
+
+        startFeedTime.setText("Started at : " + dateFormatter.format(startTime));
         finishFeed = (Button) findViewById(R.id.finish_current_feeding);
         finishFeed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +62,7 @@ public class FeedRunningActivity extends Activity {
         });
     }
 
-    int minutes;
-    int seconds;
+
     private void startTiming() {
 
         Timer timer = new Timer();
@@ -68,12 +73,6 @@ public class FeedRunningActivity extends Activity {
     private class MyTimerTask extends TimerTask {
         @Override
         public void run() {
-            if(seconds == 50) {
-                minutes++;
-                seconds = 0;
-            } else  {
-                seconds++;
-            }
             updateView();
         }
     }
@@ -82,6 +81,12 @@ public class FeedRunningActivity extends Activity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                long minutes;
+                long seconds;
+                long timeDelta = Calendar.getInstance(Locale.US).getTimeInMillis() - startTime.getTime();
+                timeDelta /= 1000;
+                seconds = timeDelta % 60;
+                minutes = (timeDelta -seconds)/60;
                 runningFeedTime.setText(minutes +":"+seconds);
             }
         });

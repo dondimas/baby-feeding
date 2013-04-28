@@ -9,19 +9,22 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static DatabaseHelper instance;
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 
     private static final String DATABASE_NAME = "babyfeeding3.db";
 
     public static final Class[] ENTITIES = {
             FeedEvent.class,
+    };
+
+    public static final Class[] ENTITIES_NEW = {
+            Reminder.class,
     };
 
     public DatabaseHelper(Context context) {
@@ -38,8 +41,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
 
-        createTablesForEntities(connectionSource, ENTITIES);
-
+//        createTablesForEntities(connectionSource, ENTITIES);
+        createTablesForEntities(connectionSource, ENTITIES_NEW);
+        createReminder();
 //        createOfferShoppingList();
 //        createOfferShoppingList2();
 
@@ -54,21 +58,30 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
 
-//    private void createOfferShoppingList2() {
-//    RuntimeExceptionDao personRepo = getRuntimeExceptionDao(Person.class);
-//    Person person = new Person("AAAA");
-//    personRepo.createOrUpdate(person);
+    private void createReminder() {
+//        RuntimeExceptionDao personRepo = getRuntimeExceptionDao(ReminderTime.class);
+//        ReminderTime reminderTime = new ReminderTime(new Date(2012, 10, 12,10,0));
+//        personRepo.createOrUpdate(reminderTime);
 //
-//    }
+//        Set<ReminderTime> list = new TreeSet<ReminderTime>();
+//        list.add(reminderTime);
+        RuntimeExceptionDao reminderRepo = getRuntimeExceptionDao(Reminder.class);
+        Reminder reminder = new Reminder("Czy tu dalas dziecku vitaminki?", new Date(2012, 10, 12,10,0));
+        reminderRepo.createOrUpdate(reminder);
+    }
 
 
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int i, int i1) {
 
-        dropTablesForEntities(connectionSource, ENTITIES);
-
+//        dropTablesForEntities(connectionSource, ENTITIES);
+//        dropTablesForEntities(connectionSource, ENTITIES_NEW);
         onCreate(sqLiteDatabase, connectionSource);
+
+        RuntimeExceptionDao<Reminder, String> simpleDao = getRuntimeExceptionDao(Reminder.class);;
+        List<Reminder> list = simpleDao.queryForAll();
+        int i2 = list.size();
     }
 
     private void createTablesForEntities(ConnectionSource connectionSource, Class... entities) {
@@ -119,6 +132,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         DatabaseHelper helper = getHelper(context);
         RuntimeExceptionDao<FeedEvent, String> simpleDao = helper.getSimpleDataDao();
         List<FeedEvent> list = simpleDao.queryForAll();
+        return list;
+    }
+
+    public List<Reminder> getReminders(Context context) {
+        DatabaseHelper helper = getHelper(context);
+        RuntimeExceptionDao<Reminder, String> simpleDao = helper.getRuntimeExceptionDao(Reminder.class);
+        List<Reminder> list = simpleDao.queryForAll();
         return list;
     }
 }

@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import com.dima.babyfeeding.controllers.RemindersController;
 import com.dima.babyfeeding.model.FeedEvent;
 import com.dima.babyfeeding.model.PersistenceFacade;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,10 +24,12 @@ public class FeedList extends Activity {
     Button finalizeFeeding;
     CheckBox leftBreast;
     CheckBox rightBreast;
-    FeedEvent currentFeedEvent;
+    public static FeedEvent currentFeedEvent;
     PersistenceFacade persistenceFacade;
     ListView listView;
     FeedEventListAdapter feedEventListAdapter;
+
+    RemindersController remindersController;
 
     private final String CONTINUE_FEEDING = "Continue Feeding";
     private final String START_FEEDING = "Start Feeding";
@@ -33,8 +37,15 @@ public class FeedList extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed_list);
+        remindersController = new RemindersController();
         persistenceFacade = new PersistenceFacade();
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        remindersController.setReminders(persistenceFacade.getReminders());
     }
 
     private void initViews() {

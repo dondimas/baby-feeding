@@ -3,6 +3,7 @@ package com.dima.babyfeeding.model;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ import java.util.List;
 public class PersistenceFacade {
 
     List<FeedEvent> feedEventList = new ArrayList<FeedEvent>();
+    private List<Reminder> reminders;
 
     public void saveFeedEvent(FeedEvent feedEvent, Context context) {
         DatabaseHelper helper = DatabaseHelper.getHelper(context);
@@ -25,5 +27,11 @@ public class PersistenceFacade {
         DatabaseHelper helper = DatabaseHelper.getHelper(context);
         feedEventList = helper.getFeedEvents(context);
         return feedEventList;
+    }
+
+    public List<Reminder> getReminders(Context context) {
+        DatabaseHelper helper = DatabaseHelper.getHelper(context);
+        reminders = helper.getReminders(context);
+        return reminders;
     }
 }
