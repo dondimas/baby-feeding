@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_main_tabhost">#768391</color>
+
+    <color name="text_label_color">#fff</color>
+
+    <!-- tab bar -->
+    <color name="tab_active_indicator">#00cf45</color>
+
+    <!-- action bar -->
+    <color name="actionbar_background">#078a31</color>
+    <color name="actionbar_white_text">#ffffff</color>
+    <color name="actionbar_button_text">#ffffff</color>
+    <color name="actionbar_button_text_disabled">#888888</color>
+    <color name="actionbar_background_start">#f7f7f7</color>
+    <color name="actionbar_background_end">#ededed</color>
+    <color name="actionbar_background_item_pressed_start">#FF7F00</color>
+    <color name="actionbar_background_item_pressed_end">#EE7600</color>
+
+    <color name="list_item_dark">#f9f9f9</color>
+
+    <color name="item_almost_black">#1a1a1a</color>
+    <color name="item_dark_gray" >#494e4a</color>
+    <color name="quantity_bg" >#a3a6a4</color>
+    <color name="item_green_description" >#079838</color>
+    <color name="item_light_gray" >#a6aaa9</color>
+    <color name="item_bg_dark" >#f3f3f3</color>
+    <color name="item_bg_shadow_gray" >#f6f4f4</color>
+
+    <color name="standard_background" >#e0e0e0</color>
+    <color name="edit_test_separator">#cccccc</color>
+    <color name="error_red">#FD0000</color>
+
+    <!-- all lists -->
+    <color name="list_divider">#eeeeee</color>
+    <color name="list_item_selector">#00cf45</color>
+    <color name="list_item_header_text">#3a3a3a</color>
+
+    <!-- jobsite details -->
+    <color name="rented_eq_count">#385487</color>
+
+    <!-- equipment search -->
+    <color name="eq_list_header_text">#393939</color>
+
+    <!-- equipment details -->
+    <color name="standard_frame">#cccccc</color>
+
+    <!-- location details -->
+    <color name="day_name">#5e615f</color>
+    <color name="opening_hours">#88918b</color>
+
+    <!-- cart -->
+    <color name="cart_empty_text">#666666</color>
+
+    <!-- account profile colors -->
+    <color name="account_job_title">#079838</color>
+    <color name="gray_background_start">#dddddd</color>
+    <color name="gray_background_end">#b1b1b1</color>
+
+    <!-- details screen -->
+    <color name="detail_name">#262626</color>
+    <color name="detail_header">#2e2e2e</color>
+    <color name="detail_value">#848785</color>
+    <color name="detail_button">#484e4a</color>
+    <color name="detail_gray">#9a9a9a</color>
+
+    <color name="yellow_button_text">#004617</color>
+
+    <color name="reservation_detail_header">#383838</color>
+    <color name="res_detail_total">#079236</color>
+    <color name="res_detail_list_text">#666a67</color>
+
+    <color name="default_description">#1e9d49</color>
+    <color name="rented_action_button">#3a3f3c</color>
+
+    <color name="tap_text">#b8b28b</color>
+
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:layout_gravity="center"
+             >
+        <CheckBox
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Left Breast"
+                android:id="@+id/left_breast"
+                android:layout_weight="0.5"/>
+        <CheckBox
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Right Breast"
+                android:id="@+id/right_breast"
+                android:layout_weight="0.5"/>
+
+    </LinearLayout>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Feeding"
+            android:id="@+id/start_feed_button"/>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue Feeding"
+            android:id="@+id/continue_feed_button"
+            android:visibility="gone"/>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Finalize"
+            android:id="@+id/finalize_feed_button"
+            android:visibility="gone"/>
+
+    <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_view" android:layout_gravity="left|center_vertical"/>
+</LinearLayout>
+
