@@ -1,16 +1,13 @@
-package com.dima.babyfeeding.model;
+package com.babycycle.babyfeeding.model;
 
-import com.j256.ormlite.dao.EagerForeignCollection;
-import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
- * User: dima
+ * User: babycycle
  * Date: 4/28/13
  * Time: 7:01 PM
  * To change this template use File | Settings | File Templates.
@@ -24,13 +21,29 @@ public class Reminder {
     @DatabaseField(generatedId = true)
     private int id;
 
-    @DatabaseField
+    @DatabaseField(canBeNull = true, columnName = "remind_message")
     private String remindMessage;
 
 //    @ForeignCollectionField(eager = true)
 //    Collection<ReminderTime> reminderTimes;
 
-    @DatabaseField
+    public Date getTimeOfDay() {
+        return timeOfDay;
+    }
+
+    public void setTimeOfDay(Date timeOfDay) {
+        this.timeOfDay = timeOfDay;
+    }
+
+    public String getRemindMessage() {
+        return remindMessage;
+    }
+
+    public void setRemindMessage(String remindMessage) {
+        this.remindMessage = remindMessage;
+    }
+
+    @DatabaseField(canBeNull = true, columnName = "time_of_day")
     private Date timeOfDay;
 
     public Reminder(String remindMessage, Date timeOfDay) {

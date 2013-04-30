@@ -1,7 +1,9 @@
-package com.dima.babyfeeding.model;
+package com.babycycle.babyfeeding.model;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import com.babycycle.babyfeeding.model.FeedEvent;
+import com.babycycle.babyfeeding.model.Reminder;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
@@ -15,16 +17,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static DatabaseHelper instance;
 
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 4;
 
-    private static final String DATABASE_NAME = "babyfeeding3.db";
+    private static final String DATABASE_NAME = "babyfeeding4.db";
 
     public static final Class[] ENTITIES = {
             FeedEvent.class,
     };
 
     public static final Class[] ENTITIES_NEW = {
-            Reminder.class,
+            FeedEvent.class, Reminder.class,
     };
 
     public DatabaseHelper(Context context) {
@@ -76,7 +78,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int i, int i1) {
 
 //        dropTablesForEntities(connectionSource, ENTITIES);
-//        dropTablesForEntities(connectionSource, ENTITIES_NEW);
+        dropTablesForEntities(connectionSource, ENTITIES_NEW);
         onCreate(sqLiteDatabase, connectionSource);
 
         RuntimeExceptionDao<Reminder, String> simpleDao = getRuntimeExceptionDao(Reminder.class);;
@@ -133,6 +135,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         RuntimeExceptionDao<FeedEvent, String> simpleDao = helper.getSimpleDataDao();
         List<FeedEvent> list = simpleDao.queryForAll();
         return list;
+    }
+
+    public void saveReminder(Reminder reminder) {
+        RuntimeExceptionDao feedEventRepo = getRuntimeExceptionDao(Reminder.class);
+        feedEventRepo.createOrUpdate(reminder);
     }
 
     public List<Reminder> getReminders(Context context) {

@@ -1,23 +1,22 @@
-package com.dima.babyfeeding;
+package com.babycycle.babyfeeding;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
-import com.dima.babyfeeding.controllers.RemindersController;
-import com.dima.babyfeeding.model.FeedEvent;
-import com.dima.babyfeeding.model.PersistenceFacade;
+import com.babycycle.babyfeeding.controllers.RemindersController;
+import com.babycycle.babyfeeding.model.DatabaseHelper;
+import com.babycycle.babyfeeding.model.FeedEvent;
+import com.babycycle.babyfeeding.model.PersistenceFacade;
+import com.google.inject.Inject;
+import roboguice.activity.RoboActivity;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
-public class FeedList extends Activity {
+public class FeedList extends RoboActivity {
 
     Button startFeed;
     Button continueFeeding;
@@ -25,6 +24,8 @@ public class FeedList extends Activity {
     CheckBox leftBreast;
     CheckBox rightBreast;
     public static FeedEvent currentFeedEvent;
+
+    @Inject
     PersistenceFacade persistenceFacade;
     ListView listView;
     FeedEventListAdapter feedEventListAdapter;
@@ -37,15 +38,16 @@ public class FeedList extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed_list);
+
         remindersController = new RemindersController();
-        persistenceFacade = new PersistenceFacade();
+//        persistenceFacade = new PersistenceFacade();
         initViews();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        remindersController.setReminders(persistenceFacade.getReminders());
+        remindersController.setReminders(persistenceFacade.getReminders(this));
     }
 
     private void initViews() {

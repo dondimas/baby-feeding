@@ -1,4 +1,4 @@
-package com.dima.babyfeeding.model;
+package com.babycycle.babyfeeding.model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
- * User: dima
+ * User: babycycle
  * Date: 4/25/13
  * Time: 11:06 AM
  * To change this template use File | Settings | File Templates.

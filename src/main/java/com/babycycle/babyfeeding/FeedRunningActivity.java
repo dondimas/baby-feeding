@@ -1,4 +1,4 @@
-package com.dima.babyfeeding;
+package com.babycycle.babyfeeding;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
- * User: dima
+ * User: babycycle
  * Date: 4/24/13
  * Time: 5:06 PM
  * To change this template use File | Settings | File Templates.

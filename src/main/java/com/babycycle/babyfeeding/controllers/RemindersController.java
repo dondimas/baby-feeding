@@ -1,12 +1,12 @@
-package com.dima.babyfeeding.controllers;
+package com.babycycle.babyfeeding.controllers;
 
-import com.dima.babyfeeding.model.Reminder;
+import com.babycycle.babyfeeding.model.Reminder;
 
 import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
- * User: dima
+ * User: babycycle
  * Date: 4/28/13
  * Time: 6:08 PM
  * To change this template use File | Settings | File Templates.

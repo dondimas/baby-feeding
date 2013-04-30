@@ -1,4 +1,4 @@
-package com.dima.babyfeeding;
+package com.babycycle.babyfeeding;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.dima.babyfeeding.model.FeedEvent;
+import com.babycycle.babyfeeding.model.FeedEvent;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
- * User: dima
+ * User: babycycle
  * Date: 4/25/13
  * Time: 1:16 PM
  * To change this template use File | Settings | File Templates.
