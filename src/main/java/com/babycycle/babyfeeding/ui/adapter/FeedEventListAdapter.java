@@ -1,4 +1,4 @@
-package com.babycycle.babyfeeding;
+package com.babycycle.babyfeeding.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.FeedEvent;
 
 import java.text.SimpleDateFormat;

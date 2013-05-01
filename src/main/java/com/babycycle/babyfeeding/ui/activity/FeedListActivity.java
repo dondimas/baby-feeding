@@ -1,4 +1,4 @@
-package com.babycycle.babyfeeding;
+package com.babycycle.babyfeeding.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,8 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import com.babycycle.babyfeeding.ui.adapter.FeedEventListAdapter;
+import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.controllers.RemindersController;
-import com.babycycle.babyfeeding.model.DatabaseHelper;
 import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.model.PersistenceFacade;
 import com.google.inject.Inject;
@@ -16,7 +17,7 @@ import roboguice.activity.RoboActivity;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class FeedList extends RoboActivity {
+public class FeedListActivity extends RoboActivity {
 
     Button startFeed;
     Button continueFeeding;
@@ -30,6 +31,7 @@ public class FeedList extends RoboActivity {
     ListView listView;
     FeedEventListAdapter feedEventListAdapter;
 
+    @Inject
     RemindersController remindersController;
 
     private final String CONTINUE_FEEDING = "Continue Feeding";
@@ -39,15 +41,17 @@ public class FeedList extends RoboActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed_list);
 
-        remindersController = new RemindersController();
-//        persistenceFacade = new PersistenceFacade();
+//        remindersController = new RemindersController();
+//        remindersController.setActivity(this);
+//        remindersController.setPersistenceFacade(persistenceFacade);
+//        remindersController.showReminders();
         initViews();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        remindersController.setReminders(persistenceFacade.getReminders(this));
+//        remindersController.showReminders();
     }
 
     private void initViews() {
@@ -56,7 +60,7 @@ public class FeedList extends RoboActivity {
             @Override
             public void onClick(View view) {
                 initFeedEvent();
-                Intent intent = new Intent(FeedList.this, FeedRunningActivity.class);
+                Intent intent = new Intent(FeedListActivity.this, FeedRunningActivity.class);
                 startActivityForResult(intent, 1);
 
             }
@@ -66,7 +70,7 @@ public class FeedList extends RoboActivity {
         continueFeeding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FeedList.this, FeedRunningActivity.class);
+                Intent intent = new Intent(FeedListActivity.this, FeedRunningActivity.class);
                 startActivityForResult(intent, 1);
 
             }
@@ -96,7 +100,7 @@ public class FeedList extends RoboActivity {
         finalizeFeeding.setVisibility(View.GONE);
         leftBreast.setChecked(false);
         rightBreast.setChecked(false);
-        feedEventListAdapter.setFeedEvents(persistenceFacade.getFeedEventList(FeedList.this));
+        feedEventListAdapter.setFeedEvents(persistenceFacade.getFeedEventList(FeedListActivity.this));
         feedEventListAdapter.notifyDataSetChanged();
     }
 

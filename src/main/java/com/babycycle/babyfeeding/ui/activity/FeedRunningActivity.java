@@ -1,4 +1,4 @@
-package com.babycycle.babyfeeding;
+package com.babycycle.babyfeeding.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.babycycle.babyfeeding.R;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -29,7 +30,7 @@ public class FeedRunningActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed_running);
-        startTime = FeedList.currentFeedEvent.getStartTime();
+        startTime = FeedListActivity.currentFeedEvent.getStartTime();
         startTiming();
         initViews();
     }

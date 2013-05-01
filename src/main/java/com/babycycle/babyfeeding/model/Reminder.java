@@ -46,9 +46,20 @@ public class Reminder {
     @DatabaseField(canBeNull = true, columnName = "time_of_day")
     private Date timeOfDay;
 
+    @DatabaseField(columnName = "was_confirmed")
+    private boolean wasConfirmed;
+
     public Reminder(String remindMessage, Date timeOfDay) {
         this.remindMessage = remindMessage;
         this.timeOfDay = timeOfDay;
 //        this.reminderTimes = new TreeSet<ReminderTime>(reminderTimes);
+    }
+
+    public boolean isWasConfirmed() {
+        return wasConfirmed;
+    }
+
+    public void setWasConfirmed(boolean wasConfirmed) {
+        this.wasConfirmed = wasConfirmed;
     }
 }

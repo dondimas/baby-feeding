@@ -51,24 +51,26 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     }
 
-    private void createOfferShoppingList() {
-        RuntimeExceptionDao personRepo = getRuntimeExceptionDao(FeedEvent.class);
-        FeedEvent person = new FeedEvent();
-        person.setStartTime(Calendar.getInstance().getTime());
-        personRepo.createOrUpdate(person);
-
-    }
+//    private void createOfferShoppingList() {
+//        RuntimeExceptionDao personRepo = getRuntimeExceptionDao(FeedEvent.class);
+//        FeedEvent person = new FeedEvent();
+//        person.setStartTime(Calendar.getInstance().getTime());
+//        personRepo.createOrUpdate(person);
+//
+//    }
 
 
     private void createReminder() {
-//        RuntimeExceptionDao personRepo = getRuntimeExceptionDao(ReminderTime.class);
-//        ReminderTime reminderTime = new ReminderTime(new Date(2012, 10, 12,10,0));
-//        personRepo.createOrUpdate(reminderTime);
-//
-//        Set<ReminderTime> list = new TreeSet<ReminderTime>();
-//        list.add(reminderTime);
         RuntimeExceptionDao reminderRepo = getRuntimeExceptionDao(Reminder.class);
-        Reminder reminder = new Reminder("Czy tu dalas dziecku vitaminki?", new Date(2012, 10, 12,10,0));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,12);
+
+        if(calendar.get(Calendar.DAY_OF_MONTH) >1)
+            calendar.set(Calendar.DAY_OF_MONTH,calendar.get(Calendar.DAY_OF_MONTH) -1);
+        else if (calendar.get(Calendar.MONTH) >0)
+            calendar.set(Calendar.MONTH,calendar.get(Calendar.MONTH) -1);
+
+        Reminder reminder = new Reminder("Czy tu dalas dziecku vitaminki?", calendar.getTime());
         reminderRepo.createOrUpdate(reminder);
     }
 
