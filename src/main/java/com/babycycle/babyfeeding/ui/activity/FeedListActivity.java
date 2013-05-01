@@ -9,14 +9,13 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import com.babycycle.babyfeeding.ui.adapter.FeedEventListAdapter;
 import com.babycycle.babyfeeding.R;
-import com.babycycle.babyfeeding.controllers.RemindersController;
+import com.babycycle.babyfeeding.ui.controller.ClockAppController;
+import com.babycycle.babyfeeding.ui.controller.RemindersController;
 import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.model.PersistenceFacade;
 import com.google.inject.Inject;
-import roboguice.activity.RoboActivity;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class FeedListActivity extends Activity {
@@ -36,6 +35,8 @@ public class FeedListActivity extends Activity {
     @Inject
     RemindersController remindersController;
 
+    ClockAppController clockAppController;
+
     private final String CONTINUE_FEEDING = "Continue Feeding";
     private final String START_FEEDING = "Start Feeding";
     @Override
@@ -46,6 +47,9 @@ public class FeedListActivity extends Activity {
         remindersController = new RemindersController();
         remindersController.setActivity(this);
         remindersController.setPersistenceFacade(persistenceFacade);
+        clockAppController = new ClockAppController();
+        clockAppController.setContext(this);
+
         initViews();
     }
 
@@ -105,6 +109,8 @@ public class FeedListActivity extends Activity {
         rightBreast.setChecked(false);
         feedEventListAdapter.setFeedEvents(persistenceFacade.getFeedEventList(FeedListActivity.this));
         feedEventListAdapter.notifyDataSetChanged();
+
+        clockAppController.openClockAppIfNeed();
     }
 
     private void initFeedEvent() {

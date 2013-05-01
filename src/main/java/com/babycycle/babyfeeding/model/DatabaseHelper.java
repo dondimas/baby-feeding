@@ -17,7 +17,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static DatabaseHelper instance;
 
-    public static final int DATABASE_VERSION = 11;
+    public static final int DATABASE_VERSION = 13;
 
     private static final String DATABASE_NAME = "babyfeeding3.db";
 
@@ -43,7 +43,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
 
-//        createTablesForEntities(connectionSource, ENTITIES);
+        createTablesForEntities(connectionSource, ENTITIES);
         createTablesForEntities(connectionSource, ENTITIES_NEW);
         createReminder();
 
@@ -52,7 +52,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private void createReminder() {
         RuntimeExceptionDao reminderRepo = getRuntimeExceptionDao(Reminder.class);
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,12);
+        calendar.set(Calendar.HOUR_OF_DAY,10);
 
         if(calendar.get(Calendar.DAY_OF_MONTH) >1)
             calendar.set(Calendar.DAY_OF_MONTH,calendar.get(Calendar.DAY_OF_MONTH) -1);
@@ -61,6 +61,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         Reminder reminder = new Reminder("Czy ty dalas dziecku vitaminki?", calendar.getTime());
         reminderRepo.createOrUpdate(reminder);
+
     }
 
 
@@ -71,10 +72,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 //        dropTablesForEntities(connectionSource, ENTITIES);
         dropTablesForEntities(connectionSource, ENTITIES_NEW);
         onCreate(sqLiteDatabase, connectionSource);
-
-        RuntimeExceptionDao<Reminder, String> simpleDao = getRuntimeExceptionDao(Reminder.class);;
-        List<Reminder> list = simpleDao.queryForAll();
-        int i2 = list.size();
     }
 
     private void createTablesForEntities(ConnectionSource connectionSource, Class... entities) {

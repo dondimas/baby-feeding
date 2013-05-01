@@ -1,7 +1,8 @@
-package com.babycycle.babyfeeding.controllers;
+package com.babycycle.babyfeeding.ui.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.PersistenceFacade;
 import com.babycycle.babyfeeding.model.Reminder;
 import com.babycycle.babyfeeding.ui.activity.FeedListActivity;
@@ -21,6 +22,8 @@ import java.util.Locale;
  */
 //@Singleton
 public class RemindersController {
+
+    private final long timeDelayForNextRemindersShowingInMillis = 1000*60*60;
 
     public void setPersistenceFacade(PersistenceFacade persistenceFacade) {
         this.persistenceFacade = persistenceFacade;
@@ -54,7 +57,7 @@ public class RemindersController {
 
     private boolean tooEarlyToShowReminder() {
         long currentTime = Calendar.getInstance(Locale.US).getTimeInMillis();
-        if((currentTime -lastRemindersShownTime) < 1000*60*60) {
+        if((currentTime -lastRemindersShownTime) < timeDelayForNextRemindersShowingInMillis) {
             return true;
         }
         lastRemindersShownTime = currentTime;
@@ -62,6 +65,14 @@ public class RemindersController {
     }
 
     private void showNextReminder() {
+        Reminder chosenReminder = chooseNextReminderToShow();
+        if(chosenReminder == null) {
+            return;
+        }
+        showReminderOnScreen(chosenReminder);
+    }
+
+    private Reminder chooseNextReminderToShow() {
         Reminder chosenReminder = null;
         for(;shownReminders < reminders.size(); shownReminders ++) {
             if(reminderShouldBeShown(reminders.get(shownReminders))) {
@@ -71,18 +82,19 @@ public class RemindersController {
             }
 
         }
-        if(chosenReminder == null) {
-            return;
-        }
+        return chosenReminder;
+    }
+
+    private void showReminderOnScreen(Reminder chosenReminder) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.reminder_confirm, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 setCurrentReminderConfirmed();
                 showNextReminder();
             }
         });
-        builder.setNegativeButton("Remind me later", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.reminder_remind_later, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 showNextReminder();
             }
