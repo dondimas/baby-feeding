@@ -8,7 +8,9 @@ import com.babycycle.babyfeeding.ui.activity.FeedListActivity;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,21 +39,40 @@ public class RemindersController {
     int shownReminders = 0;
     private List<Reminder> reminders;
 
+    private long lastRemindersShownTime = 0;
+
     public void showReminders() {
+        long currentTime = Calendar.getInstance(Locale.US).getTimeInMillis();
+        if(tooEarlyToShowReminder()) return;
+        lastRemindersShownTime = currentTime;
+
         shownReminders = 0;
         reminders = persistenceFacade.getUpdatedForTodayReminders(activity);
         showNextReminder();
 
     }
 
+    private boolean tooEarlyToShowReminder() {
+        long currentTime = Calendar.getInstance(Locale.US).getTimeInMillis();
+        if((currentTime -lastRemindersShownTime) < 1000*60*60) {
+            return true;
+        }
+        lastRemindersShownTime = currentTime;
+        return false;
+    }
+
     private void showNextReminder() {
         Reminder chosenReminder = null;
         for(;shownReminders < reminders.size(); shownReminders ++) {
-            if(!reminders.get(shownReminders).isWasConfirmed()) {
+            if(reminderShouldBeShown(reminders.get(shownReminders))) {
                 chosenReminder = reminders.get(shownReminders);
+                shownReminders++;
                 break;
             }
 
+        }
+        if(chosenReminder == null) {
+            return;
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
@@ -70,8 +91,15 @@ public class RemindersController {
         builder.create().show();
     }
 
+    private boolean reminderShouldBeShown(Reminder reminder) {
+        Calendar calendar = Calendar.getInstance();
+        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        calendar.setTime(reminder.getTimeOfDay());
+        return !reminder.isWasConfirmed() && calendar.get(Calendar.HOUR_OF_DAY) <= currentHour;
+    }
+
     private void setCurrentReminderConfirmed() {
-        Reminder chosenReminder = reminders.get(shownReminders);
+        Reminder chosenReminder = reminders.get(shownReminders-1);
         chosenReminder.setWasConfirmed(true);
         persistenceFacade.saveReminder(chosenReminder, activity);
     }

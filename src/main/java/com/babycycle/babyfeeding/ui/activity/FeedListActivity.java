@@ -1,5 +1,6 @@
 package com.babycycle.babyfeeding.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,9 +16,10 @@ import com.google.inject.Inject;
 import roboguice.activity.RoboActivity;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
-public class FeedListActivity extends RoboActivity {
+public class FeedListActivity extends Activity {
 
     Button startFeed;
     Button continueFeeding;
@@ -38,20 +40,20 @@ public class FeedListActivity extends RoboActivity {
     private final String START_FEEDING = "Start Feeding";
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(null);
         setContentView(R.layout.feed_list);
-
-//        remindersController = new RemindersController();
-//        remindersController.setActivity(this);
-//        remindersController.setPersistenceFacade(persistenceFacade);
-//        remindersController.showReminders();
+        persistenceFacade = new PersistenceFacade();
+        remindersController = new RemindersController();
+        remindersController.setActivity(this);
+        remindersController.setPersistenceFacade(persistenceFacade);
         initViews();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        remindersController.showReminders();
+        remindersController.showReminders();
+
     }
 
     private void initViews() {
@@ -59,6 +61,7 @@ public class FeedListActivity extends RoboActivity {
         startFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 initFeedEvent();
                 Intent intent = new Intent(FeedListActivity.this, FeedRunningActivity.class);
                 startActivityForResult(intent, 1);
@@ -112,6 +115,7 @@ public class FeedListActivity extends RoboActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
 
         if (requestCode == 1) {
 

@@ -17,16 +17,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static DatabaseHelper instance;
 
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 11;
 
-    private static final String DATABASE_NAME = "babyfeeding4.db";
+    private static final String DATABASE_NAME = "babyfeeding3.db";
 
     public static final Class[] ENTITIES = {
             FeedEvent.class,
     };
 
     public static final Class[] ENTITIES_NEW = {
-            FeedEvent.class, Reminder.class,
+             Reminder.class,
     };
 
     public DatabaseHelper(Context context) {
@@ -46,19 +46,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 //        createTablesForEntities(connectionSource, ENTITIES);
         createTablesForEntities(connectionSource, ENTITIES_NEW);
         createReminder();
-//        createOfferShoppingList();
-//        createOfferShoppingList2();
 
     }
-
-//    private void createOfferShoppingList() {
-//        RuntimeExceptionDao personRepo = getRuntimeExceptionDao(FeedEvent.class);
-//        FeedEvent person = new FeedEvent();
-//        person.setStartTime(Calendar.getInstance().getTime());
-//        personRepo.createOrUpdate(person);
-//
-//    }
-
 
     private void createReminder() {
         RuntimeExceptionDao reminderRepo = getRuntimeExceptionDao(Reminder.class);
@@ -70,7 +59,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         else if (calendar.get(Calendar.MONTH) >0)
             calendar.set(Calendar.MONTH,calendar.get(Calendar.MONTH) -1);
 
-        Reminder reminder = new Reminder("Czy tu dalas dziecku vitaminki?", calendar.getTime());
+        Reminder reminder = new Reminder("Czy ty dalas dziecku vitaminki?", calendar.getTime());
         reminderRepo.createOrUpdate(reminder);
     }
 
@@ -117,14 +106,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return simpleRuntimeDao;
     }
-
-//    public List<Person> GetData(Context context)
-//    {
-//        DatabaseHelper helper = getHelper(context);
-//        RuntimeExceptionDao<Person, String> simpleDao = getRuntimeExceptionDao(Person.class);
-//        List<Person> list = simpleDao.queryForAll();
-//        return list;
-//    }
 
     public void saveFeedEvent(FeedEvent feedEvent) {
         RuntimeExceptionDao feedEventRepo = getRuntimeExceptionDao(FeedEvent.class);
