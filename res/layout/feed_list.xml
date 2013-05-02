@@ -3,6 +3,7 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
+              android:background="@drawable/background1"
         >
 
     <LinearLayout
@@ -43,10 +44,11 @@
             android:text="Finalize"
             android:id="@+id/finalize_feed_button"
             android:visibility="gone"/>
-
+    <include layout="@layout/feed_list_header" />
     <ListView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:cacheColorHint="#00000000"
             android:id="@+id/list_view" android:layout_gravity="left|center_vertical"/>
 </LinearLayout>
 

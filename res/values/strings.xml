@@ -17,4 +17,11 @@
     <string name="alarm_clock_open_cancel">No thanks</string>
     <string name="alarm_clock_open_title">Do you want to set Alarm Clock?</string>
 
+
+    <string name="feed_list_header_start_time">Start</string>
+    <string name="feed_list_header_finish_time">Finish</string>
+    <string name="feed_list_header_feed_lasted">Last</string>
+    <string name="feed_list_header_source">From</string>
+    <string name="feed_list_header_date">Date</string>
+
 </resources>

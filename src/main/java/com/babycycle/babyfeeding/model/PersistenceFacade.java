@@ -66,4 +66,23 @@ public class PersistenceFacade {
         reminders = DatabaseHelper.getHelper(context).getReminders(context);
         return reminders;
     }
+
+    public List<Reminder> getActiveReminders(Context context) {
+        List<Reminder> remindersTmp = getUpdatedForTodayReminders(context);
+        reminders = new ArrayList<Reminder>(remindersTmp.size());
+        for(Reminder reminder:remindersTmp) {
+            if(reminderShouldBeShown(reminder)) {
+                reminders.add(reminder);
+            }
+        }
+
+        return reminders;
+    }
+
+    private boolean reminderShouldBeShown(Reminder reminder) {
+        Calendar calendar = Calendar.getInstance();
+        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        calendar.setTime(reminder.getTimeOfDay());
+        return !reminder.isWasConfirmed() && calendar.get(Calendar.HOUR_OF_DAY) <= currentHour;
+    }
 }

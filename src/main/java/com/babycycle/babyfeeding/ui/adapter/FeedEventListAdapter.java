@@ -1,6 +1,7 @@
 package com.babycycle.babyfeeding.ui.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
 
     Context context;
     private int layoutId;
+    private static final long maxGapOneFeedingMillis = 600000;
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
     private static SimpleDateFormat fullDateFormatter = new SimpleDateFormat("MM-dd");
 
@@ -36,7 +38,7 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
             if(i == 0){
                 feedEvents.get(0).odd = true;
             } else {
-                if(feedEvents.get(i).getStartTime().getTime() - feedEvents.get(i - 1).getFinishTime().getTime() > 600000) {
+                if(feedEvents.get(i).getStartTime().getTime() - feedEvents.get(i - 1).getFinishTime().getTime() > maxGapOneFeedingMillis) {
                     feedEvents.get(i).odd = !feedEvents.get(i - 1).odd;
                 } else {
                     feedEvents.get(i).odd = feedEvents.get(i - 1).odd;
@@ -101,10 +103,15 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     }
 
     private void setRowBackground(ViewHolder holder, FeedEvent feedEvent) {
+        ColorDrawable backgroundDrawable;
         if(!feedEvent.odd)
-            holder.itemContainer.setBackgroundResource(R.color.item_light_gray);
+//            holder.itemContainer.setBackgroundResource(R.color.item_light_gray);
+            backgroundDrawable = new ColorDrawable(R.color.item_light_gray);
         else
-            holder.itemContainer.setBackgroundResource(R.color.standard_background);
+            backgroundDrawable = new ColorDrawable(9999);
+//            holder.itemContainer.setBackgroundResource(R.color.standard_background);
+        backgroundDrawable.setAlpha(220);
+        holder.itemContainer.setBackgroundDrawable(backgroundDrawable);
     }
 
     private void setFeedingDate(ViewHolder holder, FeedEvent feedEvent) {

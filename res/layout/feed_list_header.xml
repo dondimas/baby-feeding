@@ -4,42 +4,48 @@
               android:orientation="horizontal"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-              android:id="@+id/item_container"
-              >
-    <TextView   android:id="@+id/start_time"
+              android:id="@+id/header_container"
+              android:background="@drawable/list_background_selector"
+        >
+    <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
                 android:layout_weight="0.2"
-                />
-    <TextView   android:id="@+id/finish_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/RowText"
-                android:layout_margin="3dp"
-                android:layout_weight="0.2"
+                android:text="@string/feed_list_header_start_time"
             />
-    <TextView   android:id="@+id/feeding_lasted_tima"
+    <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
                 android:layout_weight="0.2"
+                android:text="@string/feed_list_header_finish_time"
             />
-    <TextView   android:id="@+id/breast"
+    <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
                 android:layout_weight="0.2"
+                android:text="@string/feed_list_header_feed_lasted"
+            />
+    <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/RowText"
+                android:layout_margin="3dp"
+                android:layout_weight="0.2"
+                android:text="@string/feed_list_header_source"
             />
 
-    <TextView   android:id="@+id/full_date"
+    <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
                 android:layout_weight="0.2"
+                android:text="@string/feed_list_header_date"
             />
 </LinearLayout>

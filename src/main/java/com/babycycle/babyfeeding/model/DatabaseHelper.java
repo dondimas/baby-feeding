@@ -17,7 +17,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static DatabaseHelper instance;
 
-    public static final int DATABASE_VERSION = 13;
+    public static final int DATABASE_VERSION = 18;
 
     private static final String DATABASE_NAME = "babyfeeding3.db";
 
@@ -43,7 +43,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
 
-        createTablesForEntities(connectionSource, ENTITIES);
+//        createTablesForEntities(connectionSource, ENTITIES);
         createTablesForEntities(connectionSource, ENTITIES_NEW);
         createReminder();
 
@@ -61,6 +61,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         Reminder reminder = new Reminder("Czy ty dalas dziecku vitaminki?", calendar.getTime());
         reminderRepo.createOrUpdate(reminder);
+
+//        Reminder reminder2 = new Reminder("reminder2", calendar.getTime());
+//        reminderRepo.createOrUpdate(reminder2);
+//        Reminder reminder3 = new Reminder("reminder3", calendar.getTime());
+//        reminderRepo.createOrUpdate(reminder3);
 
     }
 
