@@ -9,4 +9,7 @@
     <string name="confirm_cancel">Yes, I\'m sure</string>
     <string name="not_cancel">No No!!</string>
     <string name="confirm_cancel_feeding_message">Do you really want to cancel this feeding?</string>
+    <string name="alarm_clock_open_confirm">Yes I DO!!!</string>
+    <string name="alarm_clock_open_cancel">No thanks</string>
+    <string name="alarm_clock_open_title">Do you want to set Alarm Clock?</string>
 </resources>
