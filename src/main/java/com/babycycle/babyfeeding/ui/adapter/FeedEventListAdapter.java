@@ -105,12 +105,10 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     private void setRowBackground(ViewHolder holder, FeedEvent feedEvent) {
         ColorDrawable backgroundDrawable;
         if(!feedEvent.odd)
-//            holder.itemContainer.setBackgroundResource(R.color.item_light_gray);
-            backgroundDrawable = new ColorDrawable(R.color.item_light_gray);
+            backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.actionbar_button_text_disabled));
         else
-            backgroundDrawable = new ColorDrawable(9999);
-//            holder.itemContainer.setBackgroundResource(R.color.standard_background);
-        backgroundDrawable.setAlpha(220);
+            backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.standard_background));
+        backgroundDrawable.setAlpha(190);
         holder.itemContainer.setBackgroundDrawable(backgroundDrawable);
     }
 

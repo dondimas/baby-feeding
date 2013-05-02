@@ -14,8 +14,8 @@
 
     <style name="RowText"  >
         <item name="android:textColor">#333333</item>
-        <item name="android:textSize">20dip</item>
-        <item name="android:shadowColor">#ffffff</item>
+        <item name="android:textSize">@dimen/feed_list_text_size</item>
+
         <item name="android:shadowDx">0</item>
         <item name="android:shadowDy">2</item>
         <item name="android:shadowRadius">1</item>

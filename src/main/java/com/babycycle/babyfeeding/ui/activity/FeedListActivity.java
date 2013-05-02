@@ -37,20 +37,21 @@ public class FeedListActivity extends Activity {
 
     ClockAppController clockAppController;
 
-    private final String CONTINUE_FEEDING = "Continue Feeding";
-    private final String START_FEEDING = "Start Feeding";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(null);
         setContentView(R.layout.feed_list);
         persistenceFacade = new PersistenceFacade();
+        initViews();
+        initControllers();
+    }
+
+    private void initControllers() {
         remindersController = new RemindersController();
         remindersController.setActivity(this);
         remindersController.setPersistenceFacade(persistenceFacade);
         clockAppController = new ClockAppController();
         clockAppController.setContext(this);
-
-        initViews();
     }
 
     @Override
@@ -91,9 +92,31 @@ public class FeedListActivity extends Activity {
 
             }
         });
-        leftBreast = (CheckBox) findViewById(R.id.feeding_lasted_tima);
-        rightBreast = (CheckBox) findViewById(R.id.breast);
+        leftBreast = (CheckBox) findViewById(R.id.left_breast);
+        leftBreast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                unsetOppositeCheckbox(v);
+            }
+        });
+        rightBreast = (CheckBox) findViewById(R.id.right_breast);
+        rightBreast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                unsetOppositeCheckbox(v);
+            }
+        });
         initListView();
+    }
+
+    private void unsetOppositeCheckbox(View v) {
+        CheckBox oppositeCheckbox = leftBreast;
+        if(v.getId() == R.id.left_breast) {
+            oppositeCheckbox = rightBreast;
+        }
+        if(((CheckBox)v).isChecked()) {
+            oppositeCheckbox.setChecked(false);
+        }
     }
 
     private void initListView() {
@@ -102,7 +125,7 @@ public class FeedListActivity extends Activity {
         listView.setAdapter(feedEventListAdapter);
     }
 
-    private void finalizeFeeding() {
+    public void finalizeFeeding() {
         currentFeedEvent.setLeftBreast(leftBreast.isChecked());
         currentFeedEvent.setRightBreast(rightBreast.isChecked());
         persistenceFacade.saveFeedEvent(currentFeedEvent, this);
