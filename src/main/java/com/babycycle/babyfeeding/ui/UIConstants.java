@@ -10,4 +10,5 @@ package com.babycycle.babyfeeding.ui;
 public class UIConstants {
     public static final String MONTH_DAY_FORMAT = "MM-dd";
     public static final String MINUTES_SECONDS_LASTING_FORMAT = "mm:ss";
+    public static final String HOURS_MINUTES_FORMAT = "HH:mm";
 }

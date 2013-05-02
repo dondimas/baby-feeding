@@ -28,7 +28,7 @@ public class FeedRunningActivity extends Activity {
     Button finishFeed;
     Button cancelFeeding;
     Date startTime;
-    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
+    private static SimpleDateFormat hoursMinutesFormatter = new SimpleDateFormat(UIConstants.HOURS_MINUTES_FORMAT);
     private static SimpleDateFormat minutesSecondsFormatter = new SimpleDateFormat(UIConstants.MINUTES_SECONDS_LASTING_FORMAT);
 
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class FeedRunningActivity extends Activity {
         runningFeedTime = (TextView) findViewById(R.id.current_feed_time);
         startFeedTime = (TextView) findViewById(R.id.start_feed_time);
 
-        startFeedTime.setText("Started at : " + dateFormatter.format(startTime));
+        startFeedTime.setText("Started at : " + hoursMinutesFormatter.format(startTime));
         finishFeed = (Button) findViewById(R.id.finish_current_feeding);
         finishFeed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,19 +69,19 @@ public class FeedRunningActivity extends Activity {
     private void openCancelConfirmDialogue() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setPositiveButton(R.string.confirm_cancel, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.feeding_cancel_confirm_cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Intent i = getIntent();
                 setResult(RESULT_CANCELED, i);
                 finish();
             }
         });
-        builder.setNegativeButton(R.string.not_cancel, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.feeding_cancel_not_cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
             }
         });
-        builder.setTitle(R.string.confirm_cancel_feeding_message);
+        builder.setTitle(R.string.feeding_cancel_confirm_cancel_feeding_message);
         builder.create().show();
     }
 
