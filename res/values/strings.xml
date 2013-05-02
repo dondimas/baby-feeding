@@ -6,4 +6,7 @@
     <string name="reminder_remind_later">Remind me later</string>
 
     <string name="today">Today</string>
+    <string name="confirm_cancel">Yes, I\'m sure</string>
+    <string name="not_cancel">No No!!</string>
+    <string name="confirm_cancel_feeding_message">Do you really want to cancel this feeding?</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.babycycle.babyfeeding.ui.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -55,12 +57,30 @@ public class FeedRunningActivity extends Activity {
         cancelFeeding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = getIntent();
-                setResult(RESULT_CANCELED, i);
-                finish();
+                openCancelConfirmDialogue();
+
 
             }
         });
+    }
+
+    private void openCancelConfirmDialogue() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setPositiveButton(R.string.confirm_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Intent i = getIntent();
+                setResult(RESULT_CANCELED, i);
+                finish();
+            }
+        });
+        builder.setNegativeButton(R.string.not_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        builder.setTitle(R.string.confirm_cancel_feeding_message);
+        builder.create().show();
     }
 
 
