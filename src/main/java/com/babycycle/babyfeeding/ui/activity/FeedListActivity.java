@@ -91,8 +91,8 @@ public class FeedListActivity extends Activity {
 
             }
         });
-        leftBreast = (CheckBox) findViewById(R.id.left_breast);
-        rightBreast = (CheckBox) findViewById(R.id.right_breast);
+        leftBreast = (CheckBox) findViewById(R.id.feeding_lasted_tima);
+        rightBreast = (CheckBox) findViewById(R.id.breast);
         listView = (ListView) findViewById(R.id.list_view);
         feedEventListAdapter = new FeedEventListAdapter(this, R.layout.feed_list_item, persistenceFacade.getFeedEventList(this));
         listView.setAdapter(feedEventListAdapter);

@@ -4,4 +4,6 @@
     <!-- reminders -->
     <string name="reminder_confirm">Yes</string>
     <string name="reminder_remind_later">Remind me later</string>
+
+    <string name="today">Today</string>
 </resources>

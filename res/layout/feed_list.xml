@@ -14,13 +14,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Left Breast"
-                android:id="@+id/left_breast"
+                android:id="@+id/feeding_lasted_tima"
                 android:layout_weight="0.5"/>
         <CheckBox
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Right Breast"
-                android:id="@+id/right_breast"
+                android:id="@+id/breast"
                 android:layout_weight="0.5"/>
 
     </LinearLayout>

@@ -19,14 +19,14 @@
                 android:layout_margin="3dp"
                 android:layout_weight="0.2"
             />
-    <TextView   android:id="@+id/left_breast"
+    <TextView   android:id="@+id/feeding_lasted_tima"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
                 android:layout_weight="0.2"
             />
-    <TextView   android:id="@+id/right_breast"
+    <TextView   android:id="@+id/breast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/RowText"

@@ -11,6 +11,7 @@ import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.FeedEvent;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -67,8 +68,8 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
             holder.startTime = (TextView) convertView.findViewById(R.id.start_time);
             holder.finishTime = (TextView) convertView.findViewById(R.id.finish_time);
             holder.fullDate = (TextView) convertView.findViewById(R.id.full_date);
-            holder.leftBreast = (TextView) convertView.findViewById(R.id.left_breast);
-            holder.rightBreast = (TextView) convertView.findViewById(R.id.right_breast);
+            holder.feedingLastedTime = (TextView) convertView.findViewById(R.id.feeding_lasted_tima);
+            holder.breast = (TextView) convertView.findViewById(R.id.breast);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -80,22 +81,39 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     }
 
     private void fillViewsWIthData(ViewHolder holder, FeedEvent feedEvent) {
-
-
-
         holder.startTime.setText(dateFormatter.format(feedEvent.getStartTime()));
         holder.finishTime.setText(dateFormatter.format(feedEvent.getFinishTime()));
-        holder.leftBreast.setText(feedEvent.isLeftBreast() ? "Left":"-----");
-        holder.rightBreast.setText(feedEvent.isRightBreast() ? "Right":"-----");
+        setFeedingLastedTime(holder, feedEvent);
+
+        String breast = feedEvent.isLeftBreast() ? "Left": (feedEvent.isRightBreast() ? "Right": "Bottle");
+        holder.breast.setText(breast);
+
+        setFeedingDate(holder, feedEvent);
+
+        setRowBackground(holder, feedEvent);
+
+    }
+
+    private void setFeedingLastedTime(ViewHolder holder, FeedEvent feedEvent) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("mm:ss");
+        holder.feedingLastedTime.setText(dateFormatter.format(new Date(feedEvent.getFinishTime().getTime() - feedEvent.getStartTime().getTime())));
+    }
+
+    private void setRowBackground(ViewHolder holder, FeedEvent feedEvent) {
         if(!feedEvent.odd)
             holder.itemContainer.setBackgroundResource(R.color.item_light_gray);
         else
             holder.itemContainer.setBackgroundResource(R.color.standard_background);
-        Date today = new Date();
-        if(feedEvent.getFinishTime().getDay() != today.getDay()) {
+    }
+
+    private void setFeedingDate(ViewHolder holder, FeedEvent feedEvent) {
+        Calendar calendar = Calendar.getInstance();
+        int todayDay = calendar.get(Calendar.DAY_OF_MONTH);
+        calendar.setTime(feedEvent.getFinishTime());
+        if(calendar.get(Calendar.DAY_OF_MONTH) != todayDay) {
             holder.fullDate.setText(fullDateFormatter.format(feedEvent.getFinishTime()));
         } else {
-            holder.fullDate.setText("");
+            holder.fullDate.setText(R.string.today);
         }
     }
 
@@ -108,8 +126,8 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
         LinearLayout itemContainer;
         TextView startTime;
         TextView finishTime;
-        TextView leftBreast;
-        TextView rightBreast;
+        TextView feedingLastedTime;
+        TextView breast;
         public TextView fullDate;
     }
 }
