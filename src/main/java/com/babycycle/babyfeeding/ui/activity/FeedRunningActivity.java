@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.babycycle.babyfeeding.R;
+import com.babycycle.babyfeeding.ui.UIConstants;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -28,6 +29,7 @@ public class FeedRunningActivity extends Activity {
     Button cancelFeeding;
     Date startTime;
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
+    private static SimpleDateFormat minutesSecondsFormatter = new SimpleDateFormat(UIConstants.MINUTES_SECONDS_LASTING_FORMAT);
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,13 +104,8 @@ public class FeedRunningActivity extends Activity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                long minutes;
-                long seconds;
                 long timeDelta = Calendar.getInstance(Locale.US).getTimeInMillis() - startTime.getTime();
-                timeDelta /= 1000;
-                seconds = timeDelta % 60;
-                minutes = (timeDelta -seconds)/60;
-                runningFeedTime.setText(minutes +":"+seconds);
+                runningFeedTime.setText(minutesSecondsFormatter.format(timeDelta));
             }
         });
     }

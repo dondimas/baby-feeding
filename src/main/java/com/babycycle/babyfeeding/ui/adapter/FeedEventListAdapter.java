@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.FeedEvent;
+import com.babycycle.babyfeeding.ui.UIConstants;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -95,7 +96,7 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     }
 
     private void setFeedingLastedTime(ViewHolder holder, FeedEvent feedEvent) {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("mm:ss");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(UIConstants.MINUTES_SECONDS_LASTING_FORMAT);
         holder.feedingLastedTime.setText(dateFormatter.format(new Date(feedEvent.getFinishTime().getTime() - feedEvent.getStartTime().getTime())));
     }
 
