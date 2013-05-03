@@ -1,7 +1,7 @@
 package com.babycycle.babyfeeding.ui.controller;
 
 import android.app.Activity;
-import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -32,7 +32,8 @@ public class FeedingButtonsPanelViewController {
 
     private Date lastFeedStartTime;
 
-    private static SimpleDateFormat minutesSecondsFormatter = new SimpleDateFormat(UIConstants.MINUTES_SECONDS_LASTING_FORMAT);
+    private static SimpleDateFormat hoursMinutesSecondsFormatter = new SimpleDateFormat(UIConstants.HOURS_MINUTES_SECONDS_LASTING_FORMAT);
+//    private static SimpleDateFormat hoursMinutesSecondsFormatter = new SimpleDateFormat("yyyy-MM-DD-kk mm:ss");
     public FeedingButtonsPanelViewController setFeedingRunner(FeedingRunner feedingRunner) {
         this.feedingRunner = feedingRunner;
         return this;
@@ -149,9 +150,24 @@ public class FeedingButtonsPanelViewController {
         ((Activity)feedingRunner).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                long timeDelta = Calendar.getInstance(Locale.US).getTimeInMillis() - lastFeedStartTime.getTime();
-                startFeeding.setText("Start Feeding : " + minutesSecondsFormatter.format(timeDelta));
+                startFeeding.setText(getStartFeedingButtonText());
+//                Log.e("updateView()", "Current time : "+Calendar.getInstance().getTime());
+//                Log.e("updateView()", "Current time : "+hoursMinutesSecondsFormatter.format(Calendar.getInstance().getTime()));
+//                Log.e("updateView()", "lastFeedStartTime : "+lastFeedStartTime);
+//                Log.e("updateView()", "lastFeedStartTime : "+hoursMinutesSecondsFormatter.format(lastFeedStartTime));
+//                Log.e("updateView()", "time delta seconds : "+timeDelta/1000);
+//                Log.e("updateView()", "time delta minutes : "+timeDelta/60000);
             }
         });
+    }
+
+    public String getStartFeedingButtonText() {
+        long timeDelta = Calendar.getInstance().getTimeInMillis() - lastFeedStartTime.getTime();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timeDelta);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
+
+        return "Start Feeding : " + hoursMinutesSecondsFormatter.format(calendar.getTime());
     }
 }

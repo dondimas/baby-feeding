@@ -23,7 +23,12 @@ public class PersistenceFacade {
     List<FeedEvent> feedEventList = new ArrayList<FeedEvent>();
     private List<Reminder> reminders;
     private Date lastFeedStartTime;
-    private static final long maxGapOneFeedingMillis = 600000;
+
+    public static void setMaxGapOneFeedingMillis(long maxGapOneFeedingMillis) {
+        PersistenceFacade.maxGapOneFeedingMillis = maxGapOneFeedingMillis;
+    }
+
+    private static long maxGapOneFeedingMillis = 600000;
 
     public void saveFeedEvent(FeedEvent feedEvent, Context context) {
         DatabaseHelper.getHelper(context).saveFeedEvent(feedEvent);
