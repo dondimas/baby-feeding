@@ -1,8 +1,10 @@
 package com.babycycle.babyfeeding;
 
 import android.app.Application;
+import android.content.Context;
 import com.babycycle.babyfeeding.model.DatabaseHelper;
 import com.google.inject.Singleton;
+import roboguice.RoboGuice;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,6 +19,16 @@ public class BabyFeedingApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        RoboGuice.getInjector(this).injectMembers(this);
+        context = this.getApplicationContext();
+//        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+    }
+
+    private static Context context;
+
+
+
+    public static Context getAppContext() {
+        return BabyFeedingApplication.context;
     }
 }

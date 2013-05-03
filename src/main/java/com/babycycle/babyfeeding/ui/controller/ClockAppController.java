@@ -10,6 +10,10 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 import com.babycycle.babyfeeding.R;
+import com.babycycle.babyfeeding.ui.activity.FeedListActivity;
+import com.google.inject.Singleton;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,15 +22,16 @@ import com.babycycle.babyfeeding.R;
  * Time: 12:54 AM
  * To change this template use File | Settings | File Templates.
  */
+@Singleton
 public class ClockAppController {
 
-    private Context context;
+    WeakReference<Context> context;
     boolean foundClockImpl = false;
 
     private Intent alarmClockIntent;
 
     private void checkIfClockAppIsAccessible() {
-        PackageManager packageManager = context.getPackageManager();
+        PackageManager packageManager = context.get().getPackageManager();
         alarmClockIntent = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
 
         // Verify clock implementation
@@ -57,7 +62,7 @@ public class ClockAppController {
 
     }
     public void setContext(Context context) {
-        this.context = context;
+        this.context = new WeakReference<Context>(context);
     }
 
     public void openClockAppIfNeed() {
@@ -69,7 +74,7 @@ public class ClockAppController {
     }
 
     private void openConfirmationDialogue() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context.get());
 
         builder.setPositiveButton(R.string.alarm_clock_open_confirm, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -87,7 +92,7 @@ public class ClockAppController {
 
     private void openClockAppIntent() {
         if (foundClockImpl) {
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, alarmClockIntent, 0);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context.get(), 0, alarmClockIntent, 0);
             try {
                 pendingIntent.send();
             } catch (PendingIntent.CanceledException e) {
@@ -98,7 +103,7 @@ public class ClockAppController {
 
 
     public void openClockAppIfPossible() {
-        PackageManager packageManager = context.getPackageManager();
+        PackageManager packageManager = context.get().getPackageManager();
         Intent alarmClockIntent = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
 
         // Verify clock implementation
@@ -128,7 +133,7 @@ public class ClockAppController {
         }
 
         if (foundClockImpl) {
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, alarmClockIntent, 0);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context.get(), 0, alarmClockIntent, 0);
             try {
                 pendingIntent.send();
             } catch (PendingIntent.CanceledException e) {

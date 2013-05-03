@@ -5,6 +5,7 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="8"/>
     <application android:label="@string/app_name"
+                 android:name="com.babycycle.babyfeeding.BabyFeedingApplication"
             android:icon="@drawable/app_icon_time">
         <activity android:name=".ui.activity.FeedListActivity"
                   android:label="@string/app_name" android:screenOrientation="portrait">

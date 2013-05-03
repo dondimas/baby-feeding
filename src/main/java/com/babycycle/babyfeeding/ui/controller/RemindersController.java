@@ -9,6 +9,7 @@ import com.babycycle.babyfeeding.ui.activity.FeedListActivity;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -21,39 +22,31 @@ import java.util.Locale;
  * Time: 6:08 PM
  * To change this template use File | Settings | File Templates.
  */
-//@Singleton
+@Singleton
 public class RemindersController {
 
     private final long timeDelayForNextRemindersShowingInMillis = 1000*60*60;
 
     private Reminder chosenReminder;
 
-    public void setPersistenceFacade(PersistenceFacade persistenceFacade) {
-        this.persistenceFacade = persistenceFacade;
-    }
+    WeakReference<FeedListActivity> activity;
 
-    //    @Inject
-    PersistenceFacade persistenceFacade;
-
-    public void setActivity(FeedListActivity activity) {
-        this.activity = activity;
-    }
-
-    @Inject
-    FeedListActivity activity;
-
-    int shownReminders = 0;
     private List<Reminder> reminders;
 
     private long lastRemindersShownTime = 0;
+
+    @Inject
+    PersistenceFacade persistenceFacade;
+
+    public void setActivity(FeedListActivity activity) {
+        this.activity = new WeakReference<FeedListActivity>(activity);
+    }
 
     public void showReminders() {
         long currentTime = Calendar.getInstance(Locale.US).getTimeInMillis();
         if(tooEarlyToShowReminder()) return;
         lastRemindersShownTime = currentTime;
-
-        shownReminders = 0;
-        reminders = persistenceFacade.getActiveReminders(activity);
+        reminders = persistenceFacade.getActiveReminders(activity.get());
         showNextReminder();
 
     }
@@ -83,7 +76,7 @@ public class RemindersController {
     }
 
     private void showReminderOnScreen(Reminder chosenReminder) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity.get());
 
         builder.setPositiveButton(R.string.reminder_confirm, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -103,6 +96,6 @@ public class RemindersController {
 
     private void setCurrentReminderConfirmed() {
         chosenReminder.setWasConfirmed(true);
-        persistenceFacade.saveReminder(chosenReminder, activity);
+        persistenceFacade.saveReminder(chosenReminder, activity.get());
     }
 }

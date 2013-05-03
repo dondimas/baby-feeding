@@ -14,27 +14,41 @@ import com.babycycle.babyfeeding.ui.controller.RemindersController;
 import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.model.PersistenceFacade;
 import com.google.inject.Inject;
+import roboguice.activity.RoboActivity;
+import roboguice.inject.InjectView;
 
 import java.util.Calendar;
 import java.util.Locale;
 
-public class FeedListActivity extends Activity implements FeedingButtonsPanelViewController.FeedingRunner{
+public class FeedListActivity extends RoboActivity implements FeedingButtonsPanelViewController.FeedingRunner{
 
+    @InjectView(R.id.start_feed_button)
     private Button startFeeding;
+
+    @InjectView(R.id.continue_feed_button)
     private Button continueFeeding;
+
+    @InjectView(R.id.finalize_feed_button)
     private Button finalizeFeeding;
+
+    @InjectView(R.id.left_breast)
     private CheckBox leftBreast;
+
+    @InjectView(R.id.right_breast)
     private CheckBox rightBreast;
+
     public static FeedEvent currentFeedEvent;
 
     @Inject
     PersistenceFacade persistenceFacade;
+
     ListView listView;
     FeedEventListAdapter feedEventListAdapter;
 
     @Inject
     RemindersController remindersController;
 
+    @Inject
     ClockAppController clockAppController;
 
     FeedingButtonsPanelViewController feedingButtonsPanelViewController;
@@ -43,16 +57,12 @@ public class FeedListActivity extends Activity implements FeedingButtonsPanelVie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(null);
         setContentView(R.layout.feed_list);
-        persistenceFacade = new PersistenceFacade();
-        initViews();
+        initListView();
         initControllers();
     }
 
     private void initControllers() {
-        remindersController = new RemindersController();
         remindersController.setActivity(this);
-        remindersController.setPersistenceFacade(persistenceFacade);
-        clockAppController = new ClockAppController();
         clockAppController.setContext(this);
         feedingButtonsPanelViewController = new FeedingButtonsPanelViewController()
                 .setFeedingRunner(this)
@@ -71,21 +81,10 @@ public class FeedListActivity extends Activity implements FeedingButtonsPanelVie
 
     }
 
-    private void initViews() {
-        startFeeding = (Button) findViewById(R.id.start_feed_button);
-        continueFeeding = (Button) findViewById(R.id.continue_feed_button);
-        finalizeFeeding = (Button) findViewById(R.id.finalize_feed_button);
-        leftBreast = (CheckBox) findViewById(R.id.left_breast);
-        rightBreast = (CheckBox) findViewById(R.id.right_breast);
-        initListView();
-    }
-
     public void continueFeeding() {
         Intent intent = new Intent(this, FeedRunningActivity.class);
         startActivityForResult(intent, 1);
     }
-
-
 
     private void initListView() {
         listView = (ListView) findViewById(R.id.list_view);
@@ -121,14 +120,11 @@ public class FeedListActivity extends Activity implements FeedingButtonsPanelVie
         Calendar calendarActual = Calendar.getInstance(Locale.US);
         currentFeedEvent = new FeedEvent();
         currentFeedEvent.setStartTime(calendarActual.getTime());
-
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-
         if (requestCode == 1) {
-
             if(resultCode == RESULT_OK){
                 setFinishTime();
                 feedingButtonsPanelViewController.showFinalizationButtons();

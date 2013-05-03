@@ -18,7 +18,6 @@ public class ProductionModules extends AbstractModule {
     @Override
     protected void configure() {
 //        bind(IPersistanceFacade.class).to(PersistenceFacade.class);
-
         overrideBinding();
     }
 
