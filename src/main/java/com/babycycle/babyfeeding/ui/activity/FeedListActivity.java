@@ -3,13 +3,13 @@ package com.babycycle.babyfeeding.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import com.babycycle.babyfeeding.ui.adapter.FeedEventListAdapter;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.ui.controller.ClockAppController;
+import com.babycycle.babyfeeding.ui.controller.FeedingButtonsPanelViewController;
 import com.babycycle.babyfeeding.ui.controller.RemindersController;
 import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.model.PersistenceFacade;
@@ -18,13 +18,13 @@ import com.google.inject.Inject;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class FeedListActivity extends Activity {
+public class FeedListActivity extends Activity implements FeedingButtonsPanelViewController.FeedingRunner{
 
-    Button startFeed;
-    Button continueFeeding;
-    Button finalizeFeeding;
-    CheckBox leftBreast;
-    CheckBox rightBreast;
+    private Button startFeeding;
+    private Button continueFeeding;
+    private Button finalizeFeeding;
+    private CheckBox leftBreast;
+    private CheckBox rightBreast;
     public static FeedEvent currentFeedEvent;
 
     @Inject
@@ -36,6 +36,8 @@ public class FeedListActivity extends Activity {
     RemindersController remindersController;
 
     ClockAppController clockAppController;
+
+    FeedingButtonsPanelViewController feedingButtonsPanelViewController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,13 @@ public class FeedListActivity extends Activity {
         remindersController.setPersistenceFacade(persistenceFacade);
         clockAppController = new ClockAppController();
         clockAppController.setContext(this);
+        feedingButtonsPanelViewController = new FeedingButtonsPanelViewController()
+                .setFeedingRunner(this)
+                .setStartFeeding(startFeeding)
+                .setContinueFeeding(continueFeeding)
+                .setFinalizeFeeding(finalizeFeeding)
+                .setLeftBreast(leftBreast)
+                .setRightBreast(rightBreast);
     }
 
     @Override
@@ -62,62 +71,20 @@ public class FeedListActivity extends Activity {
     }
 
     private void initViews() {
-        startFeed = (Button) findViewById(R.id.start_feed_button);
-        startFeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                initFeedEvent();
-                Intent intent = new Intent(FeedListActivity.this, FeedRunningActivity.class);
-                startActivityForResult(intent, 1);
-
-            }
-        });
-
+        startFeeding = (Button) findViewById(R.id.start_feed_button);
         continueFeeding = (Button) findViewById(R.id.continue_feed_button);
-        continueFeeding.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FeedListActivity.this, FeedRunningActivity.class);
-                startActivityForResult(intent, 1);
-
-            }
-        });
-
         finalizeFeeding = (Button) findViewById(R.id.finalize_feed_button);
-        finalizeFeeding.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finalizeFeeding();
-
-            }
-        });
         leftBreast = (CheckBox) findViewById(R.id.left_breast);
-        leftBreast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                unsetOppositeCheckbox(v);
-            }
-        });
         rightBreast = (CheckBox) findViewById(R.id.right_breast);
-        rightBreast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                unsetOppositeCheckbox(v);
-            }
-        });
         initListView();
     }
 
-    private void unsetOppositeCheckbox(View v) {
-        CheckBox oppositeCheckbox = leftBreast;
-        if(v.getId() == R.id.left_breast) {
-            oppositeCheckbox = rightBreast;
-        }
-        if(((CheckBox)v).isChecked()) {
-            oppositeCheckbox.setChecked(false);
-        }
+    public void continueFeeding() {
+        Intent intent = new Intent(this, FeedRunningActivity.class);
+        startActivityForResult(intent, 1);
     }
+
+
 
     private void initListView() {
         listView = (ListView) findViewById(R.id.list_view);
@@ -125,19 +92,27 @@ public class FeedListActivity extends Activity {
         listView.setAdapter(feedEventListAdapter);
     }
 
-    public void finalizeFeeding() {
-        currentFeedEvent.setLeftBreast(leftBreast.isChecked());
-        currentFeedEvent.setRightBreast(rightBreast.isChecked());
-        persistenceFacade.saveFeedEvent(currentFeedEvent, this);
+    @Override
+    public void runFeeding() {
+        initFeedEvent();
+        continueFeeding();
+    }
 
-        continueFeeding.setVisibility(View.GONE);
-        finalizeFeeding.setVisibility(View.GONE);
-        leftBreast.setChecked(false);
-        rightBreast.setChecked(false);
+    public void finalizeFeeding(boolean leftBreastChecked, boolean rightBreastChecked) {
+        persistFeedingData(leftBreastChecked, rightBreastChecked);
+        refreshListData();
+        clockAppController.openClockAppIfNeed();
+    }
+
+    private void refreshListData() {
         feedEventListAdapter.setFeedEvents(persistenceFacade.getFeedEventList(FeedListActivity.this));
         feedEventListAdapter.notifyDataSetChanged();
+    }
 
-        clockAppController.openClockAppIfNeed();
+    private void persistFeedingData(boolean leftBreastChecked, boolean rightBreastChecked) {
+        currentFeedEvent.setLeftBreast(leftBreastChecked);
+        currentFeedEvent.setRightBreast(rightBreastChecked);
+        persistenceFacade.saveFeedEvent(currentFeedEvent, this);
     }
 
     private void initFeedEvent() {
@@ -154,8 +129,7 @@ public class FeedListActivity extends Activity {
 
             if(resultCode == RESULT_OK){
                 setFinishTime();
-                continueFeeding.setVisibility(View.VISIBLE);
-                finalizeFeeding.setVisibility(View.VISIBLE);
+                feedingButtonsPanelViewController.showFinalizationButtons();
             }
             if (resultCode == RESULT_CANCELED) {
 

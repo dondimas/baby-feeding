@@ -20,7 +20,7 @@
 
     <string name="feed_list_header_start_time">Start</string>
     <string name="feed_list_header_finish_time">Finish</string>
-    <string name="feed_list_header_feed_lasted">Last</string>
+    <string name="feed_list_header_feed_lasted">Lasted</string>
     <string name="feed_list_header_source">From</string>
     <string name="feed_list_header_date">Date</string>
 
