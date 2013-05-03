@@ -61,6 +61,7 @@ public class FeedListActivity extends Activity implements FeedingButtonsPanelVie
                 .setFinalizeFeeding(finalizeFeeding)
                 .setLeftBreast(leftBreast)
                 .setRightBreast(rightBreast);
+        feedingButtonsPanelViewController.setLastFeedStartTime(persistenceFacade.getLastFeedStartTime());
     }
 
     @Override
@@ -107,6 +108,7 @@ public class FeedListActivity extends Activity implements FeedingButtonsPanelVie
     private void refreshListData() {
         feedEventListAdapter.setFeedEvents(persistenceFacade.getFeedEventList(FeedListActivity.this));
         feedEventListAdapter.notifyDataSetChanged();
+        feedingButtonsPanelViewController.setLastFeedStartTime(persistenceFacade.getLastFeedStartTime());
     }
 
     private void persistFeedingData(boolean leftBreastChecked, boolean rightBreastChecked) {

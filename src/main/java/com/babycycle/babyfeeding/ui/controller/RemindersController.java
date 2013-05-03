@@ -24,7 +24,7 @@ import java.util.Locale;
 //@Singleton
 public class RemindersController {
 
-    private final long timeDelayForNextRemindersShowingInMillis = 1000*6;
+    private final long timeDelayForNextRemindersShowingInMillis = 1000*60*60;
 
     private Reminder chosenReminder;
 

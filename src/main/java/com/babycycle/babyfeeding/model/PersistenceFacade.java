@@ -7,6 +7,7 @@ import com.google.inject.Singleton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +22,8 @@ public class PersistenceFacade {
 
     List<FeedEvent> feedEventList = new ArrayList<FeedEvent>();
     private List<Reminder> reminders;
+    private Date lastFeedStartTime;
+    private static final long maxGapOneFeedingMillis = 600000;
 
     public void saveFeedEvent(FeedEvent feedEvent, Context context) {
         DatabaseHelper.getHelper(context).saveFeedEvent(feedEvent);
@@ -33,7 +36,31 @@ public class PersistenceFacade {
 
     public List<FeedEvent> getFeedEventList(Context context) {
         feedEventList = DatabaseHelper.getHelper(context).getFeedEvents(context);
+        groupOddEvenEvents();
         return feedEventList;
+    }
+
+    public Date getLastFeedStartTime() {
+        if(lastFeedStartTime == null) {
+            return new Date();
+        }
+        return lastFeedStartTime;
+    }
+
+    private void groupOddEvenEvents() {
+        for (int i = 0; i < feedEventList.size(); i++) {
+            if(i == 0){
+                feedEventList.get(0).odd = true;
+            } else {
+                if(feedEventList.get(i).getStartTime().getTime() - feedEventList.get(i - 1).getFinishTime().getTime() > maxGapOneFeedingMillis) {
+                    feedEventList.get(i).odd = !feedEventList.get(i - 1).odd;
+                    lastFeedStartTime = feedEventList.get(i).getStartTime();
+                } else {
+                    feedEventList.get(i).odd = feedEventList.get(i - 1).odd;
+                }
+            }
+
+        }
     }
 
     public List<Reminder> getReminders(Context context) {

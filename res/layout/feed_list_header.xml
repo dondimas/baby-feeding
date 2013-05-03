@@ -10,7 +10,7 @@
               android:layout_marginLeft="5dp"
         >
     <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
@@ -18,7 +18,7 @@
                 android:text="@string/feed_list_header_start_time"
             />
     <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
@@ -26,7 +26,7 @@
                 android:text="@string/feed_list_header_finish_time"
             />
     <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
@@ -34,7 +34,7 @@
                 android:text="@string/feed_list_header_feed_lasted"
             />
     <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
@@ -43,7 +43,7 @@
             />
 
     <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"

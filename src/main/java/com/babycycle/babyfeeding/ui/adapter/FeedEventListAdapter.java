@@ -28,24 +28,13 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
 
     Context context;
     private int layoutId;
-    private static final long maxGapOneFeedingMillis = 600000;
+
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
     private static SimpleDateFormat fullDateFormatter = new SimpleDateFormat("MM-dd");
 
     public void setFeedEvents(List<FeedEvent> feedEvents) {
         this.feedEvents = feedEvents;
-        for (int i = 0; i < feedEvents.size(); i++) {
-            if(i == 0){
-                feedEvents.get(0).odd = true;
-            } else {
-                if(feedEvents.get(i).getStartTime().getTime() - feedEvents.get(i - 1).getFinishTime().getTime() > maxGapOneFeedingMillis) {
-                    feedEvents.get(i).odd = !feedEvents.get(i - 1).odd;
-                } else {
-                    feedEvents.get(i).odd = feedEvents.get(i - 1).odd;
-                }
-            }
 
-        }
     }
 
     List<FeedEvent> feedEvents;

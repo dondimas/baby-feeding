@@ -89,11 +89,11 @@ public class FeedRunningActivity extends Activity {
     private void startTiming() {
 
         Timer timer = new Timer();
-        MyTimerTask myTask = new MyTimerTask();
+        FeedLastingTimerTask myTask = new FeedLastingTimerTask();
         timer.schedule(myTask,0,1000);
     }
 
-    private class MyTimerTask extends TimerTask {
+    private class FeedLastingTimerTask extends TimerTask {
         @Override
         public void run() {
             updateView();
