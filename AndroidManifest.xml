@@ -15,5 +15,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.FeedRunningActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.ReminderListActivity"/>
     </application>
 </manifest> 

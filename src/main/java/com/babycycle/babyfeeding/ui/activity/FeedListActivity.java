@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import com.babycycle.babyfeeding.ui.adapter.FeedEventListAdapter;
 import com.babycycle.babyfeeding.R;
@@ -36,6 +37,9 @@ public class FeedListActivity extends RoboActivity implements FeedingButtonsPane
 
     @InjectView(R.id.right_breast)
     private CheckBox rightBreast;
+
+    @InjectView(R.id.settings_button)
+    private ImageButton settingsButton;
 
     public static FeedEvent currentFeedEvent;
 
