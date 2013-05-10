@@ -25,10 +25,7 @@ import com.babycycle.babyfeeding.ui.tabs_lib.TabFragment;
 import com.google.inject.Inject;
 import roboguice.inject.InjectView;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -93,8 +90,18 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
         initListView(rootView);
         initControllers();
         ((BabyFeedingTabActivity)activity).setActivityResultListener(this);
+        checkFeedEventWasFired();
         return rootView;
     }
+
+    private void checkFeedEventWasFired() {
+        FeedEvent runningFeedEvent = persistenceFacade.getRunningFeedEvent(activity);
+        if(runningFeedEvent != null) {
+            initFeedEventWithStartTime(runningFeedEvent.getStartTime());
+            continueFeeding();
+        }
+    }
+
     private void initViews(View rootView) {
         startFeeding = (Button) rootView.findViewById(R.id.start_feed_button);
         continueFeeding = (Button) rootView.findViewById(R.id.continue_feed_button);
@@ -163,8 +170,12 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
 
     private void initFeedEvent() {
         Calendar calendarActual = Calendar.getInstance(Locale.US);
+        initFeedEventWithStartTime(calendarActual.getTime());
+    }
+
+    private void initFeedEventWithStartTime(Date feedStartTime) {
         FeedEvent currentFeedEvent = new FeedEvent();
-        currentFeedEvent.setStartTime(calendarActual.getTime());
+        currentFeedEvent.setStartTime(feedStartTime);
         tabsCommunicator.setCurrentFeedEvent(currentFeedEvent);
     }
 

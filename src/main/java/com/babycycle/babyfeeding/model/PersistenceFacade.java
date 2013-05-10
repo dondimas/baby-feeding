@@ -4,7 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +25,7 @@ public class PersistenceFacade {
     List<FeedEvent> feedEventList = new ArrayList<FeedEvent>();
     private List<Reminder> reminders;
     private Date lastFeedStartTime;
+    private String runningEventId = "1";
 
     public static void setMaxGapOneFeedingMillis(long maxGapOneFeedingMillis) {
         PersistenceFacade.maxGapOneFeedingMillis = maxGapOneFeedingMillis;
@@ -116,5 +119,30 @@ public class PersistenceFacade {
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
         calendar.setTime(reminder.getTimeOfDay());
         return !reminder.isWasConfirmed() && calendar.get(Calendar.HOUR_OF_DAY) <= currentHour;
+    }
+
+    public FeedEvent getRunningFeedEvent(Context context) {
+        FeedEvent feedEvent = DatabaseHelper.getHelper(context).getFeedEventForId(context, runningEventId);
+        if(feedEvent.getFinishTime() == null) {
+            return feedEvent;
+        } else {
+            return null;
+        }
+    }
+    public void persistStartedFeedEvent(FeedEvent feedEvent, Context context) {
+        FeedEvent runningFeedEvent = DatabaseHelper.getHelper(context).getFeedEventForId(context, runningEventId);
+        runningFeedEvent.setStartTime(feedEvent.getStartTime());
+        runningFeedEvent.setFinishTime(null);
+        DatabaseHelper.getHelper(context).saveFeedEvent(runningFeedEvent);
+    }
+
+    public void deleteStartedFeedEvent(Context context) {
+        FeedEvent feedEvent = DatabaseHelper.getHelper(context).getFeedEventForId(context, runningEventId);
+        if(feedEvent != null) {
+            feedEvent.setFinishTime(feedEvent.getStartTime());
+            feedEvent.setLeftBreast(false);
+            feedEvent.setRightBreast(false);
+            DatabaseHelper.getHelper(context).saveFeedEvent(feedEvent);
+        }
     }
 }

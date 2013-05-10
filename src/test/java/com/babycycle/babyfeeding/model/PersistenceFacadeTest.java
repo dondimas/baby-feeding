@@ -135,6 +135,42 @@ public class PersistenceFacadeTest {
         assertThat(buttonText).contains("Start");
     }
 
+    @Test
+    public void shouldReturnRunningEventIfPreviouslyEventWasStarted() {
+        //given
+        //updating running event to be sure the finish date is set
+        FeedEvent feedEvent = persistenceFacade.getRunningFeedEvent(application);
+        if(feedEvent != null) {
+            feedEvent.setFinishTime(new Date());
+            persistenceFacade.saveFeedEvent(feedEvent, application);
+        }
+        //when
+        FeedEvent startingEventDTO = new FeedEvent();
+        Date startingEventTime = new Date();
+        startingEventDTO.setStartTime(startingEventTime);
+        persistenceFacade.persistStartedFeedEvent(startingEventDTO, application);
+
+        //than
+        FeedEvent runningFeedEvent = persistenceFacade.getRunningFeedEvent(application);
+        assertThat(runningFeedEvent).isNotNull();
+        assertThat(runningFeedEvent.getStartTime().getTime()).isEqualTo(startingEventTime.getTime());
+        assertThat(runningFeedEvent.getFinishTime()).isNull();
+    }
+
+    @Test
+    public void shouldReturnNoFeedEventIfRunningEventWasDeleted() {
+        //when
+        FeedEvent startingEventDTO = new FeedEvent();
+        Date startingEventTime = new Date();
+        startingEventDTO.setStartTime(startingEventTime);
+        persistenceFacade.persistStartedFeedEvent(startingEventDTO, application);
+        persistenceFacade.deleteStartedFeedEvent(application);
+
+        //than
+        FeedEvent runningFeedEvent = persistenceFacade.getRunningFeedEvent(application);
+        assertThat(runningFeedEvent).isNull();
+
+    }
     private void createEventsList() {
         long minute = 1000*60;
         Calendar calendar = Calendar.getInstance();
