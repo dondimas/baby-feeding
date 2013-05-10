@@ -26,7 +26,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     };
 
     public static final Class[] ENTITIES_NEW = {
-             Reminder.class,
+              Reminder.class,
     };
 
     public DatabaseHelper(Context context) {
@@ -45,7 +45,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 //        createTablesForEntities(connectionSource, ENTITIES);
         createTablesForEntities(connectionSource, ENTITIES_NEW);
+        createFeedEventForPersistingStartedFeeding();
         createReminder();
+
+    }
+
+    private void createFeedEventForPersistingStartedFeeding() {
+
+        RuntimeExceptionDao feedEventRepo = getRuntimeExceptionDao(FeedEvent.class);
+        FeedEvent feedEvent = new FeedEvent();
+        feedEvent.setStartTime(new Date());
+        feedEvent.setFinishTime(new Date());
+        feedEventRepo.createOrUpdate(feedEvent);
 
     }
 
@@ -132,5 +143,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         RuntimeExceptionDao<Reminder, String> simpleDao = helper.getRuntimeExceptionDao(Reminder.class);
         List<Reminder> list = simpleDao.queryForAll();
         return list;
+    }
+
+    public FeedEvent getFeedEventForId(Context context,String id) {
+        DatabaseHelper helper = DatabaseHelper.getHelper(context);
+        RuntimeExceptionDao<FeedEvent, String> simpleDao = helper.getRuntimeExceptionDao(FeedEvent.class);
+        return simpleDao.queryForId(id);
     }
 }
