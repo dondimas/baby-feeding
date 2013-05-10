@@ -17,7 +17,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static DatabaseHelper instance;
 
-    public static final int DATABASE_VERSION = 18;
+    public static final int DATABASE_VERSION = 19;
 
     private static final String DATABASE_NAME = "babyfeeding3.db";
 

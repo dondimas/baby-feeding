@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="DetailLayoutPadding">
+        <item name="android:paddingLeft">@dimen/fragment_window_margin</item>
+        <item name="android:paddingRight">@dimen/fragment_window_margin</item>
+        <item name="android:paddingTop">@dimen/default_padding_half</item>
+        <item name="android:paddingBottom">@dimen/default_padding_half</item>
+    </style>
 
+    <style name="NormalText" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="ButtonText" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">left|center_vertical</item>
+    </style>
+
+
+    <style name="ChoiceEditText" parent="ButtonText">
+        <item name="android:layout_height">@dimen/button_default_height</item>
+        <item name="android:background">@drawable/choice_button</item>
+    </style>
+
+    <style name="Tabs">
+        <item name="android:textColor">@color/tab_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">10dp</item>
+    </style>
     
     <style name="HeaderText" parent="@android:style/Widget.TextView">
         <item name="android:textColor">#ffffff</item>
@@ -21,8 +50,12 @@
         <item name="android:shadowRadius">1</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
+
     <style name="FeedListHeader" parent="RowText">
         <item name="android:gravity">center_horizontal</item>
+    </style>
+    <style name="ReminderListRowText" parent="RowText">
+        <item name="android:textColor">#ffffff</item>
     </style>
     <style name="Licenses" parent="@android:style/Widget.TextView">
         <item name="android:textColor">#000000</item>
@@ -42,4 +75,7 @@
         <item name="android:background">#e3e3e4</item>
     </style>
 
+    <dimen name="fragment_window_margin">5dp</dimen>
+    <dimen name="default_padding_half">5dp</dimen>
+    <dimen name="button_default_height">48dp</dimen>
 </resources>

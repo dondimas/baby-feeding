@@ -3,7 +3,7 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:background="@drawable/background1"
+              android:background="@drawable/background_mother_child1"
 
         >
 
@@ -16,23 +16,28 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Left Breast"
-                android:button="@drawable/check_selector"
+                android:button="@drawable/check_left_breast_selector"
                 android:id="@+id/left_breast"
-                android:layout_weight="0.4"/>
+                android:layout_weight="0.35"
+                android:layout_gravity="center"/>
         <CheckBox
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Right Breast"
-                android:button="@drawable/check_selector"
+                android:button="@drawable/check_right_breast_selector"
                 android:id="@+id/right_breast"
-                android:layout_weight="0.4"/>
-        <ImageButton  android:layout_width="0dp"
-                      android:layout_height="wrap_content"
-                      android:src="@drawable/actionbar_settings"
-                      android:id="@+id/settings_button"
-                      android:background="0"
-                      android:layout_weight="0.2"/>
+                android:layout_weight="0.35"
+                android:layout_gravity="center"/>
 
+        <CheckBox
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Bottle"
+                android:button="@drawable/check_bottle_selector"
+                android:id="@+id/bottle_source"
+                android:layout_weight="0.3"
+                android:layout_gravity="center"
+                android:layout_marginLeft="3dp"/>
     </LinearLayout>
 
     <Button

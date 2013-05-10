@@ -23,5 +23,13 @@
     <string name="feed_list_header_feed_lasted">Lasted</string>
     <string name="feed_list_header_source">From</string>
     <string name="feed_list_header_date">Date</string>
+    <string name="tab_feed_events_tabname">Feedings</string>
+    <string name="tab_reminders_tabname">Reminders</string>
+    <string name="add_reminder_button">Save Reminder</string>
+    <string name="reminder_message_hint">Reminder message</string>
+    <string name="reminder_time_hint">Reminder time</string>
+    <string name="cancel">Cancel</string>
+    <string name="reminder_list_header_message">Reminder message</string>
+    <string name="reminder_list_header_time">Time</string>
 
 </resources>

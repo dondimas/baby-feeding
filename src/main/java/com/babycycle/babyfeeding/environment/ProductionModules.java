@@ -1,5 +1,7 @@
 package com.babycycle.babyfeeding.environment;
 
+import com.babycycle.babyfeeding.ui.navigation.ITabHistoryContentStack;
+import com.babycycle.babyfeeding.ui.navigation.TabHistoryContentStack;
 import com.google.inject.AbstractModule;
 
 /**
@@ -18,6 +20,7 @@ public class ProductionModules extends AbstractModule {
     @Override
     protected void configure() {
 //        bind(IPersistanceFacade.class).to(PersistenceFacade.class);
+        bind(ITabHistoryContentStack.class).to(TabHistoryContentStack.class);
         overrideBinding();
     }
 

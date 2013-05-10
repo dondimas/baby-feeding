@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.ui.UIConstants;
+import com.babycycle.babyfeeding.ui.activity.helpers.TabsCommunicator;
+import com.google.inject.Inject;
+import roboguice.activity.RoboActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -21,7 +24,7 @@ import java.util.*;
  * Time: 5:06 PM
  * To change this template use File | Settings | File Templates.
  */
-public class FeedRunningActivity extends Activity {
+public class FeedRunningActivity extends RoboActivity {
 
     TextView runningFeedTime;
     TextView startFeedTime;
@@ -31,12 +34,22 @@ public class FeedRunningActivity extends Activity {
     private static SimpleDateFormat hoursMinutesFormatter = new SimpleDateFormat(UIConstants.HOURS_MINUTES_FORMAT);
     private static SimpleDateFormat minutesSecondsFormatter = new SimpleDateFormat(UIConstants.MINUTES_SECONDS_LASTING_FORMAT);
 
+    @Inject
+    TabsCommunicator tabsCommunicator;
+
     public void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.pull_in_from_bottom, R.anim.hold);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed_running);
-        startTime = FeedListActivity.currentFeedEvent.getStartTime();
+        startTime = tabsCommunicator.getCurrentFeedEvent().getStartTime();
         startTiming();
         initViews();
+    }
+
+    @Override
+    protected void onPause() {
+        overridePendingTransition(R.anim.hold, R.anim.push_out_to_bottom);
+        super.onPause();
     }
 
     private void initViews() {

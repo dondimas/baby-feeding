@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/item_container"
+              >
+    <TextView   android:id="@+id/reminder_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/ReminderListRowText"
+                android:layout_margin="3dp"
+                android:gravity="left"
+                android:layout_weight="0.8"
+            />
+    <TextView   android:id="@+id/reminder_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/ReminderListRowText"
+                android:layout_margin="3dp"
+                android:layout_weight="0.2"
+            />
+</LinearLayout>

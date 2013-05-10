@@ -3,57 +3,16 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:background="@drawable/background1"
+              android:background="@drawable/background_mother_child1"
 
         >
 
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:layout_gravity="center"
-             >
-        <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Left Breast"
-                android:button="@drawable/check_selector"
-                android:id="@+id/left_breast"
-                android:layout_weight="0.4"/>
-        <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Right Breast"
-                android:button="@drawable/check_selector"
-                android:id="@+id/right_breast"
-                android:layout_weight="0.4"/>
-        <ImageButton  android:layout_width="0dp"
-                      android:layout_height="wrap_content"
-                      android:src="@drawable/actionbar_settings"
-                      android:id="@+id/settings_button"
-                      android:background="0"
-                      android:layout_weight="0.2"/>
-
-    </LinearLayout>
-
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Start Feeding"
-            android:id="@+id/start_feed_button"/>
-
-    <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Continue Feeding"
-            android:id="@+id/continue_feed_button"
-            android:visibility="gone"/>
-    <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Finalize"
-            android:id="@+id/finalize_feed_button"
-            android:visibility="gone"/>
-    <include layout="@layout/feed_list_header" />
+            android:text="@string/add_reminder_button"
+            android:id="@+id/add_reminder_button"/>
+    <include layout="@layout/reminder_list_header" />
     <ListView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

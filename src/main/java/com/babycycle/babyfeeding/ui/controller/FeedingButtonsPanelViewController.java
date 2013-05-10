@@ -1,7 +1,6 @@
 package com.babycycle.babyfeeding.ui.controller;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,6 +26,8 @@ public class FeedingButtonsPanelViewController {
     private Button finalizeFeeding;
     private CheckBox leftBreast;
     private CheckBox rightBreast;
+
+    private CheckBox bottleSource;
 
     private FeedingRunner feedingRunner;
 
@@ -97,6 +98,17 @@ public class FeedingButtonsPanelViewController {
         return this;
     }
 
+    public FeedingButtonsPanelViewController setBottleSource(CheckBox bottleSource) {
+        this.bottleSource = bottleSource;
+        this.bottleSource.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                unsetOppositeCheckbox(v);
+            }
+        });
+        return this;
+    }
+
     public void showFinalizationButtons() {
         continueFeeding.setVisibility(View.VISIBLE);
         finalizeFeeding.setVisibility(View.VISIBLE);
@@ -112,15 +124,23 @@ public class FeedingButtonsPanelViewController {
         void runFeeding();
         void continueFeeding();
         void finalizeFeeding(boolean leftBreastChecked, boolean rightBreastChecked);
+        Activity getRunnerActivity();
     }
 
     private void unsetOppositeCheckbox(View v) {
-        CheckBox oppositeCheckbox = leftBreast;
-        if(v.getId() == R.id.left_breast) {
-            oppositeCheckbox = rightBreast;
+        if(!((CheckBox)v).isChecked()) {
+            return;
         }
-        if(((CheckBox)v).isChecked()) {
-            oppositeCheckbox.setChecked(false);
+        CheckBox oppositeCheckbox = leftBreast;
+
+        if(v.getId() != R.id.left_breast) {
+            leftBreast.setChecked(false);
+        }
+        if(v.getId() != R.id.right_breast) {
+            rightBreast.setChecked(false);
+        }
+        if(v.getId() != R.id.bottle_source) {
+            bottleSource.setChecked(false);
         }
     }
     public void finalizeFeeding() {
@@ -147,7 +167,7 @@ public class FeedingButtonsPanelViewController {
     }
 
     private void updateView() {
-        ((Activity)feedingRunner).runOnUiThread(new Runnable() {
+        feedingRunner.getRunnerActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 startFeeding.setText(getStartFeedingButtonText());

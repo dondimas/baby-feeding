@@ -1,12 +1,15 @@
 package com.babycycle.babyfeeding.ui.controller;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.PersistenceFacade;
 import com.babycycle.babyfeeding.model.Reminder;
 import com.babycycle.babyfeeding.ui.activity.FeedListActivity;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 import java.lang.ref.WeakReference;
@@ -29,7 +32,12 @@ public class RemindersController {
 
     private Reminder chosenReminder;
 
-    WeakReference<FeedListActivity> activity;
+    @Inject
+    public RemindersController(Provider<Context> contextProvider) {
+        setActivity(contextProvider.get());
+    }
+
+    WeakReference<Context> activity;
 
     private List<Reminder> reminders;
 
@@ -38,8 +46,8 @@ public class RemindersController {
     @Inject
     PersistenceFacade persistenceFacade;
 
-    public void setActivity(FeedListActivity activity) {
-        this.activity = new WeakReference<FeedListActivity>(activity);
+    public void setActivity(Context activity) {
+        this.activity = new WeakReference<Context>(activity);
     }
 
     public void showReminders() {

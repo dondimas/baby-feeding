@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.ListView;
+import com.babycycle.babyfeeding.ui.activity.helpers.TabsCommunicator;
 import com.babycycle.babyfeeding.ui.adapter.FeedEventListAdapter;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.ui.controller.ClockAppController;
@@ -38,10 +38,8 @@ public class FeedListActivity extends RoboActivity implements FeedingButtonsPane
     @InjectView(R.id.right_breast)
     private CheckBox rightBreast;
 
-    @InjectView(R.id.settings_button)
-    private ImageButton settingsButton;
-
-    public static FeedEvent currentFeedEvent;
+    @InjectView(R.id.bottle_source)
+    private CheckBox settingsButton;
 
     @Inject
     PersistenceFacade persistenceFacade;
@@ -57,23 +55,30 @@ public class FeedListActivity extends RoboActivity implements FeedingButtonsPane
 
     FeedingButtonsPanelViewController feedingButtonsPanelViewController;
 
+    Activity activity;
+
+    @Inject
+    TabsCommunicator tabsCommunicator;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(null);
+        activity = this;
         setContentView(R.layout.feed_list);
         initListView();
         initControllers();
     }
 
     private void initControllers() {
-        remindersController.setActivity(this);
-        clockAppController.setContext(this);
+        remindersController.setActivity(activity);
+        clockAppController.setContext(activity);
         feedingButtonsPanelViewController = new FeedingButtonsPanelViewController()
                 .setFeedingRunner(this)
                 .setStartFeeding(startFeeding)
                 .setContinueFeeding(continueFeeding)
                 .setFinalizeFeeding(finalizeFeeding)
                 .setLeftBreast(leftBreast)
+                .setBottleSource(leftBreast)
                 .setRightBreast(rightBreast);
         feedingButtonsPanelViewController.setLastFeedStartTime(persistenceFacade.getLastFeedStartTime());
     }
@@ -83,11 +88,6 @@ public class FeedListActivity extends RoboActivity implements FeedingButtonsPane
         super.onResume();
         remindersController.showReminders();
 
-    }
-
-    public void continueFeeding() {
-        Intent intent = new Intent(this, FeedRunningActivity.class);
-        startActivityForResult(intent, 1);
     }
 
     private void initListView() {
@@ -102,10 +102,20 @@ public class FeedListActivity extends RoboActivity implements FeedingButtonsPane
         continueFeeding();
     }
 
+    public void continueFeeding() {
+        Intent intent = new Intent(this, FeedRunningActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
     public void finalizeFeeding(boolean leftBreastChecked, boolean rightBreastChecked) {
         persistFeedingData(leftBreastChecked, rightBreastChecked);
         refreshListData();
         clockAppController.openClockAppIfNeed();
+    }
+
+    @Override
+    public Activity getRunnerActivity() {
+        return activity;
     }
 
     private void refreshListData() {
@@ -115,15 +125,16 @@ public class FeedListActivity extends RoboActivity implements FeedingButtonsPane
     }
 
     private void persistFeedingData(boolean leftBreastChecked, boolean rightBreastChecked) {
-        currentFeedEvent.setLeftBreast(leftBreastChecked);
-        currentFeedEvent.setRightBreast(rightBreastChecked);
-        persistenceFacade.saveFeedEvent(currentFeedEvent, this);
+        tabsCommunicator.getCurrentFeedEvent().setLeftBreast(leftBreastChecked);
+        tabsCommunicator.getCurrentFeedEvent().setRightBreast(rightBreastChecked);
+        persistenceFacade.saveFeedEvent(tabsCommunicator.getCurrentFeedEvent(), this);
     }
 
     private void initFeedEvent() {
         Calendar calendarActual = Calendar.getInstance(Locale.US);
-        currentFeedEvent = new FeedEvent();
+        FeedEvent currentFeedEvent = new FeedEvent();
         currentFeedEvent.setStartTime(calendarActual.getTime());
+        tabsCommunicator.setCurrentFeedEvent(currentFeedEvent);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -141,7 +152,7 @@ public class FeedListActivity extends RoboActivity implements FeedingButtonsPane
 
     private void setFinishTime() {
         Calendar calendarActual = Calendar.getInstance(Locale.US);
-        currentFeedEvent.setFinishTime(calendarActual.getTime());
+        tabsCommunicator.getCurrentFeedEvent().setFinishTime(calendarActual.getTime());
     }
 
     @Override
