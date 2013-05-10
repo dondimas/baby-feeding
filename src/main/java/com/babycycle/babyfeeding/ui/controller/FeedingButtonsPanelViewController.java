@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import com.babycycle.babyfeeding.R;
+import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.ui.UIConstants;
 
 import java.text.SimpleDateFormat;
@@ -118,6 +119,12 @@ public class FeedingButtonsPanelViewController {
     public void setLastFeedStartTime(Date lastFeedStartTime) {
         this.lastFeedStartTime = lastFeedStartTime;
         startTiming();
+    }
+
+    public void updateBreastsWithRunningFeedingEvent(FeedEvent runningFeedEvent) {
+        leftBreast.setChecked(runningFeedEvent.isLeftBreast());
+        rightBreast.setChecked(runningFeedEvent.isRightBreast());
+        bottleSource.setChecked(false);
     }
 
     public interface FeedingRunner {

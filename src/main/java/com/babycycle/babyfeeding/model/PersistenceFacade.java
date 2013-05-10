@@ -56,8 +56,9 @@ public class PersistenceFacade {
     }
 
     private void groupOddEvenEvents() {
-        for (int i = 0; i < feedEventList.size(); i++) {
-            if(i == 0){
+        int startingIndex = 1;
+        for (int i = startingIndex; i < feedEventList.size(); i++) {
+            if(i == startingIndex){
                 feedEventList.get(0).odd = true;
             } else {
                 if(feedEventList.get(i).getStartTime().getTime() - feedEventList.get(i - 1).getFinishTime().getTime() > maxGapOneFeedingMillis) {
@@ -132,6 +133,8 @@ public class PersistenceFacade {
     public void persistStartedFeedEvent(FeedEvent feedEvent, Context context) {
         FeedEvent runningFeedEvent = DatabaseHelper.getHelper(context).getFeedEventForId(context, runningEventId);
         runningFeedEvent.setStartTime(feedEvent.getStartTime());
+        runningFeedEvent.setLeftBreast(feedEvent.isLeftBreast());
+        runningFeedEvent.setRightBreast(feedEvent.isRightBreast());
         runningFeedEvent.setFinishTime(null);
         DatabaseHelper.getHelper(context).saveFeedEvent(runningFeedEvent);
     }

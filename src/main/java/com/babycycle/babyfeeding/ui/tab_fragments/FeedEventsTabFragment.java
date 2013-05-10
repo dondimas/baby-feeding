@@ -97,6 +97,7 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
     private void checkFeedEventWasFired() {
         FeedEvent runningFeedEvent = persistenceFacade.getRunningFeedEvent(activity);
         if(runningFeedEvent != null) {
+            feedingButtonsPanelViewController.updateBreastsWithRunningFeedingEvent(runningFeedEvent);
             initFeedEventWithStartTime(runningFeedEvent.getStartTime());
             continueFeeding();
         }
@@ -166,10 +167,20 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
         tabsCommunicator.getCurrentFeedEvent().setLeftBreast(leftBreastChecked);
         tabsCommunicator.getCurrentFeedEvent().setRightBreast(rightBreastChecked);
         persistenceFacade.saveFeedEvent(tabsCommunicator.getCurrentFeedEvent(), activity);
+        persistenceFacade.deleteStartedFeedEvent(activity);
     }
 
     private void initFeedEvent() {
         Calendar calendarActual = Calendar.getInstance(Locale.US);
+        FeedEvent feedEvent = new FeedEvent();
+        feedEvent.setStartTime(new Date());
+        if(leftBreast.isChecked()) {
+            feedEvent.setLeftBreast(true);
+        }
+        if(rightBreast.isChecked()) {
+            feedEvent.setRightBreast(true);
+        }
+        persistenceFacade.persistStartedFeedEvent(feedEvent, activity);
         initFeedEventWithStartTime(calendarActual.getTime());
     }
 
