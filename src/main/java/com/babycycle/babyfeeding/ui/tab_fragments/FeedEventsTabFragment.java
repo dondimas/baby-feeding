@@ -84,6 +84,12 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        refreshListData();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         initViews(rootView);

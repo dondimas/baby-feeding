@@ -60,6 +60,7 @@ public class PersistenceFacade {
         for (int i = startingIndex; i < feedEventList.size(); i++) {
             if(i == startingIndex){
                 feedEventList.get(0).odd = true;
+                lastFeedStartTime = feedEventList.get(i).getStartTime();
             } else {
                 if(feedEventList.get(i).getStartTime().getTime() - feedEventList.get(i - 1).getFinishTime().getTime() > maxGapOneFeedingMillis) {
                     feedEventList.get(i).odd = !feedEventList.get(i - 1).odd;

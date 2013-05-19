@@ -81,7 +81,8 @@ public class ReminderListAdapter extends ArrayAdapter<Reminder> {
         fillViewsWIthData(holder, feedEvent);
 
         holder.itemClickListener.setPosition(position);
-        holder.itemContainer.setOnClickListener(holder.itemClickListener);
+//        holder.itemContainer.setOnClickListener(holder.itemClickListener);
+        convertView.setOnClickListener(holder.itemClickListener);
         return convertView;
     }
 

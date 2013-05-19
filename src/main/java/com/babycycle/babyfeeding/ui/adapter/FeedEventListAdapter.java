@@ -1,6 +1,8 @@
 package com.babycycle.babyfeeding.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.FeedEvent;
+import com.babycycle.babyfeeding.model.Reminder;
 import com.babycycle.babyfeeding.ui.UIConstants;
+import com.babycycle.babyfeeding.ui.activity.FeedEventDetailsActivity;
+import com.babycycle.babyfeeding.ui.activity.ReminderDetailsActivity;
+import com.babycycle.babyfeeding.ui.activity.helpers.TabsCommunicator;
+import com.google.inject.Inject;
+import roboguice.RoboGuice;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,6 +40,9 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
     private static SimpleDateFormat fullDateFormatter = new SimpleDateFormat("MM-dd");
 
+    @Inject
+    TabsCommunicator tabsCommunicator;
+
     public void setFeedEvents(List<FeedEvent> feedEvents) {
         this.feedEvents = feedEvents;
 
@@ -44,6 +55,11 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
         this.context = context;
         setFeedEvents(feedEvents);
         this.layoutId = layoutId;
+        injectMembers();
+    }
+
+    private void injectMembers() {
+        RoboGuice.getInjector(context).injectMembers(this);
     }
 
     @Override
@@ -62,13 +78,15 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
             holder.fullDate = (TextView) convertView.findViewById(R.id.full_date);
             holder.feedingLastedTime = (TextView) convertView.findViewById(R.id.feeding_lasted_tima);
             holder.breast = (TextView) convertView.findViewById(R.id.breast);
+            holder.itemClickListener = new ItemClickListener();
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         fillViewsWIthData(holder, feedEvent);
 
-
+        holder.itemClickListener.setPosition(position);
+        convertView.setOnClickListener(holder.itemClickListener);
         return convertView;
     }
 
@@ -102,6 +120,10 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     }
 
     private void setFeedingDate(ViewHolder holder, FeedEvent feedEvent) {
+        if(feedEvent.getMilkAmount() > 0) {
+            holder.fullDate.setText(feedEvent.getMilkAmount() + " ml");
+            return;
+        }
         Calendar calendar = Calendar.getInstance();
         int todayDay = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.setTime(feedEvent.getFinishTime());
@@ -124,5 +146,26 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
         TextView feedingLastedTime;
         TextView breast;
         public TextView fullDate;
+        public ItemClickListener itemClickListener;
+    }
+
+    class ItemClickListener implements View.OnClickListener {
+
+        private int position;
+        @Override
+        public void onClick(View v) {
+            openFeedEventDetails(position);
+        }
+
+        void setPosition(int position) {
+            this.position = position;
+        }
+    }
+
+    private void openFeedEventDetails(int position) {
+        FeedEvent itemEvent = feedEvents.get(getCount() - position -1);
+        tabsCommunicator.setFeedEventForDetails(itemEvent);
+        Intent intent = new Intent(context, FeedEventDetailsActivity.class);
+        ((Activity)context).startActivityForResult(intent, 123);
     }
 }

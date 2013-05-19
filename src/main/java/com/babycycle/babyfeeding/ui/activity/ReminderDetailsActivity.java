@@ -59,7 +59,7 @@ public class ReminderDetailsActivity extends RoboActivity {
             calendar.setTime(currentReminder.getTimeOfDay());
             reminderTime.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
             reminderTime.setCurrentMinute(calendar.get(Calendar.MINUTE));
-//            submitReminder.setText("Edit reminder");
+//            submitFeedEvent.setText("Edit reminder");
         }
     }
 

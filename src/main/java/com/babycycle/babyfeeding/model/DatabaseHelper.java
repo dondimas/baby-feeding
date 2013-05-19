@@ -17,7 +17,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static DatabaseHelper instance;
 
-    public static final int DATABASE_VERSION = 19;
+    public static final int DATABASE_VERSION = 20;
 
     private static final String DATABASE_NAME = "babyfeeding3.db";
 
@@ -26,7 +26,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     };
 
     public static final Class[] ENTITIES_NEW = {
-              Reminder.class,
+            FeedEvent.class, Reminder.class,
     };
 
     public DatabaseHelper(Context context) {

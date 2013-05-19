@@ -19,6 +19,8 @@ public class TabsCommunicator {
 
     private Reminder reminderForDetails;
 
+    private FeedEvent feedEventForDetails;
+
     public FeedEvent getCurrentFeedEvent() {
         return currentFeedEvent;
     }
@@ -33,5 +35,13 @@ public class TabsCommunicator {
 
     public void setReminderForDetails(Reminder reminderForDetails) {
         this.reminderForDetails = reminderForDetails;
+    }
+
+    public void setFeedEventForDetails(FeedEvent feedEventForDetails) {
+        this.feedEventForDetails = feedEventForDetails;
+    }
+
+    public FeedEvent getFeedEventForDetails() {
+        return feedEventForDetails;
     }
 }

@@ -18,14 +18,31 @@ public class FeedEvent {
     @DatabaseField(generatedId = true)
     private int id;
 
-    @DatabaseField(canBeNull = true)
+    @DatabaseField(canBeNull = true, columnName = "start_time")
     private Date startTime;
 
-    @DatabaseField(canBeNull = true)
+    @DatabaseField(canBeNull = true, columnName = "finish_time")
     private Date finishTime;
 
-    @DatabaseField(canBeNull = true)
+    @DatabaseField(canBeNull = true, columnName = "left_breast")
     private boolean leftBreast;
+
+    @DatabaseField(canBeNull = true, columnName = "right_breast")
+    private boolean rightBreast;
+
+    @DatabaseField(canBeNull = true, columnName = "milkAmount")
+    private int milkAmount;
+
+    public FeedEvent() {
+    }
+
+    public FeedEvent(Date startTime, int milk_amount, boolean rightBreast, boolean leftBreast, Date finishTime) {
+        this.startTime = startTime;
+        this.milkAmount = milk_amount;
+        this.rightBreast = rightBreast;
+        this.leftBreast = leftBreast;
+        this.finishTime = finishTime;
+    }
 
     public boolean isRightBreast() {
         return rightBreast;
@@ -44,6 +61,9 @@ public class FeedEvent {
     }
 
     public Date getFinishTime() {
+        if(finishTime == null) {
+            return startTime;
+        }
         return finishTime;
     }
 
@@ -59,8 +79,13 @@ public class FeedEvent {
         this.leftBreast = leftBreast;
     }
 
-    @DatabaseField(canBeNull = true)
-    private boolean rightBreast;
+    public int getMilkAmount() {
+        return milkAmount;
+    }
+
+    public void setMilkAmount(int milkAmount) {
+        this.milkAmount = milkAmount;
+    }
 
     public boolean odd;
 
