@@ -73,10 +73,7 @@ public class FeedEventDetailsActivity extends RoboActivity {
 
     private void initViews() {
         milkAmount = (EditText) findViewById(R.id.milk_amount);
-        startEventTime = (TimePicker) findViewById(R.id.start_event_time);
-        startEventTime.setIs24HourView(true);
-        endEventTime = (TimePicker) findViewById(R.id.end_event_time);
-        endEventTime.setIs24HourView(true);
+
         submitFeedEvent = (Button) findViewById(R.id.submit_feed_event_button);
         cancelFeedEventDetails = (Button) findViewById(R.id.cancel_feed_event_details_button);
         screenContainer = findViewById(R.id.container_event_details);
@@ -101,13 +98,35 @@ public class FeedEventDetailsActivity extends RoboActivity {
                 closeClaviIfOpened();
             }
         });
+        initTimePickers();
         fillWithDataForEdition();
     }
 
+    private void initTimePickers() {
+        startEventTime = (TimePicker) findViewById(R.id.start_event_time);
+        startEventTime.setIs24HourView(true);
+        endEventTime = (TimePicker) findViewById(R.id.end_event_time);
+        endEventTime.setIs24HourView(true);
+
+    }
+
+    private void validateTimes() {
+        if(endEventTimeBeforeStartEventTime()) {
+            int hour = startEventTime.getCurrentHour();
+            int minute = startEventTime.getCurrentMinute();
+            endEventTime.setCurrentHour(hour);
+            endEventTime.setCurrentMinute(minute);
+        }
+    }
+
+    private boolean endEventTimeBeforeStartEventTime() {
+        return ( endEventTime.getCurrentMinute() < startEventTime.getCurrentMinute()
+                && endEventTime.getCurrentHour() == startEventTime.getCurrentHour() )
+                || endEventTime.getCurrentHour() < startEventTime.getCurrentHour();
+    }
+
     private void saveFeedEvent() {
-//        if(!validateData()) {
-//            return;
-//        }
+        validateTimes();
         if(feedEvent == null) {    //TODO CHANGE TO ENUM
             feedEvent = new FeedEvent();
         }
