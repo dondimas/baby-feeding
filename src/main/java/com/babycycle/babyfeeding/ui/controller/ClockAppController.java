@@ -14,6 +14,7 @@ import com.babycycle.babyfeeding.ui.activity.FeedListActivity;
 import com.google.inject.Singleton;
 
 import java.lang.ref.WeakReference;
+import java.util.Calendar;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,6 +26,8 @@ import java.lang.ref.WeakReference;
 @Singleton
 public class ClockAppController {
 
+    private static final int START_NIGHT_HOUR = 22;
+    private static final int END_NIGHT_HOUR = 6;
     WeakReference<Context> context;
     boolean foundClockImpl = false;
 
@@ -66,11 +69,19 @@ public class ClockAppController {
     }
 
     public void openClockAppIfNeed() {
+        if(isDayTime()) {
+            return;
+        }
         checkIfClockAppIsAccessible();
         if (!foundClockImpl) {
             return;
         }
         openConfirmationDialogue();
+    }
+
+    private boolean isDayTime() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.HOUR_OF_DAY) > START_NIGHT_HOUR || calendar.get(Calendar.HOUR_OF_DAY) < END_NIGHT_HOUR;
     }
 
     private void openConfirmationDialogue() {
