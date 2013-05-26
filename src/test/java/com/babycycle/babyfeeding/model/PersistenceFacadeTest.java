@@ -103,7 +103,8 @@ public class PersistenceFacadeTest {
         createEventsList();
         List<FeedEvent> events = persistenceFacade.getFeedEventList(application);
         for(int i = 1; i < events.size(); i++) {
-            if(events.get(i).getStartTime().getTime() - events.get(i-1).getFinishTime().getTime() >maxGapMillis) {
+            long delta = events.get(i-1).getStartTime().getTime() - events.get(i).getFinishTime().getTime();
+            if(events.get(i-1).getStartTime().getTime() - events.get(i).getFinishTime().getTime() >maxGapMillis) {
                 assertThat(events.get(i).odd).isEqualTo(!events.get(i-1).odd);
             } else {
                 assertThat(events.get(i).odd).isEqualTo(events.get(i-1).odd);

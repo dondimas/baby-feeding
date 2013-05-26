@@ -56,21 +56,20 @@ public class PersistenceFacade {
     }
 
     private void groupOddEvenEvents() {
-        int startingIndex = 1;
-        for (int i = startingIndex; i < feedEventList.size(); i++) {
-            if(i == startingIndex){
-                feedEventList.get(0).odd = true;
-                lastFeedStartTime = feedEventList.get(i).getStartTime();
+        int startingIndex = feedEventList.size()-1;
+        for (int i = 0; i < feedEventList.size(); i++) {
+            if(i == 0){
+                feedEventList.get(i).odd = true;
             } else {
-                if(feedEventList.get(i).getStartTime().getTime() - feedEventList.get(i - 1).getFinishTime().getTime() > maxGapOneFeedingMillis) {
+                if(feedEventList.get(i - 1).getStartTime().getTime() - feedEventList.get(i).getFinishTime().getTime() > maxGapOneFeedingMillis) {
                     feedEventList.get(i).odd = !feedEventList.get(i - 1).odd;
-                    lastFeedStartTime = feedEventList.get(i).getStartTime();
                 } else {
                     feedEventList.get(i).odd = feedEventList.get(i - 1).odd;
                 }
             }
 
         }
+        lastFeedStartTime = feedEventList.get(0).getStartTime();
     }
 
     public List<Reminder> getReminders(Context context) {

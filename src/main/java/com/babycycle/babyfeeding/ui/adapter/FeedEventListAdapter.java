@@ -68,7 +68,8 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         ViewHolder holder;
-        final FeedEvent feedEvent = this.feedEvents.get(feedEvents.size() - position -1);
+//        final FeedEvent feedEvent = this.feedEvents.get(feedEvents.size() - position -1);
+        final FeedEvent feedEvent = this.feedEvents.get(position);
         if (convertView == null || ((ViewHolder) convertView.getTag()).startTime == null) {
             convertView = inflater.inflate(this.layoutId, parent, false);
             holder = new ViewHolder();
@@ -78,6 +79,7 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
             holder.fullDate = (TextView) convertView.findViewById(R.id.full_date);
             holder.feedingLastedTime = (TextView) convertView.findViewById(R.id.feeding_lasted_tima);
             holder.breast = (TextView) convertView.findViewById(R.id.breast);
+            holder.amount = (TextView) convertView.findViewById(R.id.amount);
             holder.itemClickListener = new ItemClickListener();
             convertView.setTag(holder);
         } else {
@@ -121,9 +123,12 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
 
     private void setFeedingDate(ViewHolder holder, FeedEvent feedEvent) {
         if(feedEvent.getMilkAmount() > 0) {
-            holder.fullDate.setText(feedEvent.getMilkAmount() + " ml");
-            return;
+            holder.amount.setText(feedEvent.getMilkAmount() + " ml");
+
+        }else {
+            holder.amount.setText("--");
         }
+
         Calendar calendar = Calendar.getInstance();
         int todayDay = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.setTime(feedEvent.getFinishTime());
@@ -147,6 +152,7 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
         TextView breast;
         public TextView fullDate;
         public ItemClickListener itemClickListener;
+        public TextView amount;
     }
 
     class ItemClickListener implements View.OnClickListener {
@@ -163,7 +169,8 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     }
 
     private void openFeedEventDetails(int position) {
-        FeedEvent itemEvent = feedEvents.get(getCount() - position -1);
+//        FeedEvent itemEvent = feedEvents.get(getCount() - position -1);
+        FeedEvent itemEvent = feedEvents.get(position);
         tabsCommunicator.setFeedEventForDetails(itemEvent);
         Intent intent = new Intent(context, FeedEventDetailsActivity.class);
         ((Activity)context).startActivityForResult(intent, 123);

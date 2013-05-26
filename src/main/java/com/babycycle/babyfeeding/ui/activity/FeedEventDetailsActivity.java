@@ -1,7 +1,9 @@
 package com.babycycle.babyfeeding.ui.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -29,6 +31,7 @@ public class FeedEventDetailsActivity extends RoboActivity {
     TimePicker endEventTime;
     Button submitFeedEvent;
     Button cancelFeedEventDetails;
+    View screenContainer;
 
     @Inject
     TabsCommunicator tabsCommunicator;
@@ -76,6 +79,7 @@ public class FeedEventDetailsActivity extends RoboActivity {
         endEventTime.setIs24HourView(true);
         submitFeedEvent = (Button) findViewById(R.id.submit_feed_event_button);
         cancelFeedEventDetails = (Button) findViewById(R.id.cancel_feed_event_details_button);
+        screenContainer = findViewById(R.id.container_event_details);
 
         submitFeedEvent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +95,12 @@ public class FeedEventDetailsActivity extends RoboActivity {
             }
         });
 
+        screenContainer.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeClaviIfOpened();
+            }
+        });
         fillWithDataForEdition();
     }
 
@@ -124,4 +134,11 @@ public class FeedEventDetailsActivity extends RoboActivity {
         finish();
     }
 
+    public void closeClaviIfOpened() {
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 }

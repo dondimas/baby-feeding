@@ -36,5 +36,7 @@
     <string name="end_event_time_hint">End Time</string>
     <string name="milk_amount_hint">Amount of milk</string>
     <string name="update_feed_event_button_text">Update feeding</string>
+    <string name="feed_list_header_start_end_time">Start/End</string>
+    <string name="feed_list_header_amount">Amount</string>
 
 </resources>
