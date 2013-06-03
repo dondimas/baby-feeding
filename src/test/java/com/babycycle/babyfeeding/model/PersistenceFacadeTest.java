@@ -2,6 +2,7 @@ package com.babycycle.babyfeeding.model;
 
 import android.app.Application;
 import com.babycycle.babyfeeding.test_utils.BabyFeedingTestRunner;
+import com.babycycle.babyfeeding.test_utils.DBDataCreationHelper;
 import com.babycycle.babyfeeding.ui.controller.FeedingButtonsPanelViewController;
 import com.google.inject.Inject;
 import com.xtremelabs.robolectric.Robolectric;
@@ -173,28 +174,6 @@ public class PersistenceFacadeTest {
 
     }
     private void createEventsList() {
-        long minute = 1000*60;
-        Calendar calendar = Calendar.getInstance();
-        long startTimeMillis0 =  calendar.getTimeInMillis();
-        long startTimeMillis =  calendar.getTimeInMillis();
-        startTimeMillis -= minute*60*30;
-
-        for(int i = 0; startTimeMillis < startTimeMillis0; i++) {
-            calendar.set(Calendar.HOUR_OF_DAY, i +2);
-            calendar.setTimeInMillis(startTimeMillis);
-            Date startTime = calendar.getTime();
-            startTimeMillis += 15*minute;
-            calendar.setTimeInMillis(startTimeMillis);
-            Date finishTime = calendar.getTime();
-
-            FeedEvent newEvent = new FeedEvent();
-            newEvent.setStartTime(startTime);
-            newEvent.setFinishTime(finishTime);
-            persistenceFacade.saveFeedEvent(newEvent, application);
-            if(i%3 == 0)
-                startTimeMillis += maxGapMillis*2;
-            else
-                startTimeMillis += maxGapMillis/2;
-        }
+        DBDataCreationHelper.createEventsList(persistenceFacade, application, maxGapMillis);
     }
 }
