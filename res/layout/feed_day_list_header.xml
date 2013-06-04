@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/header_container"
+              android:background="@drawable/feed_list_header_gradient"
+              android:layout_marginRight="5dp"
+              android:layout_marginLeft="5dp"
+        >
+    <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/FeedDayListHeader"
+                android:layout_margin="3dp"
+                android:layout_weight="0.25"
+                android:text="@string/feed_day_list_header_day"
+            />
+    <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/FeedDayListHeader"
+                android:layout_margin="3dp"
+                android:layout_weight="0.25"
+                android:text="@string/feed_day_list_header_amount_natural"
+            />
+    <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/FeedDayListHeader"
+                android:layout_margin="3dp"
+                android:layout_weight="0.25"
+                android:text="@string/feed_day_list_header_amount_chemical"
+            />
+    <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/FeedDayListHeader"
+                android:layout_margin="3dp"
+                android:layout_weight="0.25"
+                android:text="@string/feed_day_list_header_amount_total"
+            />
+
+
+</LinearLayout>

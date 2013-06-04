@@ -54,6 +54,9 @@
     <style name="FeedListHeader" parent="RowText">
         <item name="android:gravity">center_horizontal</item>
     </style>
+    <style name="FeedDayListHeader" parent="RowText">
+        <item name="android:textSize">@dimen/feed_day_header_text_size</item>
+    </style>
     <style name="ReminderListRowText" parent="RowText">
         <item name="android:textColor">#ffffff</item>
     </style>

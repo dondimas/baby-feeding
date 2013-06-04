@@ -16,4 +16,5 @@
 
 <resources>
     <dimen name="feed_list_text_size">17dip</dimen>
+    <dimen name="feed_day_header_text_size">16dip</dimen>
 </resources>

@@ -86,6 +86,7 @@ public class BabyFeedingTabActivity extends AbstractTabFragmentActivity{
     protected void addTabHostTabs(Bundle args) {
         activityTabHelper.addFeedEventsTab();
         activityTabHelper.addRemindersTab();
+        activityTabHelper.addStatsTab();
     }
 
     @Override

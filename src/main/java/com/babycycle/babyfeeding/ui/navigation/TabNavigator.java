@@ -2,6 +2,7 @@ package com.babycycle.babyfeeding.ui.navigation;
 
 import com.babycycle.babyfeeding.ui.tab_fragments.FeedEventsTabFragment;
 import com.babycycle.babyfeeding.ui.tab_fragments.RemindersTabFragment;
+import com.babycycle.babyfeeding.ui.tab_fragments.StatsTabFragment;
 import com.babycycle.babyfeeding.ui.tabs_lib.TabFragment;
 import com.babycycle.babyfeeding.ui.tabs_lib.TabFragmentsEnum;
 
@@ -16,6 +17,7 @@ public class TabNavigator {
     public static enum APPLICATION_TABS implements TabFragmentsEnum {
         FEED_EVENTS(FeedEventsTabFragment.class)
        , REMINDERS(RemindersTabFragment.class)
+       , STATS(StatsTabFragment.class)
        ;
 
         private Class<? extends TabFragment> fragmentType;

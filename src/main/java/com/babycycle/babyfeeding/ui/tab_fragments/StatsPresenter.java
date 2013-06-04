@@ -7,6 +7,7 @@ import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.model.PersistenceFacade;
 import com.google.inject.Inject;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,8 +27,15 @@ public class StatsPresenter {
 
     Context activity;
 
+    public void setView(StatsTabFragment view) {
+        this.view = new WeakReference(view);
+    }
+
+    WeakReference<StatsTabFragment> view;
+
     public void refreshListData() {
-        //To change body of created methods use File | Settings | File Templates.
+        LoadFeedEventsAsyncTask loadFeedEventsAsyncTask = new LoadFeedEventsAsyncTask();
+        loadFeedEventsAsyncTask.execute();
     }
 
     class LoadFeedEventsAsyncTask extends AsyncTask<Void,Void,Void> {
@@ -37,17 +45,14 @@ public class StatsPresenter {
         @Override
         protected Void doInBackground(Void... params) {
             feedDays = pullEventsAndGroupFeedDays();
-//            feedDays = persistenceFacade.getFeedEventList(activity);
-//            feedDays = persistenceFacade.getFeedEventList(activity);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             if(feedDays != null) {
-//                feedEventListAdapter.setFeedEvents(feedDays);
-//                feedEventListAdapter.notifyDataSetChanged();
-//                feedingButtonsPanelViewController.setLastFeedStartTime(persistenceFacade.getLastFeedStartTime());
+
+                view.get().showUpdatedDaysList(feedDays);
             }
         }
     }
@@ -74,7 +79,7 @@ public class StatsPresenter {
         if(event.getMilkAmount()%5==0) {
             currentDay.setNatural(currentDay.getNatural() + event.getMilkAmount());
         } else {
-            currentDay.setChemical(currentDay.getChemical() + event.getMilkAmount() -1);
+            currentDay.setChemical(currentDay.getChemical() + event.getMilkAmount() - 1);
         }
         return currentDay;
     }

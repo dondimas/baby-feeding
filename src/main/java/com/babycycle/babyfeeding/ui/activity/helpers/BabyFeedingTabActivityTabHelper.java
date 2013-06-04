@@ -25,6 +25,7 @@ public class BabyFeedingTabActivityTabHelper extends AbstractTabActivityTabHelpe
     int currentTabIndexBeingAdd = 0;
     int FEED_EVENTS_TAB_INDEX;
     int REMINDERS_TAB_INDEX;
+    int STATS_TAB_INDEX;
     BabyFeedingTabActivity babyFeedingTabActivity;
 
     public BabyFeedingTabActivityTabHelper(Map<String, FragmentTab> tabsMap, TabHost tabHost, BabyFeedingTabActivity activity) {
@@ -42,6 +43,12 @@ public class BabyFeedingTabActivityTabHelper extends AbstractTabActivityTabHelpe
         REMINDERS_TAB_INDEX = currentTabIndexBeingAdd++;
         Tab tab = new Tab(babyFeedingTabActivity, R.drawable.tab_reminders_states, R.string.tab_reminders_tabname);
         addTopBarTab(TabNavigator.APPLICATION_TABS.REMINDERS, tab, null);
+    }
+
+    public void addStatsTab() {
+        STATS_TAB_INDEX = currentTabIndexBeingAdd++;
+        Tab tab = new Tab(babyFeedingTabActivity, R.drawable.tab_reminders_states, R.string.tab_stats_tabname);
+        addTopBarTab(TabNavigator.APPLICATION_TABS.STATS, tab, null);
     }
 
     public void fixUI() {

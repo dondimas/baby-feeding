@@ -81,7 +81,7 @@ public class ClockAppController {
 
     private boolean isDayTime() {
         Calendar calendar = Calendar.getInstance();
-        return calendar.get(Calendar.HOUR_OF_DAY) > START_NIGHT_HOUR || calendar.get(Calendar.HOUR_OF_DAY) < END_NIGHT_HOUR;
+        return calendar.get(Calendar.HOUR_OF_DAY) < START_NIGHT_HOUR || calendar.get(Calendar.HOUR_OF_DAY) > END_NIGHT_HOUR;
     }
 
     private void openConfirmationDialogue() {

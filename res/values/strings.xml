@@ -38,5 +38,10 @@
     <string name="update_feed_event_button_text">Update feeding</string>
     <string name="feed_list_header_start_end_time">Start/End</string>
     <string name="feed_list_header_amount">Amount</string>
+    <string name="tab_stats_tabname">Statistics</string>
+    <string name="feed_day_list_header_day">Day</string>
+    <string name="feed_day_list_header_amount_natural">Mama milk</string>
+    <string name="feed_day_list_header_amount_chemical">Chemical</string>
+    <string name="feed_day_list_header_amount_total">Total</string>
 
 </resources>

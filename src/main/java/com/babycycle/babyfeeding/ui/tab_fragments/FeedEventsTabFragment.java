@@ -164,8 +164,8 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
     private void refreshListData() {
         LoadFeedEventsAsyncTask loadFeedEventsAsyncTask = new LoadFeedEventsAsyncTask();
         loadFeedEventsAsyncTask.execute();
-//        feedEventListAdapter.setFeedEvents(persistenceFacade.getFeedEventList(activity));
-//        feedEventListAdapter.notifyDataSetChanged();
+//        feedDayListAdapter.setFeedEvents(persistenceFacade.getFeedEventList(activity));
+//        feedDayListAdapter.notifyDataSetChanged();
 //        feedingButtonsPanelViewController.setLastFeedStartTime(persistenceFacade.getLastFeedStartTime());
     }
 
