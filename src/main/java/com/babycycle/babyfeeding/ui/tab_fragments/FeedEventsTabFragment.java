@@ -49,14 +49,14 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
     @InjectView(R.id.finalize_feed_button)
     private Button finalizeFeeding;
 
-    @InjectView(R.id.left_breast)
-    private CheckBox leftBreast;
+//    @InjectView(R.id.left_breast)
+//    private CheckBox leftBreast;
 
-    @InjectView(R.id.right_breast)
-    private CheckBox rightBreast;
+//    @InjectView(R.id.right_breast)
+//    private CheckBox rightBreast;
 
-    @InjectView(R.id.bottle_source)
-    private CheckBox bottleSource;
+//    @InjectView(R.id.bottle_source)
+//    private CheckBox bottleSource;
 
     @Inject
     PersistenceFacade persistenceFacade;
@@ -113,9 +113,6 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
         startFeeding = (Button) rootView.findViewById(R.id.start_feed_button);
         continueFeeding = (Button) rootView.findViewById(R.id.continue_feed_button);
         finalizeFeeding = (Button) rootView.findViewById(R.id.finalize_feed_button);
-        leftBreast = (CheckBox) rootView.findViewById(R.id.left_breast);
-        rightBreast = (CheckBox) rootView.findViewById(R.id.right_breast);
-        bottleSource = (CheckBox) rootView.findViewById(R.id.bottle_source);
     }
     private void initControllers() {
         remindersController.setActivity(activity);
@@ -124,10 +121,11 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
                 .setFeedingRunner(this)
                 .setStartFeeding(startFeeding)
                 .setContinueFeeding(continueFeeding)
-                .setFinalizeFeeding(finalizeFeeding)
-                .setLeftBreast(leftBreast)
-                .setBottleSource(bottleSource)
-                .setRightBreast(rightBreast);
+                .setTabsCommunicator(tabsCommunicator)
+                .setFinalizeFeeding(finalizeFeeding);
+//                .setLeftBreast(leftBreast)
+//                .setBottleSource(bottleSource)
+//                .setRightBreast(rightBreast);
         feedingButtonsPanelViewController.setLastFeedStartTime(persistenceFacade.getLastFeedStartTime());
     }
 
@@ -180,12 +178,6 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
         Calendar calendarActual = Calendar.getInstance(Locale.US);
         FeedEvent feedEvent = new FeedEvent();
         feedEvent.setStartTime(new Date());
-        if(leftBreast.isChecked()) {
-            feedEvent.setLeftBreast(true);
-        }
-        if(rightBreast.isChecked()) {
-            feedEvent.setRightBreast(true);
-        }
         persistenceFacade.persistStartedFeedEvent(feedEvent, activity);
         initFeedEventWithStartTime(calendarActual.getTime());
     }

@@ -6,7 +6,10 @@ import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.model.Reminder;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -155,4 +158,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         RuntimeExceptionDao<FeedEvent, String> simpleDao = helper.getRuntimeExceptionDao(FeedEvent.class);
         return simpleDao.queryForId(id);
     }
+
+    public List<FeedEvent> getLastFeedEvents(Context context) {
+        DatabaseHelper helper = getHelper(context);
+        RuntimeExceptionDao<FeedEvent, String> simpleDao = helper.getSimpleDataDao();
+        List<FeedEvent> list = null;
+        try {
+            list = simpleDao.queryBuilder().orderBy("id", false).limit((long)30).query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 }

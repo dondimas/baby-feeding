@@ -43,5 +43,6 @@
     <string name="feed_day_list_header_amount_natural">Mama milk</string>
     <string name="feed_day_list_header_amount_chemical">Chemical</string>
     <string name="feed_day_list_header_amount_total">Total</string>
+    <string name="feed_started_at_prefix">Started at : </string>
 
 </resources>

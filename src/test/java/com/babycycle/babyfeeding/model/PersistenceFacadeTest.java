@@ -173,6 +173,13 @@ public class PersistenceFacadeTest {
         assertThat(runningFeedEvent).isNull();
 
     }
+
+    @Test
+    public void dbShouldReturnLastEvents() {
+        List<FeedEvent> reminders = persistenceFacade.getFeedEventList(application);
+        assertThat(reminders).isNotEmpty();
+    }
+
     private void createEventsList() {
         DBDataCreationHelper.createEventsList(persistenceFacade, application, maxGapMillis);
     }

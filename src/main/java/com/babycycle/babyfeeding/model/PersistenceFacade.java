@@ -43,7 +43,8 @@ public class PersistenceFacade {
     }
 
     public List<FeedEvent> getFeedEventList(Context context) {
-        feedEventList = DatabaseHelper.getHelper(context).getFeedEvents(context);
+//        feedEventList = DatabaseHelper.getHelper(context).getFeedEvents(context);
+        feedEventList = DatabaseHelper.getHelper(context).getLastFeedEvents(context);
         groupOddEvenEvents();
         return feedEventList;
     }
@@ -56,7 +57,6 @@ public class PersistenceFacade {
     }
 
     private void groupOddEvenEvents() {
-        int startingIndex = feedEventList.size()-1;
         for (int i = 0; i < feedEventList.size(); i++) {
             if(i == 0){
                 feedEventList.get(i).odd = true;

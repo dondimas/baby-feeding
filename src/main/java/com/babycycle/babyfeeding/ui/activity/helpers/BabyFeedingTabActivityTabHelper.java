@@ -51,13 +51,6 @@ public class BabyFeedingTabActivityTabHelper extends AbstractTabActivityTabHelpe
         addTopBarTab(TabNavigator.APPLICATION_TABS.STATS, tab, null);
     }
 
-    public void fixUI() {
-        tabHost.getTabWidget().getChildAt(REMINDERS_TAB_INDEX).performClick();
-        tabHost.getTabWidget().getChildAt(FEED_EVENTS_TAB_INDEX).performClick();
-        tabHost.getTabWidget().getChildAt(REMINDERS_TAB_INDEX).performClick();
-        tabHost.getTabWidget().getChildAt(FEED_EVENTS_TAB_INDEX).performClick();
-
-    }
     public void initTabClickListeners() {
 
         tabHost.getTabWidget().getChildAt(FEED_EVENTS_TAB_INDEX).setOnClickListener(new View.OnClickListener() {
@@ -81,6 +74,18 @@ public class BabyFeedingTabActivityTabHelper extends AbstractTabActivityTabHelpe
                 babyFeedingTabActivity.clearBackStack();
                 babyFeedingTabActivity.changeContentTab(TabNavigator.APPLICATION_TABS.REMINDERS);
                 setTab2Focus(TabNavigator.APPLICATION_TABS.REMINDERS);
+            }
+        });
+
+        tabHost.getTabWidget().getChildAt(STATS_TAB_INDEX).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                if (tabHost.getCurrentTabTag().equals(TabNavigator.APPLICATION_TABS.STATS.getTabTag())) {
+                    return;
+                }
+                babyFeedingTabActivity.clearBackStack();
+                babyFeedingTabActivity.changeContentTab(TabNavigator.APPLICATION_TABS.STATS);
+                setTab2Focus(TabNavigator.APPLICATION_TABS.STATS);
             }
         });
 

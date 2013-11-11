@@ -14,12 +14,16 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class TabsCommunicator {
-
+    public enum FeedSource {
+        LEFT_BREAST, RIGHT_BREAST, BOTTLE
+    }
     private FeedEvent currentFeedEvent;
 
     private Reminder reminderForDetails;
 
     private FeedEvent feedEventForDetails;
+
+    private FeedSource selectedSource;
 
     public FeedEvent getCurrentFeedEvent() {
         return currentFeedEvent;
@@ -43,5 +47,13 @@ public class TabsCommunicator {
 
     public FeedEvent getFeedEventForDetails() {
         return feedEventForDetails;
+    }
+
+    public FeedSource getSelectedSource() {
+        return selectedSource;
+    }
+
+    public void setSelectedSource(FeedSource selectedSource) {
+        this.selectedSource = selectedSource;
     }
 }

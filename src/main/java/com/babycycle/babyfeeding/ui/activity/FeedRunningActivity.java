@@ -1,21 +1,23 @@
 package com.babycycle.babyfeeding.ui.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.ui.UIConstants;
 import com.babycycle.babyfeeding.ui.activity.helpers.TabsCommunicator;
+import com.babycycle.babyfeeding.ui.controller.FeedRunningActivityController;
 import com.google.inject.Inject;
 import roboguice.activity.RoboActivity;
+import roboguice.inject.InjectView;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,59 +26,101 @@ import java.util.*;
  * Time: 5:06 PM
  * To change this template use File | Settings | File Templates.
  */
-public class FeedRunningActivity extends RoboActivity {
+public class FeedRunningActivity extends RoboActivity implements View.OnClickListener{
 
-    TextView runningFeedTime;
-    TextView startFeedTime;
-    Button finishFeed;
-    Button cancelFeeding;
-    Date startTime;
+
+    @InjectView(R.id.current_feed_time)
+    private TextView runningFeedTime;
+    @InjectView(R.id.start_feed_time)
+    private TextView startFeedTime;
+    @InjectView(R.id.finish_current_feeding)
+    private Button finishFeed;
+    @InjectView(R.id.cancel_current_feeding)
+    private Button cancelFeeding;
+    @InjectView(R.id.left_breast)
+    private ImageView leftBreastImageView;
+    @InjectView(R.id.right_breast)
+    private ImageView rightBreastImageView;
+    @InjectView(R.id.bottle_source)
+    private ImageView bottleImageView;
+
+    private Date startTime;
     private static SimpleDateFormat hoursMinutesFormatter = new SimpleDateFormat(UIConstants.HOURS_MINUTES_FORMAT);
-    private static SimpleDateFormat minutesSecondsFormatter = new SimpleDateFormat(UIConstants.MINUTES_SECONDS_LASTING_FORMAT);
 
     @Inject
     TabsCommunicator tabsCommunicator;
+
+    @Inject
+    FeedRunningActivityController feedRunningActivityController;
 
     public void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.pull_in_from_bottom, R.anim.hold);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed_running);
         startTime = tabsCommunicator.getCurrentFeedEvent().getStartTime();
-        startTiming();
+        feedRunningActivityController.startTiming();
         initViews();
     }
 
     @Override
+    protected void onResume() {
+        feedRunningActivityController.setFeedRunningActivity(this);
+        super.onResume();
+    }
+
+    @Override
     protected void onPause() {
+        feedRunningActivityController.setFeedRunningActivity(null);
         overridePendingTransition(R.anim.hold, R.anim.push_out_to_bottom);
         super.onPause();
     }
 
-    private void initViews() {
-        runningFeedTime = (TextView) findViewById(R.id.current_feed_time);
-        startFeedTime = (TextView) findViewById(R.id.start_feed_time);
+    public ImageView getBottleImageView() {
+        return bottleImageView;
+    }
 
-        startFeedTime.setText("Started at : " + hoursMinutesFormatter.format(startTime));
-        finishFeed = (Button) findViewById(R.id.finish_current_feeding);
+    public ImageView getLeftBreastImageView() {
+        return leftBreastImageView;
+    }
+
+    public ImageView getRightBreastImageView() {
+        return rightBreastImageView;
+    }
+
+    private void initViews() {
+//        leftBreastImageView = (ImageView) findViewById(R.id.left_breast);
+        leftBreastImageView.setOnClickListener(this);
+//        rightBreastImageView = (ImageView) findViewById(R.id.right_breast);
+        rightBreastImageView.setOnClickListener(this);
+//        bottleImageView = (ImageView) findViewById(R.id.bottle_source);
+        bottleImageView.setOnClickListener(this);
+
+//        runningFeedTime = (TextView) findViewById(R.id.current_feed_time);
+//        startFeedTime = (TextView) findViewById(R.id.start_feed_time);
+
+        startFeedTime.setText(getResources().getText(R.string.feed_started_at_prefix) + hoursMinutesFormatter.format(startTime));
+//        finishFeed = (Button) findViewById(R.id.finish_current_feeding);
         finishFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = getIntent();
-                setResult(RESULT_OK, i);
-                finish();
+                cancelFeedingGetBackToList(RESULT_OK);
 
             }
         });
 
-        cancelFeeding = (Button) findViewById(R.id.cancel_current_feeding);
+//        cancelFeeding = (Button) findViewById(R.id.cancel_current_feeding);
         cancelFeeding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openCancelConfirmDialogue();
-
-
             }
         });
+    }
+
+    private void cancelFeedingGetBackToList(int result) {
+        Intent i = getIntent();
+        setResult(result, i);
+        finish();
     }
 
     private void openCancelConfirmDialogue() {
@@ -84,9 +128,7 @@ public class FeedRunningActivity extends RoboActivity {
 
         builder.setPositiveButton(R.string.feeding_cancel_confirm_cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                Intent i = getIntent();
-                setResult(RESULT_CANCELED, i);
-                finish();
+                cancelFeedingGetBackToList(RESULT_CANCELED);
             }
         });
         builder.setNegativeButton(R.string.feeding_cancel_not_cancel, new DialogInterface.OnClickListener() {
@@ -98,32 +140,21 @@ public class FeedRunningActivity extends RoboActivity {
         builder.create().show();
     }
 
-
-    private void startTiming() {
-
-        Timer timer = new Timer();
-        FeedLastingTimerTask myTask = new FeedLastingTimerTask();
-        timer.schedule(myTask,0,1000);
-    }
-
-    private class FeedLastingTimerTask extends TimerTask {
-        @Override
-        public void run() {
-            updateView();
-        }
-    }
-
-    private void updateView() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                long timeDelta = Calendar.getInstance(Locale.US).getTimeInMillis() - startTime.getTime();
-                runningFeedTime.setText(minutesSecondsFormatter.format(timeDelta));
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        feedRunningActivityController.onClick(v);
     }
 
     @Override
     public void onBackPressed() {
     }
+
+    public TextView getRunningFeedTime() {
+        return runningFeedTime;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
 }
+

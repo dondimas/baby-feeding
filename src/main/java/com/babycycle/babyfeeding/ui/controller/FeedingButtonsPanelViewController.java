@@ -7,6 +7,8 @@ import android.widget.CheckBox;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.ui.UIConstants;
+import com.babycycle.babyfeeding.ui.activity.helpers.TabsCommunicator;
+import com.google.inject.Inject;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -20,15 +22,13 @@ import java.util.*;
  */
 public class FeedingButtonsPanelViewController {
 
+    private TabsCommunicator tabsCommunicator;
+
     private Activity activity;
 
     private Button startFeeding;
     private Button continueFeeding;
     private Button finalizeFeeding;
-    private CheckBox leftBreast;
-    private CheckBox rightBreast;
-
-    private CheckBox bottleSource;
 
     private FeedingRunner feedingRunner;
 
@@ -66,6 +66,11 @@ public class FeedingButtonsPanelViewController {
         return this;
     }
 
+    public FeedingButtonsPanelViewController setTabsCommunicator(TabsCommunicator tabsCommunicator) {
+        this.tabsCommunicator = tabsCommunicator;
+        return this;
+    }
+
     public FeedingButtonsPanelViewController setFinalizeFeeding(Button finalizeFeeding) {
         this.finalizeFeeding = finalizeFeeding;
         this.finalizeFeeding.setOnClickListener(new View.OnClickListener() {
@@ -77,38 +82,38 @@ public class FeedingButtonsPanelViewController {
         return this;
     }
 
-    public FeedingButtonsPanelViewController setLeftBreast(CheckBox leftBreast) {
-        this.leftBreast = leftBreast;
-        this.leftBreast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                unsetOppositeCheckbox(v);
-            }
-        });
-        return this;
-    }
+//    public FeedingButtonsPanelViewController setLeftBreast(CheckBox leftBreast) {
+//        this.leftBreast = leftBreast;
+//        this.leftBreast.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                unsetOppositeCheckbox(v);
+//            }
+//        });
+//        return this;
+//    }
 
-    public FeedingButtonsPanelViewController setRightBreast(CheckBox rightBreast) {
-        this.rightBreast = rightBreast;
-        this.rightBreast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                unsetOppositeCheckbox(v);
-            }
-        });
-        return this;
-    }
+//    public FeedingButtonsPanelViewController setRightBreast(CheckBox rightBreast) {
+//        this.rightBreast = rightBreast;
+//        this.rightBreast.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                unsetOppositeCheckbox(v);
+//            }
+//        });
+//        return this;
+//    }
 
-    public FeedingButtonsPanelViewController setBottleSource(CheckBox bottleSource) {
-        this.bottleSource = bottleSource;
-        this.bottleSource.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                unsetOppositeCheckbox(v);
-            }
-        });
-        return this;
-    }
+//    public FeedingButtonsPanelViewController setBottleSource(CheckBox bottleSource) {
+//        this.bottleSource = bottleSource;
+//        this.bottleSource.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                unsetOppositeCheckbox(v);
+//            }
+//        });
+//        return this;
+//    }
 
     public void showFinalizationButtons() {
         continueFeeding.setVisibility(View.VISIBLE);
@@ -122,9 +127,9 @@ public class FeedingButtonsPanelViewController {
     }
 
     public void updateBreastsWithRunningFeedingEvent(FeedEvent runningFeedEvent) {
-        leftBreast.setChecked(runningFeedEvent.isLeftBreast());
-        rightBreast.setChecked(runningFeedEvent.isRightBreast());
-        bottleSource.setChecked(false);
+//        leftBreast.setChecked(runningFeedEvent.isLeftBreast());
+//        rightBreast.setChecked(runningFeedEvent.isRightBreast());
+//        bottleSource.setChecked(false);
     }
 
     public interface FeedingRunner {
@@ -134,29 +139,38 @@ public class FeedingButtonsPanelViewController {
         Activity getRunnerActivity();
     }
 
-    private void unsetOppositeCheckbox(View v) {
-        if(!((CheckBox)v).isChecked()) {
-            return;
-        }
-        CheckBox oppositeCheckbox = leftBreast;
-
-        if(v.getId() != R.id.left_breast) {
-            leftBreast.setChecked(false);
-        }
-        if(v.getId() != R.id.right_breast) {
-            rightBreast.setChecked(false);
-        }
-        if(v.getId() != R.id.bottle_source) {
-            bottleSource.setChecked(false);
-        }
-    }
+//    private void unsetOppositeCheckbox(View v) {
+//        if(!((CheckBox)v).isChecked()) {
+//            return;
+//        }
+//        CheckBox oppositeCheckbox = leftBreast;
+//
+//        if(v.getId() != R.id.left_breast) {
+//            leftBreast.setChecked(false);
+//        }
+//        if(v.getId() != R.id.right_breast) {
+//            rightBreast.setChecked(false);
+//        }
+//        if(v.getId() != R.id.bottle_source) {
+//            bottleSource.setChecked(false);
+//        }
+//    }
     public void finalizeFeeding() {
-        feedingRunner.finalizeFeeding(leftBreast.isChecked(), rightBreast.isChecked());
+        boolean leftBreastIsChecked = false;
+        boolean rightBreastIsChecked = false;
+        if(tabsCommunicator.getSelectedSource() == TabsCommunicator.FeedSource.LEFT_BREAST) {
+            leftBreastIsChecked = true;
+        }
+        if(tabsCommunicator.getSelectedSource() == TabsCommunicator.FeedSource.RIGHT_BREAST) {
+            rightBreastIsChecked = true;
+        }
+
+        feedingRunner.finalizeFeeding(leftBreastIsChecked, rightBreastIsChecked);
         continueFeeding.setVisibility(View.GONE);
         finalizeFeeding.setVisibility(View.GONE);
         startFeeding.setVisibility(View.VISIBLE);
-        leftBreast.setChecked(false);
-        rightBreast.setChecked(false);
+//        leftBreast.setChecked(false);
+//        rightBreast.setChecked(false);
     }
 
     private void startTiming() {
