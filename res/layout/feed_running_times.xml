@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="50dp">
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_weight="0.5"
+                  android:gravity="center_horizontal"
+            >
+        <TextView
+                android:text="Duration"
+                style="@style/RunningLabel"
+                android:textColor="#ffffff"
+                />
+        <TextView
+                android:text="0:0"
+                style="@style/RunningLabel"
+                android:id="@+id/current_feed_time"
+                android:textColor="#ffffff"
+                />
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_weight="0.5"
+                  android:gravity="center_horizontal"
+            >
+        <TextView
+                android:text="@string/feed_started_at"
+                style="@style/RunningLabel"
+                android:textColor="@color/dark_blue"
+                />
+        <TextView
+                android:text="0:0"
+                style="@style/RunningLabel"
+                android:id="@+id/start_feed_time"
+                android:textColor="@color/dark_blue"
+                />
+    </LinearLayout>
+</LinearLayout>
+

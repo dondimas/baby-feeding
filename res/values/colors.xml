@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg_main_tabhost">#768391</color>
+    <color name="tab_bar_item">#7c95be</color>
+    <color name="tab_bar_item_selected">#2f4689</color>
+
+    <color name="separator_dark">#203469</color>
 
     <color name="text_label_color">#fff</color>
 
     <!-- tab bar -->
     <color name="tab_active_indicator">#00cf45</color>
+    <color name="dark_blue">#042546</color>
 
     <!-- action bar -->
     <color name="actionbar_background">#078a31</color>

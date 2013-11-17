@@ -6,15 +6,15 @@
               android:layout_height="wrap_content"
               android:id="@+id/header_container"
               android:background="@drawable/feed_list_header_gradient"
-              android:layout_marginRight="5dp"
-              android:layout_marginLeft="5dp"
+              android:layout_marginRight="25dp"
+              android:layout_marginLeft="25dp"
         >
     <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
-                android:layout_weight="0.166"
+                android:layout_weight="0.25"
                 android:text="@string/feed_list_header_start_time"
             />
     <TextView
@@ -22,15 +22,7 @@
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
-                android:layout_weight="0.166"
-                android:text="@string/feed_list_header_finish_time"
-            />
-    <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                style="@style/RowText"
-                android:layout_margin="3dp"
-                android:layout_weight="0.166"
+                android:layout_weight="0.25"
                 android:text="@string/feed_list_header_feed_lasted"
             />
     <TextView
@@ -38,7 +30,7 @@
                 android:layout_height="wrap_content"
                 style="@style/RowText"
                 android:layout_margin="3dp"
-                android:layout_weight="0.166"
+                android:layout_weight="0.25"
                 android:text="@string/feed_list_header_source"
             />
     <TextView
@@ -47,15 +39,7 @@
             style="@style/RowText"
             android:textSize="14dip"
             android:layout_margin="3dp"
-            android:layout_weight="0.166"
+            android:layout_weight="0.25"
             android:text="@string/feed_list_header_amount"
-            />
-    <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                style="@style/RowText"
-                android:layout_margin="3dp"
-                android:layout_weight="0.166"
-                android:text="@string/feed_list_header_date"
             />
 </LinearLayout>

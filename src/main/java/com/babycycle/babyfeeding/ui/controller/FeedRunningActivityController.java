@@ -37,16 +37,16 @@ public class FeedRunningActivityController implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        setSelectionImageView(feedRunningActivity.getLeftBreastImageView(), R.drawable.lewa_piers, false);
-        setSelectionImageView(feedRunningActivity.getRightBreastImageView(), R.drawable.prawa_piers, false);
+        setSelectionImageView(feedRunningActivity.getLeftBreastImageView(), R.drawable.lewa_piers_1, false);
+        setSelectionImageView(feedRunningActivity.getRightBreastImageView(), R.drawable.prawa_piers_1, false);
         setSelectionImageView(feedRunningActivity.getBottleImageView(), R.drawable.butelka, false);
         switch (v.getId()) {
             case R.id.left_breast:
-                setSelectionImageView(feedRunningActivity.getLeftBreastImageView(), R.drawable.lewa_piers_selected, true);
+                setSelectionImageView(feedRunningActivity.getLeftBreastImageView(), R.drawable.lewa_piers_selected_1, true);
                 tabsCommunicator.setSelectedSource(TabsCommunicator.FeedSource.LEFT_BREAST);
                 break;
             case R.id.right_breast:
-                setSelectionImageView(feedRunningActivity.getRightBreastImageView(), R.drawable.prawa_piers_selected, true);
+                setSelectionImageView(feedRunningActivity.getRightBreastImageView(), R.drawable.prawa_piers_selected_1, true);
                 tabsCommunicator.setSelectedSource(TabsCommunicator.FeedSource.RIGHT_BREAST);
                 break;
             case R.id.bottle_source:

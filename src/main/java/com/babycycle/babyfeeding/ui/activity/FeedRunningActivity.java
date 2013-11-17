@@ -98,7 +98,7 @@ public class FeedRunningActivity extends RoboActivity implements View.OnClickLis
 //        runningFeedTime = (TextView) findViewById(R.id.current_feed_time);
 //        startFeedTime = (TextView) findViewById(R.id.start_feed_time);
 
-        startFeedTime.setText(getResources().getText(R.string.feed_started_at_prefix) + hoursMinutesFormatter.format(startTime));
+        startFeedTime.setText(hoursMinutesFormatter.format(startTime));
 //        finishFeed = (Button) findViewById(R.id.finish_current_feeding);
         finishFeed.setOnClickListener(new View.OnClickListener() {
             @Override
