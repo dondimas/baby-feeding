@@ -30,8 +30,10 @@
                     android:layout_height="wrap_content">
                 <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        >
                     <TextView
                             android:text="@string/start_event_time_hint"
                             android:layout_width="wrap_content"
@@ -42,13 +44,19 @@
                     <TimePicker
                             android:id="@+id/start_event_time"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:scaleX="0.7"
+                            android:scaleY="0.7"
+                            android:layout_marginLeft="-30dp"
+                            android:layout_marginTop="-30dp"
+                            />
                 </LinearLayout>
 
                 <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
                         android:layout_marginLeft="10dp">
                     <TextView
                             android:text="@string/end_event_time_hint"
@@ -60,6 +68,10 @@
                             android:id="@+id/end_event_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:scaleX="0.7"
+                            android:scaleY="0.7"
+                            android:layout_marginLeft="-30dp"
+                            android:layout_marginTop="-30dp"
                             />
                 </LinearLayout>
 

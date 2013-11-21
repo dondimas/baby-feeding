@@ -9,60 +9,35 @@
               android:paddingBottom="7dp"
               android:background="@color/actionbar_white_text"
         >
-    <LinearLayout android:orientation="vertical"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="0.166"
-                  android:layout_margin="3dp"
-            >
-        <TextView android:id="@+id/start_time"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  style="@style/RowText"
 
-                  android:text="1234"
-                />
-        <TextView android:id="@+id/finish_time"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  style="@style/RowText"
 
-                  android:text="1234-34-34"
-                />
-
-    </LinearLayout>
-
-    <TextView android:id="@+id/feeding_lasted_tima"
+    <TextView android:id="@+id/start_time"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               style="@style/RowText"
               android:layout_margin="3dp"
-              android:layout_weight="0.166"
-              android:text="1234"
+              android:layout_weight="0.25"
+            />
+    <TextView android:id="@+id/feeding_lasted_time"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              style="@style/RowText"
+              android:layout_margin="3dp"
+              android:layout_weight="0.25"
             />
     <TextView android:id="@+id/breast"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               style="@style/RowText"
               android:layout_margin="3dp"
-              android:layout_weight="0.166"
-              android:text="1234"
+              android:layout_weight="0.25"
             />
     <TextView android:id="@+id/amount"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               style="@style/RowText"
               android:layout_margin="3dp"
-              android:layout_weight="0.166"
-              android:text="1234"
+              android:layout_weight="0.25"
             />
 
-    <TextView android:id="@+id/full_date"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              style="@style/RowText"
-              android:layout_margin="3dp"
-              android:layout_weight="0.166"
-              android:text="1234"
-            />
 </LinearLayout>

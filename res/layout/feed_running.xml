@@ -21,7 +21,7 @@
             <ImageView
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/lewa_piers_1"
+                    android:src="@drawable/left_breast"
                     android:id="@+id/left_breast"
                     android:layout_weight="0.5"
                     android:layout_gravity="center"
@@ -29,7 +29,7 @@
             <ImageView
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/prawa_piers_1"
+                    android:src="@drawable/right_breast"
                     android:id="@+id/right_breast"
                     android:layout_weight="0.5"
                     android:layout_gravity="center"/>
@@ -46,7 +46,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:text="Bottle"
-                    android:src="@drawable/butelka"
+                    android:src="@drawable/bottle"
                     android:id="@+id/bottle_source"
                     android:layout_gravity="center"
                     android:layout_margin="3dp"/>

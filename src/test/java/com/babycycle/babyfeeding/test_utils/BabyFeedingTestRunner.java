@@ -25,14 +25,6 @@ import java.util.Properties;
  */
 public class BabyFeedingTestRunner extends RobolectricTestRunner {
 
-    /**
-     * Instantiates a new colleagues test runner.
-     *
-     * @param testClass
-     *            the test class
-     * @throws org.junit.runners.model.InitializationError
-     *             the initialization error
-     */
     public BabyFeedingTestRunner(final Class<?> testClass) throws InitializationError {
         super(testClass,getConfiguration());
     }
@@ -51,7 +43,6 @@ public class BabyFeedingTestRunner extends RobolectricTestRunner {
                 }
             }
         } catch (IOException e) {
-            // ignore, use default
         }
         RobolectricConfig configuration = new RobolectricConfig(baseEventsProjectDirectory);
         return configuration;

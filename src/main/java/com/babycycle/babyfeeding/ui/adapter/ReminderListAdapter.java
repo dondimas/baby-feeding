@@ -70,7 +70,7 @@ public class ReminderListAdapter extends ArrayAdapter<Reminder> {
             holder.itemContainer = (LinearLayout) convertView.findViewById(R.id.item_container);
             holder.reminderTime = (TextView) convertView.findViewById(R.id.reminder_time);
             holder.remindMessage = (TextView) convertView.findViewById(R.id.reminder_message);
-            ColorDrawable backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.standard_background));
+            ColorDrawable backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.list_row_light));
             backgroundDrawable.setAlpha(190);
             holder.itemContainer.setBackgroundDrawable(backgroundDrawable);
             holder.itemClickListener = new ItemClickListener();

@@ -8,8 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.model.PersistenceFacade;
@@ -40,23 +41,20 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
         layoutResourceId = R.layout.feed_list;
     }
 
-    @InjectView(R.id.start_feed_button)
-    private Button startFeeding;
-
     @InjectView(R.id.continue_feed_button)
     private Button continueFeeding;
 
     @InjectView(R.id.finalize_feed_button)
     private Button finalizeFeeding;
 
-//    @InjectView(R.id.left_breast)
-//    private CheckBox leftBreast;
+    @InjectView(R.id.continue_finalize_container)
+    private LinearLayout continueFinalizeButtonLayout;
 
-//    @InjectView(R.id.right_breast)
-//    private CheckBox rightBreast;
+    @InjectView(R.id.start_feeding_container)
+    private LinearLayout startFeedingButtonLayout;
 
-//    @InjectView(R.id.bottle_source)
-//    private CheckBox bottleSource;
+    @InjectView(R.id.last_feeding_time)
+    private TextView lastFeedingTime;
 
     @Inject
     PersistenceFacade persistenceFacade;
@@ -103,23 +101,27 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
     private void checkFeedEventWasFired() {
         FeedEvent runningFeedEvent = persistenceFacade.getRunningFeedEvent(activity);
         if(runningFeedEvent != null) {
-            feedingButtonsPanelViewController.updateBreastsWithRunningFeedingEvent(runningFeedEvent);
             initFeedEventWithStartTime(runningFeedEvent.getStartTime());
             continueFeeding();
         }
     }
 
     private void initViews(View rootView) {
-        startFeeding = (Button) rootView.findViewById(R.id.start_feed_button);
         continueFeeding = (Button) rootView.findViewById(R.id.continue_feed_button);
         finalizeFeeding = (Button) rootView.findViewById(R.id.finalize_feed_button);
+        lastFeedingTime = (TextView) rootView.findViewById(R.id.last_feeding_time);
+        startFeedingButtonLayout = (LinearLayout) rootView.findViewById(R.id.start_feeding_container);
+        startFeedingButtonLayout.setClickable(true);
+        continueFinalizeButtonLayout = (LinearLayout) rootView.findViewById(R.id.continue_finalize_container);
     }
     private void initControllers() {
         remindersController.setActivity(activity);
         clockAppController.setContext(activity);
         feedingButtonsPanelViewController = new FeedingButtonsPanelViewController()
                 .setFeedingRunner(this)
-                .setStartFeeding(startFeeding)
+                .setContinueFinalizeButtonLayout(continueFinalizeButtonLayout)
+                .setStartFeeding(startFeedingButtonLayout)
+                .setLastFeedingTime(lastFeedingTime)
                 .setContinueFeeding(continueFeeding)
                 .setTabsCommunicator(tabsCommunicator)
                 .setFinalizeFeeding(finalizeFeeding);
@@ -162,9 +164,6 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
     private void refreshListData() {
         LoadFeedEventsAsyncTask loadFeedEventsAsyncTask = new LoadFeedEventsAsyncTask();
         loadFeedEventsAsyncTask.execute();
-//        feedDayListAdapter.setFeedEvents(persistenceFacade.getFeedEventList(activity));
-//        feedDayListAdapter.notifyDataSetChanged();
-//        feedingButtonsPanelViewController.setLastFeedStartTime(persistenceFacade.getLastFeedStartTime());
     }
 
     private void persistFeedingData(boolean leftBreastChecked, boolean rightBreastChecked) {

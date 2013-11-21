@@ -164,7 +164,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         RuntimeExceptionDao<FeedEvent, String> simpleDao = helper.getSimpleDataDao();
         List<FeedEvent> list = null;
         try {
-            list = simpleDao.queryBuilder().orderBy("id", false).limit((long)30).query();
+            list = simpleDao.queryBuilder().orderBy("start_time", false).limit((long)30).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -12,16 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.FeedEvent;
-import com.babycycle.babyfeeding.model.Reminder;
 import com.babycycle.babyfeeding.ui.UIConstants;
 import com.babycycle.babyfeeding.ui.activity.FeedEventDetailsActivity;
-import com.babycycle.babyfeeding.ui.activity.ReminderDetailsActivity;
 import com.babycycle.babyfeeding.ui.activity.helpers.TabsCommunicator;
 import com.google.inject.Inject;
 import roboguice.RoboGuice;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -75,9 +72,7 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
             holder = new ViewHolder();
             holder.itemContainer = (LinearLayout) convertView.findViewById(R.id.item_container);
             holder.startTime = (TextView) convertView.findViewById(R.id.start_time);
-            holder.finishTime = (TextView) convertView.findViewById(R.id.finish_time);
-            holder.fullDate = (TextView) convertView.findViewById(R.id.full_date);
-            holder.feedingLastedTime = (TextView) convertView.findViewById(R.id.feeding_lasted_tima);
+            holder.feedingLastedTime = (TextView) convertView.findViewById(R.id.feeding_lasted_time);
             holder.breast = (TextView) convertView.findViewById(R.id.breast);
             holder.amount = (TextView) convertView.findViewById(R.id.amount);
             holder.itemClickListener = new ItemClickListener();
@@ -94,7 +89,6 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
 
     private void fillViewsWIthData(ViewHolder holder, FeedEvent feedEvent) {
         holder.startTime.setText(dateFormatter.format(feedEvent.getStartTime()));
-        holder.finishTime.setText(dateFormatter.format(feedEvent.getFinishTime()));
         setFeedingLastedTime(holder, feedEvent);
 
         String breast = feedEvent.isLeftBreast() ? "Left": (feedEvent.isRightBreast() ? "Right": "Bottle");
@@ -114,9 +108,9 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     private void setRowBackground(ViewHolder holder, FeedEvent feedEvent) {
         ColorDrawable backgroundDrawable;
         if(!feedEvent.odd)
-            backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.actionbar_button_text_disabled));
+            backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.list_row_dark));
         else
-            backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.standard_background));
+            backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.list_row_light));
         backgroundDrawable.setAlpha(190);
         holder.itemContainer.setBackgroundDrawable(backgroundDrawable);
     }
@@ -129,14 +123,6 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
             holder.amount.setText("--");
         }
 
-        Calendar calendar = Calendar.getInstance();
-        int todayDay = calendar.get(Calendar.DAY_OF_MONTH);
-        calendar.setTime(feedEvent.getFinishTime());
-        if(calendar.get(Calendar.DAY_OF_MONTH) != todayDay) {
-            holder.fullDate.setText(fullDateFormatter.format(feedEvent.getFinishTime()));
-        } else {
-            holder.fullDate.setText(R.string.today);
-        }
     }
 
     @Override
@@ -147,10 +133,10 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     class ViewHolder {
         LinearLayout itemContainer;
         TextView startTime;
-        TextView finishTime;
+//        TextView finishTime;
         TextView feedingLastedTime;
         TextView breast;
-        public TextView fullDate;
+//        public TextView fullDate;
         public ItemClickListener itemClickListener;
         public TextView amount;
     }

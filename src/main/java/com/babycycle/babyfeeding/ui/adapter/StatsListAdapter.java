@@ -79,10 +79,10 @@ public class StatsListAdapter extends ArrayAdapter<FeedDay> {
         holder.amountTotal.setText((feedDay.getNatural() + feedDay.getChemical())+" ml");
 
         ColorDrawable backgroundDrawable;
-//        if(position%2 == 0)
-            backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.actionbar_button_text_disabled));
-//        else
-//            backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.standard_background));
+        if(position%2 == 0)
+            backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.list_row_light));
+        else
+            backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.list_row_dark));
         backgroundDrawable.setAlpha(190);
         holder.itemContainer.setBackgroundDrawable(backgroundDrawable);
     }

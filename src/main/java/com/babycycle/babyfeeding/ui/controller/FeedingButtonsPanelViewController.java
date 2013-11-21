@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.ui.UIConstants;
@@ -26,7 +28,7 @@ public class FeedingButtonsPanelViewController {
 
     private Activity activity;
 
-    private Button startFeeding;
+    private View startFeeding;
     private Button continueFeeding;
     private Button finalizeFeeding;
 
@@ -35,7 +37,9 @@ public class FeedingButtonsPanelViewController {
     private Date lastFeedStartTime;
 
     private static SimpleDateFormat hoursMinutesSecondsFormatter = new SimpleDateFormat(UIConstants.HOURS_MINUTES_SECONDS_LASTING_FORMAT);
-//    private static SimpleDateFormat hoursMinutesSecondsFormatter = new SimpleDateFormat("yyyy-MM-DD-kk mm:ss");
+    private TextView lastFeedingTime;
+    private LinearLayout continueFinalizeButtonLayout;
+
     public FeedingButtonsPanelViewController setFeedingRunner(FeedingRunner feedingRunner) {
         this.feedingRunner = feedingRunner;
         return this;
@@ -43,7 +47,7 @@ public class FeedingButtonsPanelViewController {
 
 
 
-    public FeedingButtonsPanelViewController setStartFeeding(Button startFeed) {
+    public FeedingButtonsPanelViewController setStartFeeding(View startFeed) {
         this.startFeeding = startFeed;
         startFeeding.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,42 +86,9 @@ public class FeedingButtonsPanelViewController {
         return this;
     }
 
-//    public FeedingButtonsPanelViewController setLeftBreast(CheckBox leftBreast) {
-//        this.leftBreast = leftBreast;
-//        this.leftBreast.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                unsetOppositeCheckbox(v);
-//            }
-//        });
-//        return this;
-//    }
-
-//    public FeedingButtonsPanelViewController setRightBreast(CheckBox rightBreast) {
-//        this.rightBreast = rightBreast;
-//        this.rightBreast.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                unsetOppositeCheckbox(v);
-//            }
-//        });
-//        return this;
-//    }
-
-//    public FeedingButtonsPanelViewController setBottleSource(CheckBox bottleSource) {
-//        this.bottleSource = bottleSource;
-//        this.bottleSource.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                unsetOppositeCheckbox(v);
-//            }
-//        });
-//        return this;
-//    }
 
     public void showFinalizationButtons() {
-        continueFeeding.setVisibility(View.VISIBLE);
-        finalizeFeeding.setVisibility(View.VISIBLE);
+        continueFinalizeButtonLayout.setVisibility(View.VISIBLE);
         startFeeding.setVisibility(View.GONE);
     }
 
@@ -126,10 +97,22 @@ public class FeedingButtonsPanelViewController {
         startTiming();
     }
 
-    public void updateBreastsWithRunningFeedingEvent(FeedEvent runningFeedEvent) {
-//        leftBreast.setChecked(runningFeedEvent.isLeftBreast());
-//        rightBreast.setChecked(runningFeedEvent.isRightBreast());
-//        bottleSource.setChecked(false);
+    public FeedingButtonsPanelViewController setLastFeedingTime(TextView lastFeedingTime) {
+        this.lastFeedingTime = lastFeedingTime;
+        return this;
+    }
+
+    public TextView getLastFeedingTime() {
+        return lastFeedingTime;
+    }
+
+    public FeedingButtonsPanelViewController setContinueFinalizeButtonLayout(LinearLayout continueFinalizeButtonLayout) {
+        this.continueFinalizeButtonLayout = continueFinalizeButtonLayout;
+        return this;
+    }
+
+    public LinearLayout getContinueFinalizeButtonLayout() {
+        return continueFinalizeButtonLayout;
     }
 
     public interface FeedingRunner {
@@ -139,22 +122,6 @@ public class FeedingButtonsPanelViewController {
         Activity getRunnerActivity();
     }
 
-//    private void unsetOppositeCheckbox(View v) {
-//        if(!((CheckBox)v).isChecked()) {
-//            return;
-//        }
-//        CheckBox oppositeCheckbox = leftBreast;
-//
-//        if(v.getId() != R.id.left_breast) {
-//            leftBreast.setChecked(false);
-//        }
-//        if(v.getId() != R.id.right_breast) {
-//            rightBreast.setChecked(false);
-//        }
-//        if(v.getId() != R.id.bottle_source) {
-//            bottleSource.setChecked(false);
-//        }
-//    }
     public void finalizeFeeding() {
         boolean leftBreastIsChecked = false;
         boolean rightBreastIsChecked = false;
@@ -166,11 +133,8 @@ public class FeedingButtonsPanelViewController {
         }
 
         feedingRunner.finalizeFeeding(leftBreastIsChecked, rightBreastIsChecked);
-        continueFeeding.setVisibility(View.GONE);
-        finalizeFeeding.setVisibility(View.GONE);
+        continueFinalizeButtonLayout.setVisibility(View.GONE);
         startFeeding.setVisibility(View.VISIBLE);
-//        leftBreast.setChecked(false);
-//        rightBreast.setChecked(false);
     }
 
     private void startTiming() {
@@ -191,13 +155,7 @@ public class FeedingButtonsPanelViewController {
         feedingRunner.getRunnerActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                startFeeding.setText(getStartFeedingButtonText());
-//                Log.e("updateView()", "Current time : "+Calendar.getInstance().getTime());
-//                Log.e("updateView()", "Current time : "+hoursMinutesSecondsFormatter.format(Calendar.getInstance().getTime()));
-//                Log.e("updateView()", "lastFeedStartTime : "+lastFeedStartTime);
-//                Log.e("updateView()", "lastFeedStartTime : "+hoursMinutesSecondsFormatter.format(lastFeedStartTime));
-//                Log.e("updateView()", "time delta seconds : "+timeDelta/1000);
-//                Log.e("updateView()", "time delta minutes : "+timeDelta/60000);
+                lastFeedingTime.setText(getStartFeedingButtonText());
             }
         });
     }
@@ -209,6 +167,6 @@ public class FeedingButtonsPanelViewController {
         calendar.setTimeInMillis(timeDelta);
         calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
 
-        return "Start Feeding : " + hoursMinutesSecondsFormatter.format(calendar.getTime());
+        return  hoursMinutesSecondsFormatter.format(calendar.getTime());
     }
 }

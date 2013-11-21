@@ -37,20 +37,20 @@ public class FeedRunningActivityController implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        setSelectionImageView(feedRunningActivity.getLeftBreastImageView(), R.drawable.lewa_piers_1, false);
-        setSelectionImageView(feedRunningActivity.getRightBreastImageView(), R.drawable.prawa_piers_1, false);
-        setSelectionImageView(feedRunningActivity.getBottleImageView(), R.drawable.butelka, false);
+        setSelectionImageView(feedRunningActivity.getLeftBreastImageView(), R.drawable.left_breast, false);
+        setSelectionImageView(feedRunningActivity.getRightBreastImageView(), R.drawable.right_breast, false);
+        setSelectionImageView(feedRunningActivity.getBottleImageView(), R.drawable.bottle, false);
         switch (v.getId()) {
             case R.id.left_breast:
-                setSelectionImageView(feedRunningActivity.getLeftBreastImageView(), R.drawable.lewa_piers_selected_1, true);
+                setSelectionImageView(feedRunningActivity.getLeftBreastImageView(), R.drawable.left_breast_selected, true);
                 tabsCommunicator.setSelectedSource(TabsCommunicator.FeedSource.LEFT_BREAST);
                 break;
             case R.id.right_breast:
-                setSelectionImageView(feedRunningActivity.getRightBreastImageView(), R.drawable.prawa_piers_selected_1, true);
+                setSelectionImageView(feedRunningActivity.getRightBreastImageView(), R.drawable.right_breast_selected, true);
                 tabsCommunicator.setSelectedSource(TabsCommunicator.FeedSource.RIGHT_BREAST);
                 break;
             case R.id.bottle_source:
-                setSelectionImageView(feedRunningActivity.getBottleImageView(), R.drawable.butelka_selected, true);
+                setSelectionImageView(feedRunningActivity.getBottleImageView(), R.drawable.bottle_selected, true);
                 tabsCommunicator.setSelectedSource(TabsCommunicator.FeedSource.BOTTLE);
                 break;
         }

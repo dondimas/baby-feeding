@@ -19,7 +19,7 @@
                 android:textColor="#ffffff"
                 />
         <TextView
-                android:text="0:0"
+                android:text="00:00"
                 style="@style/RunningLabel"
                 android:id="@+id/current_feed_time"
                 android:textColor="#ffffff"
@@ -38,7 +38,7 @@
                 android:textColor="@color/dark_blue"
                 />
         <TextView
-                android:text="0:0"
+                android:text="00:00"
                 style="@style/RunningLabel"
                 android:id="@+id/start_feed_time"
                 android:textColor="@color/dark_blue"
