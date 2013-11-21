@@ -27,7 +27,8 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/actionbar_white_text">
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="0dp"
@@ -90,7 +91,7 @@
 
         <Button
                 android:id="@+id/cancel_feed_event_details_button"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/WideButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
@@ -98,7 +99,7 @@
 
         <Button
                 android:id="@+id/submit_feed_event_button"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/WideButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/add_feed_event_button"

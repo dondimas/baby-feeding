@@ -3,13 +3,14 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:background="@drawable/background_mother_child1"
+              android:background="@drawable/bg_light"
 
         >
 
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            style="@style/WideButton"
             android:text="@string/add_reminder_button"
             android:id="@+id/add_reminder_button"/>
     <include layout="@layout/reminder_list_header" />

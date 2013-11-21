@@ -36,14 +36,16 @@
                   android:id="@+id/continue_finalize_container"
                   android:layout_margin="25dp"
                   android:orientation="horizontal"
-                  android:visibility="visible">
+                  android:visibility="gone">
         <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:background="@drawable/wide_button_selector"
                 android:text="Continue Feeding"
+                android:textSize="13dp"
                 android:id="@+id/continue_feed_button"
+                android:layout_marginRight="3dp"
                 />
         <Button
                 android:layout_width="0dp"
@@ -51,6 +53,8 @@
                 android:layout_weight="0.5"
                 android:background="@drawable/wide_button_selector"
                 android:text="Finalize"
+                android:textSize="13dp"
+                android:layout_marginLeft="3dp"
                 android:id="@+id/finalize_feed_button"
                 />
     </LinearLayout>

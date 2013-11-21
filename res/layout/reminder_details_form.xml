@@ -10,7 +10,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_mother_child1">
+            android:background="@drawable/bg_light">
 
         <LinearLayout
                 android:orientation="vertical"
@@ -42,11 +42,13 @@
             <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    style="@style/WideButton"
                     android:text="@string/add_reminder_button"
                     android:id="@+id/submit_reminder_button"/>
             <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    style="@style/WideButton"
                     android:text="@string/cancel"
                     android:id="@+id/cancel_reminder_details_button"/>
         </LinearLayout>

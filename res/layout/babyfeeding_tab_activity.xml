@@ -14,7 +14,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:layout_weight="0"
-                android:showDividers="none"/>
+                android:divider="@drawable/tab_separator_shape"/>
 
         <FrameLayout
                 android:id="@android:id/tabcontent"
