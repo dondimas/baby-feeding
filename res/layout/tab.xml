@@ -22,7 +22,6 @@
             android:layout_marginRight="3dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/separator_left"
-            android:layout_below="@+id/top_border"
             android:src="@drawable/tab_bar_feedings"
             />
 

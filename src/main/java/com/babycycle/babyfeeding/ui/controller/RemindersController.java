@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.PersistenceFacade;
 import com.babycycle.babyfeeding.model.Reminder;
-import com.babycycle.babyfeeding.ui.activity.FeedListActivity;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;

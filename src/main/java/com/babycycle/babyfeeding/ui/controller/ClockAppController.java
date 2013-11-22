@@ -10,7 +10,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 import com.babycycle.babyfeeding.R;
-import com.babycycle.babyfeeding.ui.activity.FeedListActivity;
 import com.google.inject.Singleton;
 
 import java.lang.ref.WeakReference;
