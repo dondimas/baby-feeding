@@ -49,7 +49,8 @@
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp">
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_horizontal">
                     <TextView
                             android:text="@string/end_event_time_hint"
                             android:layout_width="wrap_content"
@@ -58,6 +59,7 @@
                             style="@style/RowText"/>
                     <TimePicker
                             android:id="@+id/end_event_time"
+                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             />
@@ -68,7 +70,6 @@
         </LinearLayout>
     <LinearLayout
             android:id="@+id/buttonArea"
-            style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

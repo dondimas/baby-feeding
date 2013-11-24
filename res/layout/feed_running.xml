@@ -3,7 +3,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@drawable/background_blue">
+              android:background="@drawable/bg_light">
     <include layout="@layout/feed_running_times"/>
     <LinearLayout
             android:orientation="vertical"
@@ -20,16 +20,16 @@
 
             <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/left_breast"
+                    android:layout_height="100dp"
+                    android:src="@drawable/lewa_piers"
                     android:id="@+id/left_breast"
                     android:layout_weight="0.5"
                     android:layout_gravity="center"
                     android:gravity="center"/>
             <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/right_breast"
+                    android:layout_height="100dp"
+                    android:src="@drawable/prawa_piers"
                     android:id="@+id/right_breast"
                     android:layout_weight="0.5"
                     android:layout_gravity="center"/>
@@ -43,8 +43,8 @@
                 android:gravity="center"
                 >
             <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:text="Bottle"
                     android:src="@drawable/bottle"
                     android:id="@+id/bottle_source"

@@ -20,10 +20,9 @@
             android:gravity="center"
             >
         <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/finish_current_feeding"
-                android:background="@drawable/finish_button_selector"/>
+                style="@style/SquareButton"
+                android:text="Finish"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
@@ -41,11 +40,10 @@
 
             >
         <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
                 android:id="@+id/cancel_current_feeding"
-                android:background="@drawable/cancel_button_selector"/>
+                android:text="Cancel"
+                style="@style/SquareButton"
+                />
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"

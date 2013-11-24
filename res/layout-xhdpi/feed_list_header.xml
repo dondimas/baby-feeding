@@ -6,8 +6,8 @@
               android:layout_height="wrap_content"
               android:id="@+id/header_container"
               android:background="@color/list_header_bg"
-              android:layout_marginRight="25dp"
-              android:layout_marginLeft="25dp"
+              android:layout_marginRight="@dimen/list_view_margin"
+              android:layout_marginLeft="@dimen/list_view_margin"
               android:paddingTop="10dp"
               android:paddingBottom="10dp"
         >

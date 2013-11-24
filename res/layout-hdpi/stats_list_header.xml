@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/header_container"
+              android:background="@color/list_header_bg"
+              android:layout_marginTop="@dimen/list_view_margin"
+              android:layout_marginLeft="@dimen/list_view_margin"
+              android:layout_marginRight="@dimen/list_view_margin"
+        >
+    <TextView
+                style="@style/StatsListHeader"
+                android:text="@string/feed_day_list_header_day"
+            />
+    <TextView
+                style="@style/StatsListHeader"
+                android:text="@string/feed_day_list_header_amount_natural"
+            />
+    <TextView
+                style="@style/StatsListHeader"
+                android:textSize="14dip"
+                android:text="@string/feed_day_list_header_amount_chemical"
+            />
+    <TextView
+                style="@style/StatsListHeader"
+                android:text="@string/feed_day_list_header_amount_total"
+            />
+
+
+</LinearLayout>
