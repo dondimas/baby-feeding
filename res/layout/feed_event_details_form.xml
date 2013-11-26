@@ -8,66 +8,73 @@
               android:background="@drawable/bg_light">
 
 
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding_half">
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/default_padding_half">
-
+                android:gravity="center_horizontal">
             <TextView
                     android:text="@string/milk_amount_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/NormalText"/>
+                    style="@style/FormLabel" android:layout_marginTop="50dp"/>
             <EditText
                     android:id="@+id/milk_amount"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
                     android:inputType="number"
-                    style="@style/ChoiceEditText"/>
+                    android:minEms="15"
+                    android:maxLength="3"
+                    android:background="@drawable/wide_button_shape"
+                    android:gravity="center_horizontal"
+                    android:text="222"
+                    style="@style/ChoiceEditText" android:layout_marginTop="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="50dp">
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:text="@string/start_event_time_hint"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_height="wrap_content"
-                            style="@style/RowText"/>
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    >
+                <TextView
+                        android:text="@string/start_event_time_hint"
+                        style="@style/FormLabel" android:layout_marginBottom="8dp"/>
 
-                    <TimePicker
-                            android:id="@+id/start_event_time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-                <LinearLayout
-                        android:orientation="vertical"
+                <TimePicker
+                        android:id="@+id/start_event_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center_horizontal">
-                    <TextView
-                            android:text="@string/end_event_time_hint"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_height="wrap_content"
-                            style="@style/RowText"/>
-                    <TimePicker
-                            android:id="@+id/end_event_time"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-                </LinearLayout>
+                        android:layout_gravity="center"
+                        />
+            </LinearLayout>
 
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    >
+                <TextView
+                        android:text="@string/end_event_time_hint"
+                        style="@style/FormLabel" android:layout_marginBottom="8dp"/>
+                <TimePicker
+                        android:id="@+id/end_event_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        />
             </LinearLayout>
 
         </LinearLayout>
+
+    </LinearLayout>
     <LinearLayout
             android:id="@+id/buttonArea"
             android:layout_width="match_parent"
@@ -75,11 +82,11 @@
             android:layout_alignParentBottom="true"
             android:gravity="bottom|right"
             android:orientation="horizontal"
-            android:padding="5dp" >
+            android:padding="5dp" android:layout_marginTop="30dp">
 
         <Button
                 android:id="@+id/cancel_feed_event_details_button"
-                style="@style/WideButton"
+                style="@style/WideButtonShort"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
@@ -87,7 +94,7 @@
 
         <Button
                 android:id="@+id/submit_feed_event_button"
-                style="@style/WideButton"
+                style="@style/WideButtonShort"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/add_feed_event_button"

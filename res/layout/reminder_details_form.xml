@@ -39,18 +39,30 @@
                     android:id="@+id/reminder_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-            <Button
-                    android:layout_width="fill_parent"
+
+            <LinearLayout
+                    android:id="@+id/buttonArea"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/WideButton"
-                    android:text="@string/add_reminder_button"
-                    android:id="@+id/submit_reminder_button"/>
-            <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/WideButton"
-                    android:text="@string/cancel"
-                    android:id="@+id/cancel_reminder_details_button"/>
+                    android:layout_alignParentBottom="true"
+                    android:gravity="bottom|right"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        style="@style/WideButtonShort"
+                        android:text="@string/save_reminder_button"
+                        android:id="@+id/submit_reminder_button"/>
+                <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        style="@style/WideButtonShort"
+                        android:text="@string/cancel"
+                        android:id="@+id/cancel_reminder_details_button"/>
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -25,7 +25,8 @@
     <string name="feed_list_header_date">Date</string>
     <string name="tab_feed_events_tabname">Feedings</string>
     <string name="tab_reminders_tabname">Reminders</string>
-    <string name="add_reminder_button">Save Reminder</string>
+    <string name="add_reminder_button">Add Reminder</string>
+    <string name="save_reminder_button">Save Reminder</string>
     <string name="reminder_message_hint">Reminder message</string>
     <string name="reminder_time_hint">Reminder time</string>
     <string name="cancel">Cancel</string>

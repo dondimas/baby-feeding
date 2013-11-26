@@ -43,6 +43,7 @@
     </style>
 
     <style name="WideButton">
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/wide_button_selector</item>
         <item name="android:layout_marginLeft">@dimen/list_view_margin</item>
         <item name="android:layout_marginRight">@dimen/list_view_margin</item>
@@ -50,6 +51,7 @@
     </style>
 
     <style name="WideButtonShort">
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/wide_button_short_selector</item>
         <item name="android:textColor">@color/button_title</item>
     </style>
@@ -59,7 +61,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/button_title</item>
-        <item name="android:textSize">30dp</item>
+        <item name="android:textSize">@dimen/feed_running_button_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -75,6 +77,17 @@
         <item name="android:shadowDy">2</item>
         <item name="android:shadowRadius">1</item>
         <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="FormLabel"  >
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">@dimen/feed_list_text_size</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="FeedListHeader" parent="RowText">
