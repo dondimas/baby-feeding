@@ -28,10 +28,8 @@
                     android:inputType="number"
                     android:minEms="15"
                     android:maxLength="3"
-                    android:background="@drawable/wide_button_shape"
                     android:gravity="center_horizontal"
-                    android:text="222"
-                    style="@style/ChoiceEditText" android:layout_marginTop="10dp"/>
+                    style="@style/FormEditText" android:layout_marginTop="10dp"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"

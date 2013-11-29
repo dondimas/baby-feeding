@@ -16,29 +16,29 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:padding="@dimen/default_padding_half">
 
             <TextView
                     android:text="@string/reminder_message_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/NormalText"/>
+                    style="@style/FormLabel" android:layout_marginTop="30dp"/>
             <EditText
                     android:id="@+id/reminder_message"
                     android:layout_width="match_parent"
-                    style="@style/ChoiceEditText"/>
+                    style="@style/FormEditText" android:layout_marginTop="10dp" android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"/>
 
             <TextView
                     android:text="@string/reminder_time_hint"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     android:layout_height="wrap_content"
-                    style="@style/NormalText"/>
+                    style="@style/FormLabel"/>
 
             <TimePicker
                     android:id="@+id/reminder_time"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
 
             <LinearLayout
                     android:id="@+id/buttonArea"
@@ -47,7 +47,7 @@
                     android:layout_alignParentBottom="true"
                     android:gravity="bottom|right"
                     android:orientation="horizontal"
-                    android:padding="5dp" >
+                    android:padding="5dp" android:layout_marginTop="30dp">
 
                 <Button
                         android:layout_width="0dp"

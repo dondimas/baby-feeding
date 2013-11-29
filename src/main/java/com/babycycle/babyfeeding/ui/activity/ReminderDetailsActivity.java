@@ -66,6 +66,7 @@ public class ReminderDetailsActivity extends RoboActivity {
     private void initViews() {
         reminderMessage = (EditText) findViewById(R.id.reminder_message);
         reminderTime = (TimePicker) findViewById(R.id.reminder_time);
+        reminderTime.setIs24HourView(true);
         submitReminder = (Button) findViewById(R.id.submit_reminder_button);
         cancelReminderDetails = (Button) findViewById(R.id.cancel_reminder_details_button);
 
