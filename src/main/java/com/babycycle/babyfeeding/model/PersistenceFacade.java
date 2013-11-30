@@ -142,7 +142,8 @@ public class PersistenceFacade {
     public void deleteStartedFeedEvent(Context context) {
         FeedEvent feedEvent = DatabaseHelper.getHelper(context).getFeedEventForId(context, runningEventId);
         if(feedEvent != null) {
-            feedEvent.setFinishTime(feedEvent.getStartTime());
+            feedEvent.setFinishTime(new Date(0));
+            feedEvent.setStartTime(new Date(0));
             feedEvent.setLeftBreast(false);
             feedEvent.setRightBreast(false);
             DatabaseHelper.getHelper(context).saveFeedEvent(feedEvent);
