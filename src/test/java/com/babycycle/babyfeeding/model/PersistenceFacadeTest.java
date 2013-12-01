@@ -60,51 +60,11 @@ public class PersistenceFacadeTest {
 
     }
 
-    String testReminderMessage = "Some Message";
-    @Test
-    public void sudReturnProperIsConfirmedValues() {
-
-        updateExistingReminder();
-
-        createReminder(testReminderMessage);
-        List<Reminder> reminders = persistenceFacade.getUpdatedForTodayReminders(application);
-        for(Reminder reminder:reminders){
-            if(reminder.getRemindMessage().equals(testReminderMessage)){
-                assertThat(reminder.isWasConfirmed()).isTrue();
-            } else {
-                assertThat(reminder.isWasConfirmed()).isFalse();
-            }
-        }
-
-    }
-
-    private void updateExistingReminder() {
-        Reminder reminderBase = persistenceFacade.getReminders(application).get(0);
-        reminderBase.setWasConfirmed(true);
-        persistenceFacade.saveReminder(reminderBase, application);
-    }
-//    @Test
-//    public void shouldNotBeConfirmedIfApplicationRunAfterReminderTime() {
-//        List<Reminder> reminders = persistenceFacade.getReminders(application);
-//        Reminder reminder = reminders.get(0);
-//        Date reminderDate
-//        if()
-//        assertThat(reminders).isNotEmpty();
-//    }
-
-    private void createReminder(String message) {
-        Calendar calendar = Calendar.getInstance();
-        Reminder reminder = new Reminder(message, calendar.getTime());
-        reminder.setWasConfirmed(true);
-        persistenceFacade.saveReminder(reminder, application);
-    }
-
     @Test
     public void shouldReturnEventsListWithProperOddEvenValues() {
         createEventsList();
         List<FeedEvent> events = persistenceFacade.getFeedEventList(application);
         for(int i = 1; i < events.size(); i++) {
-            long delta = events.get(i-1).getStartTime().getTime() - events.get(i).getFinishTime().getTime();
             if(events.get(i-1).getStartTime().getTime() - events.get(i).getFinishTime().getTime() >maxGapMillis) {
                 assertThat(events.get(i).odd).isEqualTo(!events.get(i-1).odd);
             } else {
