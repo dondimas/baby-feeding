@@ -35,7 +35,6 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     private int layoutId;
 
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
-    private static SimpleDateFormat fullDateFormatter = new SimpleDateFormat("MM-dd");
 
     @Inject
     TabsCommunicator tabsCommunicator;
@@ -111,14 +110,13 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
             backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.list_row_dark));
         else
             backgroundDrawable = new ColorDrawable(context.getResources().getColor(R.color.list_row_light));
-        backgroundDrawable.setAlpha(190);
+//        backgroundDrawable.setAlpha(190);
         holder.itemContainer.setBackgroundDrawable(backgroundDrawable);
     }
 
     private void setFeedingDate(ViewHolder holder, FeedEvent feedEvent) {
         if(feedEvent.getMilkAmount() > 0) {
             holder.amount.setText(feedEvent.getMilkAmount() + " ml");
-
         }else {
             holder.amount.setText("--");
         }
@@ -133,10 +131,8 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     class ViewHolder {
         LinearLayout itemContainer;
         TextView startTime;
-//        TextView finishTime;
         TextView feedingLastedTime;
         TextView breast;
-//        public TextView fullDate;
         public ItemClickListener itemClickListener;
         public TextView amount;
     }
@@ -155,7 +151,6 @@ public class FeedEventListAdapter extends ArrayAdapter<FeedEvent> {
     }
 
     private void openFeedEventDetails(int position) {
-//        FeedEvent itemEvent = feedEvents.get(getCount() - position -1);
         FeedEvent itemEvent = feedEvents.get(position);
         tabsCommunicator.setFeedEventForDetails(itemEvent);
         Intent intent = new Intent(context, FeedEventDetailsActivity.class);

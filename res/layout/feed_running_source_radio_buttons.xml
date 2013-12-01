@@ -4,6 +4,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginTop="@dimen/feed_running_source_ratio_button_margin_top"
         >
     <TextView android:layout_width="fill_parent"
               android:layout_height="wrap_content"
@@ -21,14 +22,14 @@
 
         <ImageView
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="@dimen/feed_running_source_ratio_button_image_size"
                 android:src="@drawable/right_breast"
                 android:id="@+id/right_breast"
                 android:layout_weight="0.5"
                 android:layout_gravity="center"/>
         <ImageView
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="@dimen/feed_running_source_ratio_button_image_size"
                 android:src="@drawable/left_breast"
                 android:id="@+id/left_breast"
                 android:layout_weight="0.5"
@@ -44,8 +45,8 @@
             android:gravity="center"
             >
         <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/feed_running_source_ratio_button_image_size"
+                android:layout_height="@dimen/feed_running_source_ratio_button_image_size"
                 android:text="Bottle"
                 android:src="@drawable/bottle"
                 android:id="@+id/bottle_source"

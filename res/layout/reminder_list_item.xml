@@ -11,7 +11,7 @@
                 android:layout_height="wrap_content"
                 style="@style/ReminderListRowText"
                 android:layout_margin="3dp"
-                android:layout_marginLeft="7dp"
+                android:paddingLeft="5dp"
                 android:gravity="left"
                 android:layout_weight="0.8"
             />

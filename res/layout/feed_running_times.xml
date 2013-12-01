@@ -3,9 +3,7 @@
               android:orientation="horizontal"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:paddingBottom="50dp">
-
+        android:paddingTop="20dp">
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"

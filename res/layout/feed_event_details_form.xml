@@ -12,7 +12,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/default_padding_half">
+            android:layout_marginLeft="@dimen/reminder_details_content_margin"
+            android:layout_marginRight="@dimen/reminder_details_content_margin">
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -80,7 +81,9 @@
             android:layout_alignParentBottom="true"
             android:gravity="bottom|right"
             android:orientation="horizontal"
-            android:padding="5dp" android:layout_marginTop="30dp">
+            android:layout_marginLeft="@dimen/reminder_details_content_margin"
+            android:layout_marginRight="@dimen/reminder_details_content_margin"
+            android:layout_marginTop="30dp">
 
         <Button
                 android:id="@+id/cancel_feed_event_details_button"

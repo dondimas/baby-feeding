@@ -3,21 +3,22 @@
                android:orientation="vertical"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:background="@android:color/transparent"
+               android:background="@drawable/bg_light"
                style="@style/DetailLayoutPadding">
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_light">
+            >
 
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:padding="@dimen/default_padding_half">
+                android:layout_marginLeft="@dimen/reminder_details_content_margin"
+                android:layout_marginRight="@dimen/reminder_details_content_margin">
 
             <TextView
                     android:text="@string/reminder_message_hint"
@@ -25,8 +26,10 @@
             <EditText
                     android:id="@+id/reminder_message"
                     android:layout_width="match_parent"
-                    style="@style/FormEditText" android:layout_marginTop="10dp" android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
+                    android:paddingLeft="10dp"
+                    style="@style/FormEditText"
+                    android:layout_marginTop="10dp"
+                    />
 
             <TextView
                     android:text="@string/reminder_time_hint"
@@ -47,7 +50,7 @@
                     android:layout_alignParentBottom="true"
                     android:gravity="bottom|right"
                     android:orientation="horizontal"
-                    android:padding="5dp" android:layout_marginTop="30dp">
+                    android:layout_marginTop="30dp">
 
                 <Button
                         android:layout_width="0dp"
