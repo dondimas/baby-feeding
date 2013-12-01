@@ -2,15 +2,18 @@ package com.babycycle.babyfeeding.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import com.actionbarsherlock.app.ActionBar;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.model.PersistenceFacade;
 import com.babycycle.babyfeeding.ui.activity.helpers.TabsCommunicator;
+import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
 import com.google.inject.Inject;
 import roboguice.activity.RoboActivity;
 
@@ -24,7 +27,7 @@ import java.util.Date;
  * Time: 5:06 PM
  * To change this template use File | Settings | File Templates.
  */
-public class FeedEventDetailsActivity extends RoboActivity {
+public class FeedEventDetailsActivity extends BackButtonActionBarRoboSherlockActivity {
 
     EditText milkAmount;
     TimePicker startEventTime;
@@ -43,6 +46,8 @@ public class FeedEventDetailsActivity extends RoboActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.feed_event_details_form);
         initViews();
     }
@@ -73,7 +78,18 @@ public class FeedEventDetailsActivity extends RoboActivity {
 
     private void initViews() {
         milkAmount = (EditText) findViewById(R.id.milk_amount);
-
+        milkAmount.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER))
+                {
+                    InputMethodManager manager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    manager.hideSoftInputFromWindow(milkAmount.getWindowToken(), 0);
+                }
+                return false;
+            }
+        });
         submitFeedEvent = (Button) findViewById(R.id.submit_feed_event_button);
         cancelFeedEventDetails = (Button) findViewById(R.id.cancel_feed_event_details_button);
         screenContainer = findViewById(R.id.container_event_details);

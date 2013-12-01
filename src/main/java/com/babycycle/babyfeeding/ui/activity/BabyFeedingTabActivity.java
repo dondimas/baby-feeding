@@ -4,6 +4,8 @@ package com.babycycle.babyfeeding.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.ui.activity.helpers.BabyFeedingActivityResultListener;
 import com.babycycle.babyfeeding.ui.activity.helpers.BabyFeedingTabActivityTabHelper;
@@ -128,4 +130,23 @@ public class BabyFeedingTabActivity extends AbstractTabFragmentActivity{
     @Override
     public void onBackPressed() {
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        //Used to put dark icons on light action bar
+//        boolean isLight =  true;
+//
+//        menu.add("Save")
+//                .setIcon(R.drawable.bottle)
+//                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+//
+//        menu.add("Search")
+//                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+//
+//        menu.add("Refresh")
+//                .setIcon(R.drawable.bottle)
+//                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+//
+//        return true;
+//    }
 }

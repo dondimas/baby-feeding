@@ -22,7 +22,7 @@ import java.util.Calendar;
  * Time: 5:06 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ReminderDetailsActivity extends RoboActivity {
+public class ReminderDetailsActivity extends BackButtonActionBarRoboSherlockActivity {
     public static final int ADD_REMINDER = 0;
     public static final int EDIT_REMINDER = 1;
     public static final int CLONE_REMINDER = 2;

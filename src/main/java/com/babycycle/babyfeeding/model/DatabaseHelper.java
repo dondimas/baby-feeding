@@ -24,10 +24,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "babyfeeding3.db";
 
-    public static final Class[] ENTITIES = {
-            FeedEvent.class,
-    };
-
     public static final Class[] ENTITIES_NEW = {
             FeedEvent.class, Reminder.class,
     };
@@ -46,7 +42,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
 
-//        createTablesForEntities(connectionSource, ENTITIES);
         createTablesForEntities(connectionSource, ENTITIES_NEW);
         createFeedEventForPersistingStartedFeeding();
         createReminder();
@@ -73,13 +68,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         else if (calendar.get(Calendar.MONTH) >0)
             calendar.set(Calendar.MONTH,calendar.get(Calendar.MONTH) -1);
 
-        Reminder reminder = new Reminder("Czy ty dalas dziecku vitaminki?", calendar.getTime());
+        Reminder reminder = new Reminder("Did you give vitamins?", calendar.getTime());
         reminderRepo.createOrUpdate(reminder);
 
-//        Reminder reminder2 = new Reminder("reminder2", calendar.getTime());
-//        reminderRepo.createOrUpdate(reminder2);
-//        Reminder reminder3 = new Reminder("reminder3", calendar.getTime());
-//        reminderRepo.createOrUpdate(reminder3);
 
     }
 
@@ -88,7 +79,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int i, int i1) {
 
-//        dropTablesForEntities(connectionSource, ENTITIES);
         dropTablesForEntities(connectionSource, ENTITIES_NEW);
         onCreate(sqLiteDatabase, connectionSource);
     }

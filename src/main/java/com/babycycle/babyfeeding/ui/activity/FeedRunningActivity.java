@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.actionbarsherlock.view.MenuItem;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.ui.UIConstants;
 import com.babycycle.babyfeeding.ui.activity.helpers.TabsCommunicator;
@@ -26,7 +27,7 @@ import java.util.Date;
  * Time: 5:06 PM
  * To change this template use File | Settings | File Templates.
  */
-public class FeedRunningActivity extends RoboActivity implements View.OnClickListener{
+public class FeedRunningActivity extends BackButtonActionBarRoboSherlockActivity implements View.OnClickListener{
 
 
     @InjectView(R.id.current_feed_time)
@@ -88,18 +89,11 @@ public class FeedRunningActivity extends RoboActivity implements View.OnClickLis
     }
 
     private void initViews() {
-//        leftBreastImageView = (ImageView) findViewById(R.id.left_breast);
         leftBreastImageView.setOnClickListener(this);
-//        rightBreastImageView = (ImageView) findViewById(R.id.right_breast);
         rightBreastImageView.setOnClickListener(this);
-//        bottleImageView = (ImageView) findViewById(R.id.bottle_source);
         bottleImageView.setOnClickListener(this);
 
-//        runningFeedTime = (TextView) findViewById(R.id.current_feed_time);
-//        startFeedTime = (TextView) findViewById(R.id.start_feed_time);
-
         startFeedTime.setText(hoursMinutesFormatter.format(startTime));
-//        finishFeed = (Button) findViewById(R.id.finish_current_feeding);
         finishFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +102,6 @@ public class FeedRunningActivity extends RoboActivity implements View.OnClickLis
             }
         });
 
-//        cancelFeeding = (Button) findViewById(R.id.cancel_current_feeding);
         cancelFeeding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,6 +148,20 @@ public class FeedRunningActivity extends RoboActivity implements View.OnClickLis
 
     public Date getStartTime() {
         return startTime;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                openCancelConfirmDialogue();
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return false;
     }
 }
 
