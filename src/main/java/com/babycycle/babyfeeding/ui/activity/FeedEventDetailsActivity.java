@@ -29,12 +29,12 @@ import java.util.Date;
  */
 public class FeedEventDetailsActivity extends BackButtonActionBarRoboSherlockActivity {
 
-    EditText milkAmount;
-    TimePicker startEventTime;
-    TimePicker endEventTime;
-    Button submitFeedEvent;
-    Button cancelFeedEventDetails;
-    View screenContainer;
+    private EditText milkAmount;
+    private TimePicker startEventTime;
+    private TimePicker endEventTime;
+    private Button submitFeedEvent;
+    private Button cancelFeedEventDetails;
+    private View screenContainer;
 
     @Inject
     TabsCommunicator tabsCommunicator;

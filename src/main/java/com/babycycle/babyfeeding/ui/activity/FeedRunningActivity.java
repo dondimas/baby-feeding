@@ -59,13 +59,13 @@ public class FeedRunningActivity extends BackButtonActionBarRoboSherlockActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed_running);
         startTime = tabsCommunicator.getCurrentFeedEvent().getStartTime();
-        feedRunningActivityController.startTiming();
         initViews();
     }
 
     @Override
     protected void onResume() {
         feedRunningActivityController.setFeedRunningActivity(this);
+        feedRunningActivityController.startFeedRunning();
         super.onResume();
     }
 

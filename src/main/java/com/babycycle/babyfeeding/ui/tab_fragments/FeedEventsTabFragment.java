@@ -93,6 +93,7 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
         initViews(rootView);
         initListView(rootView);
         initControllers();
+        if(activity instanceof BabyFeedingTabActivity)
         ((BabyFeedingTabActivity)activity).setActivityResultListener(this);
         checkFeedEventWasFired();
         return rootView;
@@ -169,6 +170,7 @@ public class FeedEventsTabFragment extends TabFragment implements FeedingButtons
     private void persistFeedingData(boolean leftBreastChecked, boolean rightBreastChecked) {
         tabsCommunicator.getCurrentFeedEvent().setLeftBreast(leftBreastChecked);
         tabsCommunicator.getCurrentFeedEvent().setRightBreast(rightBreastChecked);
+        tabsCommunicator.setSelectedSource(null);
         persistenceFacade.saveFeedEvent(tabsCommunicator.getCurrentFeedEvent(), activity);
         persistenceFacade.deleteStartedFeedEvent(activity);
     }

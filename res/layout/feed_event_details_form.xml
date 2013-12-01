@@ -91,6 +91,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
+                android:layout_marginRight="2dp"
                 android:layout_weight="1"/>
 
         <Button
@@ -99,6 +100,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/add_feed_event_button"
+                android:layout_marginLeft="2dp"
                 android:layout_weight="1"/>
     </LinearLayout>
 </LinearLayout>

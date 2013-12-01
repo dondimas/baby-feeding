@@ -23,15 +23,15 @@
         <ImageView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/feed_running_source_ratio_button_image_size"
-                android:src="@drawable/right_breast"
-                android:id="@+id/right_breast"
+                android:src="@drawable/left_breast"
+                android:id="@+id/left_breast"
                 android:layout_weight="0.5"
                 android:layout_gravity="center"/>
         <ImageView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/feed_running_source_ratio_button_image_size"
-                android:src="@drawable/left_breast"
-                android:id="@+id/left_breast"
+                android:src="@drawable/right_breast"
+                android:id="@+id/right_breast"
                 android:layout_weight="0.5"
                 android:layout_gravity="center"
                 android:gravity="center"/>

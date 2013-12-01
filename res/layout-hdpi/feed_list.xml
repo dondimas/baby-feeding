@@ -35,28 +35,37 @@
                   android:layout_height="wrap_content"
                   android:id="@+id/continue_finalize_container"
                   android:layout_margin="@dimen/list_view_margin"
-                  android:orientation="horizontal"
+                  android:orientation="vertical"
                   android:visibility="gone">
-        <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:background="@drawable/wide_button_selector"
-                android:text="Continue Feeding"
-                android:textSize="13dp"
-                android:id="@+id/continue_feed_button"
-                android:layout_marginRight="3dp"
-                />
-        <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:background="@drawable/wide_button_selector"
-                android:text="Finalize"
-                android:textSize="13dp"
-                android:layout_marginLeft="3dp"
-                android:id="@+id/finalize_feed_button"
-                />
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  style="@style/RunningLabel"
+                  android:textColor="@color/separator_dark"
+                  android:text="@string/currently_running_feeding"/>
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/wide_button_selector"
+                    android:text="Continue Feeding"
+                    android:textSize="13dp"
+                    android:id="@+id/continue_feed_button"
+                    android:layout_marginRight="3dp"
+                    />
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/wide_button_selector"
+                    android:text="Finalize"
+                    android:textSize="13dp"
+                    android:layout_marginLeft="3dp"
+                    android:id="@+id/finalize_feed_button"
+                    />
+        </LinearLayout>
     </LinearLayout>
     <include layout="@layout/feed_list_header"/>
     <ListView

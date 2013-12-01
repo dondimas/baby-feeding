@@ -44,7 +44,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         createTablesForEntities(connectionSource, ENTITIES_NEW);
         createFeedEventForPersistingStartedFeeding();
-        createReminder();
+//        createReminder();
 
     }
 
@@ -68,7 +68,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         else if (calendar.get(Calendar.MONTH) >0)
             calendar.set(Calendar.MONTH,calendar.get(Calendar.MONTH) -1);
 
-        Reminder reminder = new Reminder("Did you give vitamins?", calendar.getTime());
+        Reminder reminder = new Reminder("Did you give vitamins?", new Date(0));
         reminderRepo.createOrUpdate(reminder);
 
 

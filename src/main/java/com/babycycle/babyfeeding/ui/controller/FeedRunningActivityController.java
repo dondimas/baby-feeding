@@ -69,6 +69,29 @@ public class FeedRunningActivityController implements View.OnClickListener {
         timer.schedule(myTask,0,1000);
     }
 
+    public void startFeedRunning() {
+        startTiming();
+        updateRadioButtons();
+    }
+
+    private void updateRadioButtons() {
+        if(tabsCommunicator.getSelectedSource() == null) {
+            return;
+        }
+        switch (tabsCommunicator.getSelectedSource()) {
+            case LEFT_BREAST:
+                setSelectionImageView(feedRunningActivity.getLeftBreastImageView(), R.drawable.left_breast_selected, true);
+                break;
+            case RIGHT_BREAST:
+                setSelectionImageView(feedRunningActivity.getRightBreastImageView(), R.drawable.right_breast_selected, true);
+                break;
+            case BOTTLE:
+                setSelectionImageView(feedRunningActivity.getBottleImageView(), R.drawable.bottle_selected, true);
+                break;
+        }
+
+    }
+
     private class FeedLastingTimerTask extends TimerTask {
         @Override
         public void run() {

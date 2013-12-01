@@ -1,8 +1,11 @@
 package com.babycycle.babyfeeding.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -27,10 +30,10 @@ public class ReminderDetailsActivity extends BackButtonActionBarRoboSherlockActi
     public static final int EDIT_REMINDER = 1;
     public static final int CLONE_REMINDER = 2;
 
-    EditText reminderMessage;
-    TimePicker reminderTime;
-    Button submitReminder;
-    Button cancelReminderDetails;
+    private EditText reminderMessage;
+    private TimePicker reminderTime;
+    private Button submitReminder;
+    private Button cancelReminderDetails;
 
     @Inject
     TabsCommunicator tabsCommunicator;
@@ -65,6 +68,19 @@ public class ReminderDetailsActivity extends BackButtonActionBarRoboSherlockActi
 
     private void initViews() {
         reminderMessage = (EditText) findViewById(R.id.reminder_message);
+        reminderMessage.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER))
+                {
+                    InputMethodManager manager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    manager.hideSoftInputFromWindow(reminderMessage.getWindowToken(), 0);
+                }
+                return false;
+            }
+        });
+
         reminderTime = (TimePicker) findViewById(R.id.reminder_time);
         reminderTime.setIs24HourView(true);
         submitReminder = (Button) findViewById(R.id.submit_reminder_button);

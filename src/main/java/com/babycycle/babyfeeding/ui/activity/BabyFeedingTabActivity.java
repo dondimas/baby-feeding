@@ -27,13 +27,13 @@ import com.google.inject.Inject;
  */
 public class BabyFeedingTabActivity extends AbstractTabFragmentActivity{
 
-    BabyFeedingTabActivityTabHelper activityTabHelper;
+    private BabyFeedingTabActivityTabHelper activityTabHelper;
 
     @Inject
-    ITabHistoryContentStack tabHistoryContentStack;
+    private ITabHistoryContentStack tabHistoryContentStack;
 
     @Inject
-    RemindersController remindersController;
+    private RemindersController remindersController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

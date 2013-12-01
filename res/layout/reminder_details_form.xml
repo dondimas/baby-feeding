@@ -28,6 +28,7 @@
                     android:layout_width="match_parent"
                     android:paddingLeft="10dp"
                     style="@style/FormEditText"
+                    android:singleLine="true"
                     android:layout_marginTop="10dp"
                     />
 
@@ -57,12 +58,14 @@
                         android:layout_weight="1"
                         style="@style/WideButtonShort"
                         android:text="@string/save_reminder_button"
+                        android:layout_marginRight="2dp"
                         android:id="@+id/submit_reminder_button"/>
                 <Button
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         style="@style/WideButtonShort"
                         android:text="@string/cancel"
+                        android:layout_marginLeft="2dp"
                         android:id="@+id/cancel_reminder_details_button"/>
 
             </LinearLayout>
