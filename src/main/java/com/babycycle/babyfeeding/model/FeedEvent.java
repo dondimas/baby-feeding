@@ -30,7 +30,7 @@ public class FeedEvent {
     @DatabaseField(canBeNull = true, columnName = "right_breast")
     private boolean rightBreast;
 
-    @DatabaseField(canBeNull = true, columnName = "milkAmount")
+    @DatabaseField(canBeNull = true, columnName = "milk_amount")
     private int milkAmount;
 
     public FeedEvent() {
