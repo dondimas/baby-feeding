@@ -8,6 +8,7 @@ import com.babycycle.babyfeeding.test_utils.DBDataCreationHelper;
 import com.google.inject.Inject;
 import com.xtremelabs.robolectric.Robolectric;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -44,6 +45,7 @@ public class StatsPresenterTest {
     }
 
     @Test
+    @Ignore
     public void testRefreshListData() throws Exception {
         DBDataCreationHelper.createEventsList(persistenceFacade, application, maxGapMillis);
         //when
