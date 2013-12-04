@@ -63,6 +63,11 @@ public class FeedRunningActivity extends BackButtonActionBarRoboSherlockActivity
     }
 
     @Override
+    protected int getActionBarTitleStringResource() {
+        return R.string.feed_funning_action_bar_title;
+    }
+
+    @Override
     protected void onResume() {
         feedRunningActivityController.setFeedRunningActivity(this);
         feedRunningActivityController.startFeedRunning();
@@ -97,8 +102,7 @@ public class FeedRunningActivity extends BackButtonActionBarRoboSherlockActivity
         finishFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancelFeedingGetBackToList(RESULT_OK);
-
+                runDoneAction();
             }
         });
 
@@ -151,17 +155,13 @@ public class FeedRunningActivity extends BackButtonActionBarRoboSherlockActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    protected void runHomeAction() {
+        openCancelConfirmDialogue();
+    }
 
-            case android.R.id.home:
-                openCancelConfirmDialogue();
-                break;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        return false;
+    @Override
+    protected void runDoneAction() {
+        cancelFeedingGetBackToList(RESULT_OK);
     }
 }
 

@@ -53,8 +53,22 @@ public class ReminderDetailsActivity extends BackButtonActionBarRoboSherlockActi
 
     }
 
+    @Override
+    protected int getActionBarTitleStringResource() {
+        if (tabsCommunicator.getReminderForDetails() != null) {
+            return R.string.edit_reminder_action_bar_title;
+        } else {
+            return R.string.add_reminder_action_bar_title;
+        }
+    }
+
+    @Override
+    protected void runDoneAction() {
+        saveCurrentReminder();
+    }
+
     private void fillWithDataForEdition() {
-        if(tabsCommunicator.getReminderForDetails() != null) {
+        if (tabsCommunicator.getReminderForDetails() != null) {
             currentReminder = tabsCommunicator.getReminderForDetails();
             tabsCommunicator.setReminderForDetails(null);
             reminderMessage.setText(currentReminder.getRemindMessage());
@@ -62,7 +76,6 @@ public class ReminderDetailsActivity extends BackButtonActionBarRoboSherlockActi
             calendar.setTime(currentReminder.getTimeOfDay());
             reminderTime.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
             reminderTime.setCurrentMinute(calendar.get(Calendar.MINUTE));
-//            submitFeedEvent.setText("Edit reminder");
         }
     }
 
@@ -72,9 +85,8 @@ public class ReminderDetailsActivity extends BackButtonActionBarRoboSherlockActi
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER))
-                {
-                    InputMethodManager manager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     manager.hideSoftInputFromWindow(reminderMessage.getWindowToken(), 0);
                 }
                 return false;
@@ -104,13 +116,13 @@ public class ReminderDetailsActivity extends BackButtonActionBarRoboSherlockActi
     }
 
     private void saveCurrentReminder() {
-        if(!validateData()) {
+        if (!validateData()) {
             return;
         }
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, reminderTime.getCurrentHour());
         calendar.set(Calendar.MINUTE, reminderTime.getCurrentMinute());
-        if(currentReminder == null) {    //TODO CHANGE TO ENUM
+        if (currentReminder == null) {    //TODO CHANGE TO ENUM
             currentReminder = new Reminder(reminderMessage.getText().toString(), calendar.getTime());
         } else {
             currentReminder.setRemindMessage(reminderMessage.getText().toString());

@@ -46,5 +46,10 @@
     <string name="feed_day_list_header_amount_total">Total</string>
     <string name="feed_started_at">Started at</string>
     <string name="currently_running_feeding">You are currently feeding your baby. You can finalize that event or continue it by pressing \"Continue\" button</string>
+    <string name="update_event_details">Update Feeding</string>
+    <string name="feed_funning_action_bar_title">Feed Running</string>
+    <string name="edit_reminder_action_bar_title">Edit Reminder</string>
+    <string name="add_reminder_action_bar_title">Add Reminder</string>
+    <string name="action_done_title">Done</string>
 
 </resources>

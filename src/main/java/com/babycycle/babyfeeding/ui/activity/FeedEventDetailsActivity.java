@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.babycycle.babyfeeding.R;
 import com.babycycle.babyfeeding.model.FeedEvent;
 import com.babycycle.babyfeeding.model.PersistenceFacade;
@@ -46,10 +48,18 @@ public class FeedEventDetailsActivity extends BackButtonActionBarRoboSherlockAct
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.feed_event_details_form);
         initViews();
+    }
+
+    @Override
+    protected int getActionBarTitleStringResource() {
+        return R.string.update_event_details;
+    }
+
+    @Override
+    protected void runDoneAction() {
+        saveFeedEvent();
     }
 
     private void fillWithDataForEdition() {
