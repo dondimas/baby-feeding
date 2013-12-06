@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/container_event_details"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              style="@style/DetailLayoutPadding"
+              android:background="@drawable/bg_light">
+
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="0.4"
+            android:layout_height="0dp"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/reminder_details_content_margin"
+            android:layout_marginRight="@dimen/reminder_details_content_margin">
+        <TextView
+                android:text="@string/milk_amount_hint"
+                style="@style/FormLabel" android:layout_marginTop="20dp"/>
+        <EditText
+                android:id="@+id/milk_amount"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:minEms="15"
+                android:maxLength="3"
+                android:gravity="center_horizontal"
+                style="@style/FormEditText" android:layout_marginTop="10dp"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="0.3"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/reminder_details_content_margin"
+            android:layout_marginRight="@dimen/reminder_details_content_margin">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                >
+            <TextView
+                    android:text="@string/start_event_time_hint"
+                    style="@style/FormLabel"/>
+
+            <TimePicker
+                    android:id="@+id/start_event_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    />
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                >
+            <TextView
+                    android:text="@string/end_event_time_hint"
+                    style="@style/FormLabel"/>
+            <TimePicker
+                    android:id="@+id/end_event_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/buttonArea"
+            android:layout_width="match_parent"
+            android:layout_weight="0.3"
+            android:layout_height="0dp"
+            android:gravity="top"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/reminder_details_content_margin"
+            android:layout_marginRight="@dimen/reminder_details_content_margin"
+            >
+
+        <Button
+                android:id="@+id/cancel_feed_event_details_button"
+                style="@style/WideButtonShort"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"/>
+
+        <Button
+                android:id="@+id/submit_feed_event_button"
+                style="@style/WideButtonShort"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/add_feed_event_button"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"/>
+    </LinearLayout>
+</LinearLayout>
